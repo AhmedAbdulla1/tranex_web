@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - TRANEX</title>
+    <meta name="description" content="Detailed information about TRANEX equipment including specifications, features, and purchase options.">
+    <link rel="canonical" href="https://tranex.com/product-details.html">
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Product Details - TRANEX">
+    <meta property="og:description" content="Detailed information about TRANEX equipment.">
+    <meta property="og:image" content="https://tranex.com/assets/images/og-product.jpg">
+    <meta property="og:url" content="https://tranex.com/product-details.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Supabase -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/product-details.css">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "TRANEX Equipment",
+        "description": "Professional sports equipment for elite performance",
+        "url": "https://tranex.com/product-details.html",
+        "brand": {
+            "@type": "Brand",
+            "name": "TRANEX"
+        },
+        "category": "Sports Equipment"
+    }
+    </script>
+    
+    <!-- Component Loader -->
+    <script type="module" src="../utils/component-loader.js"></script>
+</head>
+<body>
+    <!-- Header Component Container -->
+    <div data-component="header.html"></div>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Product Hero Section -->
+        <section class="product-hero">
+            <div class="container">
+                <div class="product-hero__content">
+                    <div class="product-hero__gallery">
+                        <div class="product-gallery">
+                            <div class="product-gallery__main">
+                                <img id="main-product-image" src="/assets/images/products/flywheel-pro-main.jpg" alt="Flywheel Pro 2.0" class="product-gallery__main-image">
+                            </div>
+                            <div class="product-gallery__thumbnails">
+                                <button class="thumbnail-btn active" data-image="/assets/images/products/flywheel-pro-main.jpg">
+                                    <img src="/assets/images/products/flywheel-pro-thumb-1.jpg" alt="Flywheel Pro 2.0 - Front view" class="thumbnail-image">
+                                </button>
+                                <button class="thumbnail-btn" data-image="/assets/images/products/flywheel-pro-angle.jpg">
+                                    <img src="/assets/images/products/flywheel-pro-thumb-2.jpg" alt="Flywheel Pro 2.0 - Angle view" class="thumbnail-image">
+                                </button>
+                                <button class="thumbnail-btn" data-image="/assets/images/products/flywheel-pro-detail.jpg">
+                                    <img src="/assets/images/products/flywheel-pro-thumb-3.jpg" alt="Flywheel Pro 2.0 - Detail view" class="thumbnail-image">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-hero__info">
+                        <h1 class="product-title" data-en="Flywheel Pro 2.0" data-ar="فلايويل برو 2.0">Flywheel Pro 2.0</h1>
+                        <div class="product-price">$899</div>
+                        <div class="product-rating">
+                            <div class="stars">
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star filled">★</span>
+                                <span class="star half-filled">★</span>
+                            </div>
+                            <span class="rating-count">(42 reviews)</span>
+                        </div>
+                        
+                        <div class="product-description">
+                            <p data-en="Professional-grade flywheel training device with CNC aluminum construction, digital performance tracking, and adjustable resistance settings." data-ar="جهاز تدريب العجلة الطائرة من الدرجة الاحترافية مع بناء من الألومنيوم CNC، وتتبع الأداء الرقمي، وإعدادات مقاومة قابلة للتعديل.">Professional-grade flywheel training device with CNC aluminum construction, digital performance tracking, and adjustable resistance settings.</p>
+                        </div>
+                        
+                        <div class="product-options">
+                            <div class="option-group">
+                                <label for="color-select" data-en="Color" data-ar="اللون">Color</label>
+                                <div class="color-options">
+                                    <button class="color-option active" data-color="black" style="background-color: #222;"></button>
+                                    <button class="color-option" data-color="silver" style="background-color: #DDD;"></button>
+                                    <button class="color-option" data-color="blue" style="background-color: #1E88E5;"></button>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <label for="quantity-select" data-en="Quantity" data-ar="الكمية">Quantity</label>
+                                <div class="quantity-selector">
+                                    <button class="quantity-btn minus" aria-label="Decrease quantity">-</button>
+                                    <input type="number" id="quantity-select" class="quantity-input" value="1" min="1" max="10">
+                                    <button class="quantity-btn plus" aria-label="Increase quantity">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="product-actions">
+                            <button class="btn btn--primary add-to-cart-btn" data-en="Add to Cart" data-ar="أضف إلى السلة">Add to Cart</button>
+                            <button class="btn btn--secondary wishlist-btn" data-en="Add to Wishlist" data-ar="أضف إلى قائمة الرغبات">Add to Wishlist</button>
+                        </div>
+                        
+                        <div class="product-meta">
+                            <div class="meta-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14"></path>
+                                    <path d="M12 5v14"></path>
+                                </svg>
+                                <span data-en="In Stock" data-ar="متوفر">In Stock</span>
+                            </div>
+                            <div class="meta-item">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="3" width="22" height="18" rx="2" ry="2"></rect>
+                                    <line x1="1" y1="9" x2="23" y2="9"></line>
+                                </svg>
+                                <span data-en="Free shipping on orders over $500" data-ar="شحن مجاني للطلبات التي تزيد عن 500 دولار">Free shipping on orders over $500</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Product Details Tabs -->
+        <section class="product-details">
+            <div class="container">
+                <div class="tabs">
+                    <div class="tab-header">
+                        <button class="tab-btn active" data-tab="description" data-en="Description" data-ar="الوصف">Description</button>
+                        <button class="tab-btn" data-tab="specifications" data-en="Specifications" data-ar="المواصفات">Specifications</button>
+                        <button class="tab-btn" data-tab="reviews" data-en="Reviews" data-ar="التقييمات">Reviews</button>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="description">
+                            <h2 data-en="About Flywheel Pro 2.0" data-ar="نبذة عن فلايويل برو 2.0">About Flywheel Pro 2.0</h2>
+                            <p data-en="The Flywheel Pro 2.0 represents the pinnacle of inertial training technology, designed for professional athletes and high-performance training facilities. This advanced device utilizes the principles of rotational inertia to provide variable resistance throughout the entire range of motion." data-ar="يمثل فلايويل برو 2.0 قمة تكنولوجيا التدريب بالقصور الذاتي، وهو مصمم للرياضيين المحترفين ومرافق التدريب عالية الأداء. يستخدم هذا الجهاز المتطور مبادئ القصور الدوراني لتوفير مقاومة متغيرة خلال نطاق الحركة بأكمله.">The Flywheel Pro 2.0 represents the pinnacle of inertial training technology, designed for professional athletes and high-performance training facilities. This advanced device utilizes the principles of rotational inertia to provide variable resistance throughout the entire range of motion.</p>
+                            
+                            <h3 data-en="Key Benefits" data-ar="الفوائد الرئيسية">Key Benefits</h3>
+                            <ul>
+                                <li data-en="Eccentric Overload: Targets the eccentric phase of movement for enhanced strength gains" data-ar="الحمل الزائد اللامركزي: يستهدف المرحلة اللامركزية من الحركة لتعزيز مكاسب القوة">Eccentric Overload: Targets the eccentric phase of movement for enhanced strength gains</li>
+                                <li data-en="Variable Resistance: Adapts to your force output for optimal training stimulus" data-ar="المقاومة المتغيرة: تتكيف مع قوة الإخراج الخاصة بك للحصول على تحفيز تدريبي مثالي">Variable Resistance: Adapts to your force output for optimal training stimulus</li>
+                                <li data-en="Performance Tracking: Built-in sensors measure power, velocity, and force metrics" data-ar="تتبع الأداء: أجهزة استشعار مدمجة تقيس القوة والسرعة ومقاييس القوة">Performance Tracking: Built-in sensors measure power, velocity, and force metrics</li>
+                                <li data-en="Versatility: Multiple attachment options for a wide range of exercises" data-ar="تعدد الاستخدامات: خيارات ربط متعددة لمجموعة واسعة من التمارين">Versatility: Multiple attachment options for a wide range of exercises</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="tab-pane" id="specifications">
+                            <h2 data-en="Technical Specifications" data-ar="المواصفات الفنية">Technical Specifications</h2>
+                            <table class="specs-table">
+                                <tbody>
+                                    <tr>
+                                        <th data-en="Dimensions" data-ar="الأبعاد">Dimensions</th>
+                                        <td>45cm x 35cm x 25cm</td>
+                                    </tr>
+                                    <tr>
+                                        <th data-en="Weight" data-ar="الوزن">Weight</th>
+                                        <td>12.5kg</td>
+                                    </tr>
+                                    <tr>
+                                        <th data-en="Materials" data-ar="المواد">Materials</th>
+                                        <td data-en="CNC Aluminum, Steel, High-density polymer" data-ar="ألومنيوم CNC، فولاذ، بوليمر عالي الكثافة">CNC Aluminum, Steel, High-density polymer</td>
+                                    </tr>
+                                    <tr>
+                                        <th data-en="Inertia Settings" data-ar="إعدادات القصور الذاتي">Inertia Settings</th>
+                                        <td data-en="6 levels (0.025 - 0.1 kgm²)" data-ar="6 مستويات (0.025 - 0.1 كجم م²)">6 levels (0.025 - 0.1 kgm²)</td>
+                                    </tr>
+                                    <tr>
+                                        <th data-en="Connectivity" data-ar="الاتصال">Connectivity</th>
+                                        <td data-en="Bluetooth 5.0, ANT+" data-ar="بلوتوث 5.0، ANT+">Bluetooth 5.0, ANT+</td>
+                                    </tr>
+                                    <tr>
+                                        <th data-en="Battery Life" data-ar="عمر البطارية">Battery Life</th>
+                                        <td data-en="Up to 30 hours of active use" data-ar="تصل إلى 30 ساعة من الاستخدام النشط">Up to 30 hours of active use</td>
+                                    </tr>
+                                    <tr>
+                                        <th data-en="Warranty" data-ar="الضمان">Warranty</th>
+                                        <td data-en="2 years" data-ar="سنتان">2 years</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="tab-pane" id="reviews">
+                            <h2 data-en="Customer Reviews" data-ar="تقييمات العملاء">Customer Reviews</h2>
+                            <div class="reviews-summary">
+                                <div class="average-rating">
+                                    <div class="rating-number">4.5</div>
+                                    <div class="stars">
+                                        <span class="star filled">★</span>
+                                        <span class="star filled">★</span>
+                                        <span class="star filled">★</span>
+                                        <span class="star filled">★</span>
+                                        <span class="star half-filled">★</span>
+                                    </div>
+                                    <div class="rating-count" data-en="Based on 42 reviews" data-ar="بناءً على 42 تقييمًا">Based on 42 reviews</div>
+                                </div>
+                            </div>
+                            
+                            <div class="reviews-list">
+                                <!-- Review items will be loaded dynamically -->
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <div class="reviewer-name">Michael T.</div>
+                                        <div class="review-date">2023-11-15</div>
+                                        <div class="review-rating">
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                        </div>
+                                    </div>
+                                    <div class="review-content">
+                                        <p data-en="Game changer for my training program. The eccentric overload has significantly improved my power output in just 6 weeks. The build quality is exceptional and the app integration works flawlessly." data-ar="مغير للعبة في برنامج التدريب الخاص بي. لقد حسن الحمل الزائد اللامركزي بشكل كبير من قوة الإخراج لدي في غضون 6 أسابيع فقط. جودة البناء استثنائية وتكامل التطبيق يعمل بشكل مثالي.">Game changer for my training program. The eccentric overload has significantly improved my power output in just 6 weeks. The build quality is exceptional and the app integration works flawlessly.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Related Products -->
+        <section class="related-products">
+            <div class="container">
+                <h2 class="section-title" data-en="You May Also Like" data-ar="قد يعجبك أيضًا">You May Also Like</h2>
+                <div class="products-grid">
+                    <!-- Related product cards -->
+                    <div class="product-card">
+                        <div class="product-card__image">
+                            <div class="product-placeholder"></div>
+                        </div>
+                        <div class="product-card__content">
+                            <h3 class="product-card__title" data-en="Performance Tracker" data-ar="متتبع الأداء">Performance Tracker</h3>
+                            <p class="product-card__price">$199</p>
+                            <p class="product-card__description" data-en="Wireless performance tracking module with smartphone integration" data-ar="وحدة تتبع الأداء اللاسلكية مع تكامل الهاتف الذكي">Wireless performance tracking module with smartphone integration</p>
+                            <button class="btn btn--primary btn--sm" data-en="View Details" data-ar="عرض التفاصيل">View Details</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-card__image">
+                            <div class="product-placeholder"></div>
+                        </div>
+                        <div class="product-card__content">
+                            <h3 class="product-card__title" data-en="Training Accessories Kit" data-ar="مجموعة ملحقات التدريب">Training Accessories Kit</h3>
+                            <p class="product-card__price">$149</p>
+                            <p class="product-card__description" data-en="Complete set of attachments and accessories for versatile training" data-ar="مجموعة كاملة من المرفقات والملحقات للتدريب متعدد الاستخدامات">Complete set of attachments and accessories for versatile training</p>
+                            <button class="btn btn--primary btn--sm" data-en="View Details" data-ar="عرض التفاصيل">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer Component Container -->
+    <div id="footer-container"></div>
+    
+    <!-- Main Script -->
+    <script type="module">
+        import componentLoader from '../../src/utils/component-loader.js';
+        
+        // Initialize components when DOM is loaded
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Get current language
+                const currentLang = document.documentElement.getAttribute('lang') || 'en';
+                
+                // Load components
+                await componentLoader.initializeComponents({
+                    '/src/components/header.html': '#header-container',
+                    '/src/components/footer.html': '#footer-container'
+                }, { language: currentLang });
+                
+                // Initialize theme
+                initializeTheme();
+                
+                // Initialize product page functionality
+                initProductPage();
+                
+                console.log('Components loaded successfully');
+            } catch (error) {
+                console.error('Error loading components:', error);
+            }
+        });
+        
+        // Product page specific functionality
+        function initProductPage() {
+            // Thumbnail gallery
+            const thumbnailBtns = document.querySelectorAll('.thumbnail-btn');
+            const mainImage = document.getElementById('main-product-image');
+            
+            thumbnailBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active thumbnail
+                    thumbnailBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    // Update main image
+                    const imageSrc = btn.getAttribute('data-image');
+                    mainImage.src = imageSrc;
+                });
+            });
+            
+            // Quantity selector
+            const quantityInput = document.querySelector('.quantity-input');
+            const minusBtn = document.querySelector('.quantity-btn.minus');
+            const plusBtn = document.querySelector('.quantity-btn.plus');
+            
+            minusBtn.addEventListener('click', () => {
+                let value = parseInt(quantityInput.value);
+                if (value > 1) {
+                    quantityInput.value = value - 1;
+                }
+            });
+            
+            plusBtn.addEventListener('click', () => {
+                let value = parseInt(quantityInput.value);
+                if (value < 10) {
+                    quantityInput.value = value + 1;
+                }
+            });
+            
+            // Tabs functionality
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active tab button
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    // Show corresponding tab pane
+                    const tabId = btn.getAttribute('data-tab');
+                    tabPanes.forEach(pane => {
+                        pane.classList.remove('active');
+                        if (pane.id === tabId) {
+                            pane.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Color options
+            const colorOptions = document.querySelectorAll('.color-option');
+            colorOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    colorOptions.forEach(o => o.classList.remove('active'));
+                    option.classList.add('active');
+                });
+            });
+        }
+    </script>
+    
+    <!-- Footer Component Container -->
+    <div data-component="footer.html"></div>
+    
+    <!-- Scripts -->
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/product-details.js"></script>
+    <script src="../scripts/product-loader.js"></script>
+    
+    <!-- Initialize Components -->
+    <script type="module">
+        import componentLoader from '../utils/component-loader.js';
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Get current language
+                const currentLang = document.documentElement.getAttribute('lang') || 'en';
+                
+                // Load components
+                await componentLoader.initializeComponents({
+                    '/src/components/header.html': '[data-component="header.html"]',
+                    '/src/components/footer.html': '[data-component="footer.html"]'
+                }, { language: currentLang });
+                
+                // Initialize theme
+                initializeTheme();
+                
+                // Initialize product details functionality
+                initializeQuantityControls();
+                
+                console.log('Components loaded successfully');
+            } catch (error) {
+                console.error('Error loading components:', error);
+            }
+        });
+    </script>
+</body>
+</html>

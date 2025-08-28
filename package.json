@@ -1,0 +1,47 @@
+{
+  "name": "tranex-sports-website",
+  "version": "1.0.0",
+  "description": "TRANEX Sports - Elite sports performance equipment website",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "dev": "python -m http.server 8000",
+    "serve": "npx serve .",
+    "build": "echo 'Static site - no build required'",
+    "test": "echo 'No tests specified'",
+    "lint": "echo 'No linter configured'",
+    "format": "echo 'No formatter configured'"
+  },
+  "keywords": [
+    "sports",
+    "equipment",
+    "flywheel",
+    "fencing",
+    "training",
+    "performance",
+    "tranex",
+    "website"
+  ],
+  "author": "TRANEX Sports Team",
+  "license": "UNLICENSED",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tranex-sports/website.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tranex-sports/website/issues"
+  },
+  "homepage": "https://tranex.com",
+  "devDependencies": {
+    "serve": "^14.2.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

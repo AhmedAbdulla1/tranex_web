@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - TRANEX</title>
+    <meta name="description" content="Create a new TRANEX account to start shopping and track your orders.">
+    <link rel="canonical" href="https://tranex.com/src/pages/auth/register.html">
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Register - TRANEX">
+    <meta property="og:description" content="Create a new TRANEX account to start shopping and track your orders.">
+    <meta property="og:image" content="https://tranex.com/assets/images/og-register.jpg">
+    <meta property="og:url" content="https://tranex.com/src/pages/auth/register.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../../src/styles/auth.css">
+    
+    <!-- Component Loader -->
+    <script type="module" src="../../utils/component-loader.js"></script>
+    
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- Header Component Container -->
+    <div id="header-container"></div>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="auth-section">
+            <div class="container">
+                <div class="auth-container">
+                    <div class="auth-card">
+                        <div class="auth-header">
+                            <h1 class="auth-title" data-en="Create Account" data-ar="إنشاء حساب">Create Account</h1>
+                            <p class="auth-subtitle" data-en="Join TRANEX today and start shopping" data-ar="انضم إلى ترانكس اليوم وابدأ التسوق">Join TRANEX today and start shopping</p>
+                        </div>
+                        
+                        <div class="auth-form">
+                            <div class="form-message" id="auth-message"></div>
+                            
+                            <form id="register-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="first-name" data-en="First Name" data-ar="الاسم الأول">First Name</label>
+                                        <input type="text" id="first-name" name="firstName" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="last-name" data-en="Last Name" data-ar="اسم العائلة">Last Name</label>
+                                        <input type="text" id="last-name" name="lastName" required>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email" data-en="Email" data-ar="البريد الإلكتروني">Email</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="password" data-en="Password" data-ar="كلمة المرور">Password</label>
+                                    <input type="password" id="password" name="password" required>
+                                    <small class="password-hint" data-en="Password must be at least 8 characters" data-ar="يجب أن تتكون كلمة المرور من 8 أحرف على الأقل">Password must be at least 8 characters</small>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="confirm-password" data-en="Confirm Password" data-ar="تأكيد كلمة المرور">Confirm Password</label>
+                                    <input type="password" id="confirm-password" name="confirmPassword" required>
+                                </div>
+                                
+                                <div class="form-options">
+                                    <div class="terms-checkbox">
+                                        <input type="checkbox" id="terms" name="terms" required>
+                                        <label for="terms">
+                                            <span data-en="I agree to the" data-ar="أوافق على">I agree to the</span> 
+                                            <a href="/terms" data-en="Terms of Service" data-ar="شروط الخدمة">Terms of Service</a> 
+                                            <span data-en="and" data-ar="و">and</span> 
+                                            <a href="/privacy" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="btn btn--primary btn--full" data-en="Create Account" data-ar="إنشاء حساب">Create Account</button>
+                            </form>
+                            
+                            <div class="auth-divider">
+                                <span data-en="OR" data-ar="أو">OR</span>
+                            </div>
+                            
+                            <button class="btn btn--outline btn--full social-login">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                                </svg>
+                                <span data-en="Sign up with Google" data-ar="التسجيل بواسطة جوجل">Sign up with Google</span>
+                            </button>
+                            
+                            <div class="auth-footer">
+                                <p data-en="Already have an account?" data-ar="لديك حساب بالفعل؟">Already have an account? <a href="login.html" data-en="Sign in" data-ar="تسجيل الدخول">Sign in</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="auth-image">
+                        <img src="../../assets/images/auth-image.jpg" alt="Register" class="responsive-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer Component Container -->
+    <div id="footer-container"></div>
+    
+    <!-- Main Script -->
+    <script type="module">
+        import componentLoader from '../../utils/component-loader.js';
+        import { signUp } from '../../../config/supabase.js';
+        
+        // Initialize components when DOM is loaded
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Get current language
+                const currentLang = document.documentElement.getAttribute('lang') || 'en';
+                
+                // Load components
+                await componentLoader.initializeComponents({
+                    '/src/components/header.html': '#header-container',
+                    '/src/components/footer.html': '#footer-container'
+                }, { language: currentLang });
+                
+                // Initialize theme
+                initializeTheme();
+                
+                // Set up event listeners for theme and language toggles
+                document.getElementById('theme-toggle').addEventListener('click', function() {
+                    toggleTheme();
+                });
+                
+                document.getElementById('lang-toggle').addEventListener('click', function() {
+                    switchLanguage();
+                });
+                
+                // Handle registration form submission
+                const registerForm = document.getElementById('register-form');
+                const messageEl = document.getElementById('auth-message');
+                
+                registerForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    const firstName = document.getElementById('first-name').value;
+                    const lastName = document.getElementById('last-name').value;
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    const confirmPassword = document.getElementById('confirm-password').value;
+                    
+                    // Validate password match
+                    if (password !== confirmPassword) {
+                        messageEl.textContent = 'Passwords do not match';
+                        messageEl.className = 'form-message error';
+                        return;
+                    }
+                    
+                    // Validate password length
+                    if (password.length < 8) {
+                        messageEl.textContent = 'Password must be at least 8 characters';
+                        messageEl.className = 'form-message error';
+                        return;
+                    }
+                    
+                    try {
+                        messageEl.textContent = 'Creating your account...';
+                        messageEl.className = 'form-message info';
+                        
+                        const { data, error } = await signUp(email, password, {
+                            first_name: firstName,
+                            last_name: lastName
+                        });
+                        
+                        if (error) throw error;
+                        
+                        messageEl.textContent = 'Account created successfully! Please check your email to confirm your registration.';
+                        messageEl.className = 'form-message success';
+                        
+                        // Clear form
+                        registerForm.reset();
+                        
+                    } catch (error) {
+                        console.error('Registration error:', error);
+                        messageEl.textContent = error.message || 'Failed to create account. Please try again.';
+                        messageEl.className = 'form-message error';
+                    }
+                });
+                
+                console.log('Components loaded successfully');
+            } catch (error) {
+                console.error('Error loading components:', error);
+            }
+        });
+    </script>
+    
+    <script src="../../scripts/main.js"></script>
+    <script src="../../../src/scripts/auth.js"></script>
+</body>
+</html>

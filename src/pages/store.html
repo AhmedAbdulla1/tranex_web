@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store - TRANEX</title>
+    <meta name="description" content="Shop professional flywheel training equipment, smart sensors, and accessories from TRANEX. Free shipping on orders over $500.">
+    <link rel="canonical" href="https://tranex.com/store.html">
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Store - TRANEX">
+    <meta property="og:description" content="Shop professional flywheel training equipment, smart sensors, and accessories.">
+    <meta property="og:image" content="https://tranex.com/assets/images/og-store.jpg">
+    <meta property="og:url" content="https://tranex.com/store.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/store.css">
+    
+    <!-- Component Loader -->
+    <script type="module" src="../../src/utils/component-loader.js"></script>
+    
+    <!-- JSON-LD Product Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Store",
+        "name": "TRANEX Store",
+        "url": "https://tranex.com/store.html",
+        "description": "Professional flywheel training equipment and smart sensor modules",
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "TRANEX Training Equipment",
+            "itemListElement": [
+                {
+                    "@type": "Product",
+                    "name": "Flywheel Pro 2.0",
+                    "description": "Professional-grade flywheel with CNC aluminum construction",
+                    "offers": {
+                        "@type": "Offer",
+                        "price": "899",
+                        "priceCurrency": "USD"
+                    }
+                }
+            ]
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Header Component Container -->
+    <div id="header-container"></div>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Store Hero Section -->
+        <section class="page-hero">
+            <div class="container">
+                <div class="page-hero__content">
+                    <h1 class="page-hero__title" data-en="Shop TRANEX Equipment" data-ar="تسوق معدات ترانكس">Shop TRANEX Equipment</h1>
+                    <p class="page-hero__subtitle" data-en="Professional-grade sports equipment for elite performance" data-ar="معدات رياضية احترافية للأداء النخبوي">Professional-grade sports equipment for elite performance</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Product Filters -->
+        <section class="product-filters">
+            <div class="container">
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="category-filter" data-en="Category" data-ar="الفئة">Category</label>
+                        <select id="category-filter" class="filter-select">
+                            <option value="all" data-en="All Categories" data-ar="جميع الفئات">All Categories</option>
+                            <option value="flywheel" data-en="Flywheel Training" data-ar="تدريب العجلة الطائرة">Flywheel Training</option>
+                            <option value="fencing" data-en="Fencing Equipment" data-ar="معدات المبارزة">Fencing Equipment</option>
+                            <option value="accessories" data-en="Accessories" data-ar="الإكسسوارات">Accessories</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="sort-filter" data-en="Sort By" data-ar="ترتيب حسب">Sort By</label>
+                        <select id="sort-filter" class="filter-select">
+                            <option value="featured" data-en="Featured" data-ar="مميز">Featured</option>
+                            <option value="price-low" data-en="Price: Low to High" data-ar="السعر: من الأقل إلى الأعلى">Price: Low to High</option>
+                            <option value="price-high" data-en="Price: High to Low" data-ar="السعر: من الأعلى إلى الأقل">Price: High to Low</option>
+                            <option value="newest" data-en="Newest" data-ar="الأحدث">Newest</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Products Grid -->
+        <section class="products-section">
+            <div class="container">
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <input type="text" id="product-search" placeholder="Search products..." class="search-input">
+                </div>
+                
+                <!-- Loading Indicator -->
+                <div id="loading" class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <p>Loading products...</p>
+                </div>
+                
+                <!-- Products Grid -->
+                <div id="product-grid" class="products-grid">
+                    <!-- Products will be loaded dynamically via JavaScript -->
+                </div>
+                
+                <!-- Load More Button -->
+                <div class="load-more-container">
+                    <button id="load-more" class="btn btn--secondary">Load More Products</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer Component Container -->
+    <div id="footer-container"></div>
+    
+    <!-- Main Script -->
+    <script type="module">
+        import componentLoader from '../../src/utils/component-loader.js';
+        
+        // Initialize components when DOM is loaded
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Get current language
+                const currentLang = document.documentElement.getAttribute('lang') || 'en';
+                
+                // Load components
+                await componentLoader.initializeComponents({
+                    '/src/components/header.html': '#header-container',
+                    '/src/components/footer.html': '#footer-container'
+                }, { language: currentLang });
+                
+                // Initialize theme
+                initializeTheme();
+                
+                // Set up event listeners for theme and language toggles
+                const themeToggle = document.querySelector('.theme-toggle');
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', toggleTheme);
+                }
+                
+                const langToggle = document.querySelector('.lang-btn');
+                if (langToggle) {
+                    langToggle.addEventListener('click', () => {
+                        const currentLang = document.documentElement.getAttribute('lang') || 'en';
+                        switchLanguage(currentLang === 'en' ? 'ar' : 'en');
+                    });
+                }
+                
+                console.log('Components loaded successfully');
+            } catch (error) {
+                console.error('Error loading components:', error);
+            }
+        });
+    </script>
+    
+    <script src="../scripts/main.js"></script>
+    <script type="module" src="../scripts/store.js"></script>
+</body>
+</html>

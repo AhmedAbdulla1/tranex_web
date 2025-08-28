@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المتجر - TRANEX</title>
+    <meta name="description" content="تسوق أحدث منتجات TRANEX التكنولوجية. اكتشف مجموعتنا من الأجهزة والبرامج والملحقات.">
+    <link rel="canonical" href="https://tranex.com/ar/store.html">
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content="المتجر - TRANEX">
+    <meta property="og:description" content="تسوق أحدث منتجات TRANEX التكنولوجية. اكتشف مجموعتنا من الأجهزة والبرامج والملحقات.">
+    <meta property="og:image" content="https://tranex.com/assets/images/og-store.jpg">
+    <meta property="og:url" content="https://tranex.com/ar/store.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link rel="stylesheet" href="../../styles/store.css">
+    
+    <!-- Component Loader -->
+    <script type="module" src="../../utils/component-loader.js"></script>
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Store",
+        "name": "TRANEX Store",
+        "description": "تسوق أحدث منتجات TRANEX التكنولوجية. اكتشف مجموعتنا من الأجهزة والبرامج والملحقات.",
+        "url": "https://tranex.com/ar/store.html",
+        "logo": "https://tranex.com/assets/icons/logo.svg",
+        "telephone": "+20-111-222-3333",
+        "email": "store@tranex.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "123 شارع التحرير",
+            "addressLocality": "القاهرة",
+            "postalCode": "11511",
+            "addressCountry": "مصر"
+        },
+        "openingHours": "Mo,Tu,We,Th,Fr 09:00-17:00",
+        "paymentAccepted": ["بطاقة ائتمان", "PayPal", "الدفع عند الاستلام"],
+        "priceRange": "$$$"
+    }
+    </script>
+</head>
+<body>
+    <!-- Header Component Container -->
+    <div data-component="header.html"></div>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Store Hero Section -->
+        <section class="page-hero">
+            <div class="container">
+                <div class="page-hero__content">
+                    <h1 class="page-hero__title" data-en="TRANEX Store" data-ar="متجر TRANEX">متجر TRANEX</h1>
+                    <p class="page-hero__subtitle" data-en="Shop our latest tech products and solutions" data-ar="تسوق أحدث منتجاتنا التكنولوجية وحلولنا">تسوق أحدث منتجاتنا التكنولوجية وحلولنا</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Store Filters -->
+        <section class="store-filters">
+            <div class="container">
+                <div class="filters-container">
+                    <div class="search-filter">
+                        <input type="text" id="product-search" placeholder="ابحث عن منتجات..." data-en-placeholder="Search products..." data-ar-placeholder="ابحث عن منتجات...">
+                    </div>
+                    
+                    <div class="category-filter">
+                        <select id="category-select">
+                            <option value="all" data-en="All Categories" data-ar="جميع الفئات">جميع الفئات</option>
+                            <option value="hardware" data-en="Hardware" data-ar="أجهزة">أجهزة</option>
+                            <option value="software" data-en="Software" data-ar="برمجيات">برمجيات</option>
+                            <option value="accessories" data-en="Accessories" data-ar="ملحقات">ملحقات</option>
+                            <option value="services" data-en="Services" data-ar="خدمات">خدمات</option>
+                        </select>
+                    </div>
+                    
+                    <div class="sort-filter">
+                        <select id="sort-select">
+                            <option value="featured" data-en="Featured" data-ar="مميز">مميز</option>
+                            <option value="price-low" data-en="Price: Low to High" data-ar="السعر: من الأقل إلى الأعلى">السعر: من الأقل إلى الأعلى</option>
+                            <option value="price-high" data-en="Price: High to Low" data-ar="السعر: من الأعلى إلى الأقل">السعر: من الأعلى إلى الأقل</option>
+                            <option value="newest" data-en="Newest" data-ar="الأحدث">الأحدث</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Products Grid -->
+        <section class="products-section">
+            <div class="container">
+                <div class="products-grid" id="products-container">
+                    <!-- Product Card 1 -->
+                    <div class="product-card" data-category="hardware">
+                        <div class="product-card__image">
+                            <img src="/assets/images/products/product1.jpg" alt="TRANEX Pro Tablet" loading="lazy">
+                            <div class="product-badge new" data-en="New" data-ar="جديد">جديد</div>
+                        </div>
+                        <div class="product-card__content">
+                            <h3 class="product-card__title" data-en="TRANEX Pro Tablet" data-ar="جهاز TRANEX Pro اللوحي">جهاز TRANEX Pro اللوحي</h3>
+                            <p class="product-card__description" data-en="High-performance tablet with 12-inch display and advanced processing power." data-ar="جهاز لوحي عالي الأداء بشاشة 12 بوصة وقوة معالجة متقدمة.">جهاز لوحي عالي الأداء بشاشة 12 بوصة وقوة معالجة متقدمة.</p>
+                            <div class="product-card__price">$899.99</div>
+                            <button class="btn btn--primary add-to-cart" data-product-id="1" data-en="Add to Cart" data-ar="أضف إلى السلة">أضف إلى السلة</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 2 -->
+                    <div class="product-card" data-category="software">
+                        <div class="product-card__image">
+                            <img src="/assets/images/products/product2.jpg" alt="TRANEX Analytics Suite" loading="lazy">
+                            <div class="product-badge bestseller" data-en="Bestseller" data-ar="الأكثر مبيعًا">الأكثر مبيعًا</div>
+                        </div>
+                        <div class="product-card__content">
+                            <h3 class="product-card__title" data-en="TRANEX Analytics Suite" data-ar="حزمة TRANEX للتحليلات">حزمة TRANEX للتحليلات</h3>
+                            <p class="product-card__description" data-en="Comprehensive data analytics software with AI-powered insights and visualization tools." data-ar="برنامج شامل لتحليل البيانات مع رؤى مدعومة بالذكاء الاصطناعي وأدوات التصور.">برنامج شامل لتحليل البيانات مع رؤى مدعومة بالذكاء الاصطناعي وأدوات التصور.</p>
+                            <div class="product-card__price">$499.99</div>
+                            <button class="btn btn--primary add-to-cart" data-product-id="2" data-en="Add to Cart" data-ar="أضف إلى السلة">أضف إلى السلة</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 3 -->
+                    <div class="product-card" data-category="accessories">
+                        <div class="product-card__image">
+                            <img src="/assets/images/products/product3.jpg" alt="TRANEX Smart Keyboard" loading="lazy">
+                        </div>
+                        <div class="product-card__content">
+                            <h3 class="product-card__title" data-en="TRANEX Smart Keyboard" data-ar="لوحة مفاتيح TRANEX الذكية">لوحة مفاتيح TRANEX الذكية</h3>
+                            <p class="product-card__description" data-en="Ergonomic keyboard with customizable keys and wireless connectivity." data-ar="لوحة مفاتيح مريحة مع مفاتيح قابلة للتخصيص واتصال لاسلكي.">لوحة مفاتيح مريحة مع مفاتيح قابلة للتخصيص واتصال لاسلكي.</p>
+                            <div class="product-card__price">$129.99</div>
+                            <button class="btn btn--primary add-to-cart" data-product-id="3" data-en="Add to Cart" data-ar="أضف إلى السلة">أضف إلى السلة</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 4 -->
+                    <div class="product-card" data-category="hardware">
+                        <div class="product-card__image">
+                            <img src="/assets/images/products/product4.jpg" alt="TRANEX Smart Hub" loading="lazy">
+                            <div class="product-badge sale" data-en="Sale" data-ar="تخفيض">تخفيض</div>
+                        </div>
+                        <div class="product-card__content">
+                            <h3 class="product-card__title" data-en="TRANEX Smart Hub" data-ar="مركز TRANEX الذكي">مركز TRANEX الذكي</h3>
+                            <p class="product-card__description" data-en="Central smart home controller with voice recognition and device management." data-ar="وحدة تحكم مركزية للمنزل الذكي مع التعرف على الصوت وإدارة الأجهزة.">وحدة تحكم مركزية للمنزل الذكي مع التعرف على الصوت وإدارة الأجهزة.</p>
+                            <div class="product-card__price"><span class="original-price">$349.99</span> $299.99</div>
+                            <button class="btn btn--primary add-to-cart" data-product-id="4" data-en="Add to Cart" data-ar="أضف إلى السلة">أضف إلى السلة</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 5 -->
+                    <div class="product-card" data-category="services">
+                        <div class="product-card__image">
+                            <img src="/assets/images/products/product5.jpg" alt="TRANEX Cloud Storage" loading="lazy">
+                        </div>
+                        <div class="product-card__content">
+                            <h3 class="product-card__title" data-en="TRANEX Cloud Storage" data-ar="تخزين TRANEX السحابي">تخزين TRANEX السحابي</h3>
+                            <p class="product-card__description" data-en="Secure cloud storage solution with 1TB capacity and advanced encryption." data-ar="حل تخزين سحابي آمن بسعة 1 تيرابايت وتشفير متقدم.">حل تخزين سحابي آمن بسعة 1 تيرابايت وتشفير متقدم.</p>
+                            <div class="product-card__price">$9.99/month</div>
+                            <button class="btn btn--primary add-to-cart" data-product-id="5" data-en="Subscribe" data-ar="اشترك">اشترك</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Card 6 -->
+                    <div class="product-card" data-category="software">
+                        <div class="product-card__image">
+                            <img src="/assets/images/products/product6.jpg" alt="TRANEX Security Suite" loading="lazy">
+                        </div>
+                        <div class="product-card__content">
+                            <h3 class="product-card__title" data-en="TRANEX Security Suite" data-ar="حزمة TRANEX للأمان">حزمة TRANEX للأمان</h3>
+                            <p class="product-card__description" data-en="Comprehensive security software with firewall, antivirus, and privacy protection." data-ar="برنامج أمان شامل مع جدار حماية ومضاد فيروسات وحماية الخصوصية.">برنامج أمان شامل مع جدار حماية ومضاد فيروسات وحماية الخصوصية.</p>
+                            <div class="product-card__price">$199.99</div>
+                            <button class="btn btn--primary add-to-cart" data-product-id="6" data-en="Add to Cart" data-ar="أضف إلى السلة">أضف إلى السلة</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="pagination__btn active">1</button>
+                    <button class="pagination__btn">2</button>
+                    <button class="pagination__btn">3</button>
+                    <button class="pagination__btn pagination__next" aria-label="Next Page">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Shopping Cart Sidebar -->
+        <div class="cart-sidebar" id="cart-sidebar">
+            <div class="cart-sidebar__header">
+                <h3 data-en="Your Cart" data-ar="سلة التسوق الخاصة بك">سلة التسوق الخاصة بك</h3>
+                <button class="cart-close" id="cart-close" aria-label="Close Cart">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="cart-items" id="cart-items">
+                <!-- Cart items will be dynamically added here -->
+                <div class="empty-cart-message" data-en="Your cart is empty" data-ar="سلة التسوق فارغة">سلة التسوق فارغة</div>
+            </div>
+            
+            <div class="cart-sidebar__footer">
+                <div class="cart-total">
+                    <span data-en="Total:" data-ar="المجموع:">المجموع:</span>
+                    <span id="cart-total-amount">$0.00</span>
+                </div>
+                <button class="btn btn--primary checkout-btn" id="checkout-btn" data-en="Checkout" data-ar="إتمام الشراء">إتمام الشراء</button>
+            </div>
+        </div>
+        
+        <!-- Cart Overlay -->
+        <div class="cart-overlay" id="cart-overlay"></div>
+    </main>
+    
+    <!-- Footer Component Container -->
+    <div data-component="footer.html"></div>
+    
+    <!-- Scripts -->
+    <script type="module">
+        import componentLoader from '../../utils/component-loader.js';
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Get current language
+                const currentLang = document.documentElement.getAttribute('lang') || 'ar';
+                
+                // Load components
+                await componentLoader.initializeComponents({
+                    '/src/components/header.html': '[data-component="header.html"]',
+                    '/src/components/footer.html': '[data-component="footer.html"]'
+                }, { language: currentLang });
+                
+                // Initialize theme
+                initializeTheme();
+            
+            // Store functionality
+            const productsContainer = document.getElementById('products-container');
+            const productSearch = document.getElementById('product-search');
+            const categorySelect = document.getElementById('category-select');
+            const sortSelect = document.getElementById('sort-select');
+            const cartSidebar = document.getElementById('cart-sidebar');
+            const cartOverlay = document.getElementById('cart-overlay');
+            const cartItems = document.getElementById('cart-items');
+            const cartTotalAmount = document.getElementById('cart-total-amount');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            
+            // Cart open/close functionality
+            document.querySelectorAll('.cart-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openCart();
+                });
+            });
+            
+            document.getElementById('cart-close').addEventListener('click', closeCart);
+            cartOverlay.addEventListener('click', closeCart);
+            
+            function openCart() {
+                cartSidebar.classList.add('open');
+                cartOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeCart() {
+                cartSidebar.classList.remove('open');
+                cartOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            // Add to cart functionality
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-product-id');
+                    const productCard = this.closest('.product-card');
+                    const productTitle = productCard.querySelector('.product-card__title').textContent;
+                    const productPrice = productCard.querySelector('.product-card__price').textContent.split(' ')[0];
+                    const productImage = productCard.querySelector('img').getAttribute('src');
+                    
+                    addToCart(productId, productTitle, productPrice, productImage);
+                    openCart();
+                });
+            });
+            
+            // Cart functionality
+            let cart = [];
+            
+            function addToCart(id, title, price, image) {
+                const existingItem = cart.find(item => item.id === id);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        id: id,
+                        title: title,
+                        price: price,
+                        image: image,
+                        quantity: 1
+                    });
+                }
+                
+                updateCart();
+            }
+            
+            function removeFromCart(id) {
+                cart = cart.filter(item => item.id !== id);
+                updateCart();
+            }
+            
+            function updateQuantity(id, quantity) {
+                const item = cart.find(item => item.id === id);
+                if (item) {
+                    item.quantity = quantity;
+                    if (item.quantity <= 0) {
+                        removeFromCart(id);
+                    } else {
+                        updateCart();
+                    }
+                }
+            }
+            
+            function updateCart() {
+                cartItems.innerHTML = '';
+                
+                if (cart.length === 0) {
+                    cartItems.innerHTML = '<div class="empty-cart-message" data-en="Your cart is empty" data-ar="سلة التسوق فارغة">سلة التسوق فارغة</div>';
+                    cartTotalAmount.textContent = '$0.00';
+                    return;
+                }
+                
+                let total = 0;
+                
+                cart.forEach(item => {
+                    const itemPrice = parseFloat(item.price.replace('$', ''));
+                    const itemTotal = itemPrice * item.quantity;
+                    total += itemTotal;
+                    
+                    const cartItemElement = document.createElement('div');
+                    cartItemElement.className = 'cart-item';
+                    cartItemElement.innerHTML = `
+                        <div class="cart-item__image">
+                            <img src="${item.image}" alt="${item.title}">
+                        </div>
+                        <div class="cart-item__details">
+                            <h4 class="cart-item__title">${item.title}</h4>
+                            <div class="cart-item__price">${item.price}</div>
+                            <div class="cart-item__quantity">
+                                <button class="quantity-btn decrease" data-id="${item.id}">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="quantity-btn increase" data-id="${item.id}">+</button>
+                            </div>
+                        </div>
+                        <button class="cart-item__remove" data-id="${item.id}">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    `;
+                    
+                    cartItems.appendChild(cartItemElement);
+                });
+                
+                cartTotalAmount.textContent = `$${total.toFixed(2)}`;
+                
+                // Add event listeners to cart item buttons
+                document.querySelectorAll('.cart-item__remove').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        removeFromCart(id);
+                    });
+                });
+                
+                document.querySelectorAll('.quantity-btn.decrease').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const item = cart.find(item => item.id === id);
+                        if (item) {
+                            updateQuantity(id, item.quantity - 1);
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.quantity-btn.increase').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const item = cart.find(item => item.id === id);
+                        if (item) {
+                            updateQuantity(id, item.quantity + 1);
+                        }
+                    });
+                });
+            }
+            
+            // Checkout functionality
+            checkoutBtn.addEventListener('click', function() {
+                if (cart.length === 0) {
+                    alert('سلة التسوق فارغة');
+                    return;
+                }
+                
+                alert('تم تقديم طلبك بنجاح! سيتم توجيهك إلى صفحة الدفع.');
+                cart = [];
+                updateCart();
+                closeCart();
+            });
+            
+            // Filter and search functionality
+            function filterProducts() {
+                const searchTerm = productSearch.value.toLowerCase();
+                const category = categorySelect.value;
+                const sortBy = sortSelect.value;
+                
+                const productCards = document.querySelectorAll('.product-card');
+                
+                productCards.forEach(card => {
+                    const title = card.querySelector('.product-card__title').textContent.toLowerCase();
+                    const description = card.querySelector('.product-card__description').textContent.toLowerCase();
+                    const productCategory = card.getAttribute('data-category');
+                    
+                    const matchesSearch = title.includes(searchTerm) || description.includes(searchTerm);
+                    const matchesCategory = category === 'all' || productCategory === category;
+                    
+                    try {
+                        // Additional error handling for product filtering
+                        if (title === undefined || description === undefined) {
+                            console.error('Product data is incomplete');
+                            return false;
+                        }
+                    } catch (error) {
+                        console.error('Error filtering products:', error);
+                        return true; // Show product by default if there's an error
+                    }
+                    
+                    if (matchesSearch && matchesCategory) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Sort products
+                const productArray = Array.from(productCards).filter(card => card.style.display !== 'none');
+                
+                productArray.sort((a, b) => {
+                    const priceA = parseFloat(a.querySelector('.product-card__price').textContent.replace(/[^0-9.]/g, ''));
+                    const priceB = parseFloat(b.querySelector('.product-card__price').textContent.replace(/[^0-9.]/g, ''));
+                    
+                    if (sortBy === 'price-low') {
+                        return priceA - priceB;
+                    } else if (sortBy === 'price-high') {
+                        return priceB - priceA;
+                    }
+                    
+                    return 0;
+                });
+                
+                // Reappend sorted products
+                productArray.forEach(card => {
+                    productsContainer.appendChild(card);
+                });
+            }
+            
+            productSearch.addEventListener('input', filterProducts);
+            categorySelect.addEventListener('change', filterProducts);
+            sortSelect.addEventListener('change', filterProducts);
+            
+            console.log('Components loaded successfully');
+        } catch (error) {
+            console.error('Error loading components:', error);
+        }
+    });
+    </script>
+    <script src="../../scripts/main.js"></script>
+</body>
+</html>

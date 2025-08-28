@@ -1,0 +1,127 @@
+<!-- Navigation Component -->
+<nav class="navbar" id="navbar">
+    <div class="nav-container">
+        <!-- Logo -->
+        <div class="nav-logo">
+            <a href="/" class="logo-link">
+                <span class="logo-text">TRANEX</span>
+                <span class="logo-subtitle">Sports</span>
+            </a>
+        </div>
+
+        <!-- Navigation Links -->
+        <ul class="nav-menu" id="nav-menu">
+            <li class="nav-item">
+                <a href="/" class="nav-link" data-en="Home" data-ar="الرئيسية">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="/src/pages/store.html" class="nav-link" data-en="Store" data-ar="المتجر">Store</a>
+                <div class="dropdown-menu">
+                    <a href="/src/pages/store.html?category=flywheel" class="dropdown-link" data-en="Flywheel Systems" data-ar="أنظمة الطيران">Flywheel Systems</a>
+                    <a href="/src/pages/store.html?category=fencing" class="dropdown-link" data-en="Fencing Equipment" data-ar="معدات المبارزة">Fencing Equipment</a>
+                    <a href="/src/pages/store.html?category=accessories" class="dropdown-link" data-en="Accessories" data-ar="الإكسسوارات">Accessories</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a href="/src/pages/services.html" class="nav-link" data-en="Services" data-ar="الخدمات">Services</a>
+            </li>
+            <li class="nav-item">
+                <a href="/src/pages/about.html" class="nav-link" data-en="About" data-ar="من نحن">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="/src/pages/contact.html" class="nav-link" data-en="Contact" data-ar="تواصل معنا">Contact</a>
+            </li>
+        </ul>
+
+        <!-- Right Side Actions -->
+        <div class="nav-actions">
+            <!-- Language Toggle -->
+            <button class="lang-toggle" id="lang-toggle">
+                <span class="lang-text" id="current-lang">EN</span>
+            </button>
+
+            <!-- Theme Toggle -->
+            <button class="theme-toggle" id="theme-toggle" title="Toggle Theme">
+                <span class="theme-icon">🌙</span>
+            </button>
+
+            <!-- Search -->
+            <button class="search-toggle" id="search-toggle">
+                <svg class="icon"><use href="/src/assets/icons/icons.svg#search"></use></svg>
+            </button>
+
+            <!-- User Account -->
+            <div class="user-menu">
+                <button class="user-toggle" id="user-toggle">
+                    <svg class="icon"><use href="/src/assets/icons/icons.svg#user"></use></svg>
+                </button>
+                <div class="user-dropdown" id="user-dropdown">
+                    <div class="user-dropdown-content">
+                        <!-- Logged Out State -->
+                        <div id="auth-actions" class="auth-actions">
+                            <a href="#" class="dropdown-link" id="login-btn" data-en="Login" data-ar="تسجيل الدخول">Login</a>
+                            <a href="#" class="dropdown-link" id="register-btn" data-en="Register" data-ar="إنشاء حساب">Register</a>
+                        </div>
+                        <!-- Logged In State -->
+                        <div id="user-actions" class="user-actions" style="display: none;">
+                            <div class="user-info">
+                                <span class="user-name" id="user-name">User</span>
+                                <span class="user-email" id="user-email">user@example.com</span>
+                            </div>
+                            <a href="#" class="dropdown-link" data-en="Profile" data-ar="الملف الشخصي">Profile</a>
+                            <a href="#" class="dropdown-link" data-en="Orders" data-ar="الطلبات">Orders</a>
+                            <a href="#" class="dropdown-link" id="logout-btn" data-en="Logout" data-ar="تسجيل الخروج">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shopping Cart -->
+            <button class="cart-toggle" id="cart-toggle">
+                <svg class="icon"><use href="/src/assets/icons/icons.svg#cart"></use></svg>
+                <span class="cart-badge" id="cart-badge">0</span>
+            </button>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-toggle" id="mobile-toggle">
+                <svg class="icon"><use href="/src/assets/icons/icons.svg#menu"></use></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="search-overlay">
+        <div class="search-container">
+            <input type="text" class="search-input" id="search-input" placeholder="Search products..." data-placeholder-en="Search products..." data-placeholder-ar="البحث عن المنتجات...">
+            <button class="search-close" id="search-close">×</button>
+        </div>
+        <div class="search-results" id="search-results"></div>
+    </div>
+</nav>
+
+<!-- Cart Sidebar -->
+<div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+        <h3 data-en="Shopping Cart" data-ar="سلة التسوق">Shopping Cart</h3>
+        <button class="cart-close" id="cart-close">×</button>
+    </div>
+    <div class="cart-content">
+        <div class="cart-empty" id="cart-empty" style="display: block;">
+            <p data-en="Your cart is empty" data-ar="سلة التسوق فارغة">Your cart is empty</p>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+    </div>
+    <div class="cart-footer" id="cart-footer" style="display: none;">
+        <div class="cart-total">
+            <span data-en="Total: " data-ar="المجموع: ">Total: </span>
+            <span class="total-amount" id="total-amount">$0.00</span>
+        </div>
+        <div class="cart-actions">
+            <button class="btn btn-secondary" id="clear-cart" data-en="Clear Cart" data-ar="مسح السلة">Clear Cart</button>
+            <button class="btn btn-primary" id="checkout-btn" data-en="Checkout" data-ar="إتمام الشراء">Checkout</button>
+        </div>
+    </div>
+</div>
+
+<!-- Overlay for mobile menu and modals -->
+<div class="overlay" id="overlay"></div>

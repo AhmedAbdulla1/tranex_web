@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <!-- Cart Icon -->
+  <symbol id="cart" viewBox="0 0 24 24">
+    <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M9 22C9.55228 22 10 21.5523 10 21C10 20.4477 9.55228 20 9 20C8.44772 20 8 20.4477 8 21C8 21.5523 8.44772 22 9 22Z"/>
+    <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M20 22C20.5523 22 21 21.5523 21 21C21 20.4477 20.5523 20 20 20C19.4477 20 19 20.4477 19 21C19 21.5523 19.4477 22 20 22Z"/>
+    <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M1 1H5L7.68 14.39C7.77144 14.8504 8.02191 15.264 8.38755 15.5583C8.75318 15.8526 9.2107 16.009 9.68 16H19.4C19.8693 16.009 20.3268 15.8526 20.6925 15.5583C21.0581 15.264 21.3086 14.8504 21.4 14.39L23 6H6"/>
+  </symbol>
+
+  <!-- Search Icon -->
+  <symbol id="search" viewBox="0 0 24 24">
+    <circle stroke="currentColor" stroke-width="2" fill="none" cx="11" cy="11" r="8"/>
+    <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M21 21L16.65 16.65"/>
+  </symbol>
+
+  <!-- User Icon -->
+  <symbol id="user" viewBox="0 0 24 24">
+    <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21"/>
+    <circle stroke="currentColor" stroke-width="2" fill="none" cx="12" cy="7" r="4"/>
+  </symbol>
+
+  <!-- Menu Icon -->
+  <symbol id="menu" viewBox="0 0 24 24">
+    <line stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" x1="3" y1="6" x2="21" y2="6"/>
+    <line stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" x1="3" y1="12" x2="21" y2="12"/>
+    <line stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" x1="3" y1="18" x2="21" y2="18"/>
+  </symbol>
+
+  <!-- Star Icon -->
+  <symbol id="star" viewBox="0 0 24 24">
+    <polygon stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="currentColor" points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/>
+  </symbol>
+
+  <!-- Check Icon -->
+  <symbol id="check" viewBox="0 0 24 24">
+    <polyline stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" points="20,6 9,17 4,12"/>
+  </symbol>
+
+  <!-- Arrow Right Icon -->
+  <symbol id="arrow-right" viewBox="0 0 24 24">
+    <line stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" x1="5" y1="12" x2="19" y2="12"/>
+    <polyline stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" points="12,5 19,12 12,19"/>
+  </symbol>
+
+  <!-- Phone Icon -->
+  <symbol id="phone" viewBox="0 0 24 24">
+    <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M22 16.92V19.92C22.0011 20.1985 21.9441 20.4742 21.8325 20.7294C21.7209 20.9846 21.5573 21.2137 21.3521 21.4019C21.1468 21.5901 20.9046 21.7335 20.6407 21.8227C20.3769 21.9119 20.0974 21.9451 19.82 21.92C16.7428 21.5856 13.787 20.5341 11.19 18.85C8.77382 17.3147 6.72533 15.2662 5.18999 12.85C3.49997 10.2412 2.44824 7.27099 2.11999 4.18C2.095 3.90347 2.12787 3.62476 2.21649 3.36162C2.30512 3.09849 2.44756 2.85669 2.63476 2.65162C2.82196 2.44655 3.0498 2.28271 3.30379 2.17052C3.55777 2.05833 3.83233 2.00026 4.10999 2H7.10999C7.59533 1.99522 8.06579 2.16708 8.43376 2.48353C8.80173 2.79999 9.04207 3.23945 9.10999 3.72C9.23662 4.68007 9.47144 5.62273 9.80999 6.53C9.94454 6.88792 9.97366 7.27691 9.8939 7.65088C9.81415 8.02485 9.62886 8.36811 9.35999 8.64L8.08999 9.91C9.51355 12.4135 11.5865 14.4864 14.09 15.91L15.36 14.64C15.6319 14.3711 15.9751 14.1858 16.3491 14.1061C16.7231 14.0263 17.1121 14.0555 17.47 14.19C18.3773 14.5286 19.3199 14.7634 20.28 14.89C20.7658 14.9585 21.2094 15.2032 21.5265 15.5775C21.8437 15.9518 22.0122 16.4296 21.00999 16.92H22Z"/>
+  </symbol>
+
+  <!-- Mail Icon -->
+  <symbol id="mail" viewBox="0 0 24 24">
+    <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z"/>
+    <polyline stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" points="22,6 12,13 2,6"/>
+  </symbol>
+
+  <!-- Location Icon -->
+  <symbol id="location" viewBox="0 0 24 24">
+    <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M21 10C21 17 12 23 12 23S3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.3639 3.63604C20.0518 5.32387 21 7.61305 21 10Z"/>
+    <circle stroke="currentColor" stroke-width="2" fill="none" cx="12" cy="10" r="3"/>
+  </symbol>
+
+  <!-- Plus Icon -->
+  <symbol id="plus" viewBox="0 0 24 24">
+    <line stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" x1="12" y1="5" x2="12" y2="19"/>
+    <line stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" x1="5" y1="12" x2="19" y2="12"/>
+  </symbol>
+
+  <!-- Minus Icon -->
+  <symbol id="minus" viewBox="0 0 24 24">
+    <line stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" x1="5" y1="12" x2="19" y2="12"/>
+  </symbol>
+
+  <!-- Heart Icon -->
+  <symbol id="heart" viewBox="0 0 24 24">
+    <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" d="M20.84 4.61C20.3292 4.099 19.7228 3.69364 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69364 13.5708 4.099 13.06 4.61L12 5.67L10.94 4.61C9.9083 3.5783 8.50903 2.9987 7.05 2.9987C5.59096 2.9987 4.19169 3.5783 3.16 4.61C2.1283 5.6417 1.5487 7.04097 1.5487 8.5C1.5487 9.95903 2.1283 11.3583 3.16 12.39L12 21.23L20.84 12.39C21.351 11.8792 21.7563 11.2728 22.0329 10.6053C22.3095 9.93789 22.4518 9.22248 22.4518 8.5C22.4518 7.77752 22.3095 7.0621 22.0329 6.39467C21.7563 5.72723 21.351 5.12081 20.84 4.61V4.61Z"/>
+  </symbol>
+
+  <!-- Filter Icon -->
+  <symbol id="filter" viewBox="0 0 24 24">
+    <polygon stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" points="22,3 2,3 10,12.46 10,19 14,21 14,12.46"/>
+  </symbol>
+</svg>
