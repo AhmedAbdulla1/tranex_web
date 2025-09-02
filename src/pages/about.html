@@ -234,8 +234,8 @@
 					// Load components
 					await componentLoader.initializeComponents(
 						{
-							"/src/components/header.html": "#header-container",
-							"/src/components/footer.html": "#footer-container",
+							"../components/header.html": "#header-container",
+							"../components/footer.html": "#footer-container",
 						},
 						{ language: currentLang }
 					);
@@ -266,6 +266,6 @@
 			});
 		</script>
 
-		<script src="../scripts/main.js"></script>
+		<script src="src/scripts/main.js"></script>
 	</body>
 </html>
