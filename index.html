@@ -1,329 +1,561 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRANEX - Manufacturing & Development of Flywheel Training Equipment for GYMs</title>
-    <meta name="description" content="TRANEX specializes in manufacturing and developing flywheel training equipment for professional GYMs and training facilities. Elite sports performance technology.">
-    <link rel="canonical" href="https://tranex.com/">
-    
-    <!-- OpenGraph -->
-    <meta property="og:title" content="TRANEX - Flywheel Training Equipment Manufacturing">
-    <meta property="og:description" content="Professional flywheel training equipment manufacturing and development for GYMs and training facilities.">
-    <meta property="og:image" content="https://tranex.com/src/assets/images/logo.png">
-    <meta property="og:url" content="https://tranex.com/">
-    <meta property="og:type" content="website">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="src/styles/main.css">
-    
-    <!-- Component Loader -->
-    <script type="module" src="src/utils/component-loader.js"></script>
-</head>
-<body>
-    <!-- Header Component Container -->
-    <div id="header-container"></div>
-    
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Hero Image Slider -->
-        <section class="hero-slider">
-            <div class="slider-container">
-                <div class="slide active">
-                    <div class="slide-background">
-                        <img src="src/assets/images/logo.png" alt="TRANEX Manufacturing Excellence" class="slide-logo">
-                        <div class="slide-overlay"></div>
-                    </div>
-                    <div class="slide-content">
-                        <div class="container">
-                            <h1 class="slide-title">Manufacturing Excellence</h1>
-                            <p class="slide-subtitle">Professional flywheel training equipment for elite performance</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="slide">
-                    <div class="slide-background">
-                        <img src="src/assets/images/logo.png" alt="TRANEX Innovation & Development" class="slide-logo">
-                        <div class="slide-overlay"></div>
-                    </div>
-                    <div class="slide-content">
-                        <div class="container">
-                            <h1 class="slide-title">Innovation & Development</h1>
-                            <p class="slide-subtitle">Cutting-edge technology for modern GYMs</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="slide">
-                    <div class="slide-background">
-                        <img src="src/assets/images/logo.png" alt="TRANEX GYM Solutions" class="slide-logo">
-                        <div class="slide-overlay"></div>
-                    </div>
-                    <div class="slide-content">
-                        <div class="container">
-                            <h1 class="slide-title">GYM Solutions</h1>
-                            <p class="slide-subtitle">Complete flywheel training systems for fitness centers</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slider Navigation -->
-            <div class="slider-nav">
-                <button class="slider-btn prev-btn" onclick="changeSlide(-1)" aria-label="Previous slide">❮</button>
-                <button class="slider-btn next-btn" onclick="changeSlide(1)" aria-label="Next slide">❯</button>
-            </div>
-            
-            <!-- Slider Dots -->
-            <div class="slider-dots">
-                <button class="dot active" onclick="currentSlide(1)" aria-label="Go to slide 1"></button>
-                <button class="dot" onclick="currentSlide(2)" aria-label="Go to slide 2"></button>
-                <button class="dot" onclick="currentSlide(3)" aria-label="Go to slide 3"></button>
-            </div>
-        </section>
-        
-        <!-- About Section -->
-        <section class="about-section">
-            <div class="container">
-                <div class="about-content">
-                    <h2 class="section-title" data-en="Who We Are" data-ar="من نحن">Who We Are</h2>
-                    <div class="about-grid">
-                        <div class="about-item">
-                            <div class="about-icon">🏭</div>
-                            <h3>Our Story</h3>
-                            <p data-en="Founded in 2020, TRANEX has quickly established itself as a leader in flywheel training equipment manufacturing. What began as a small team of engineers and fitness experts has grown into a company serving professional GYMs and training facilities worldwide." data-ar="تأسست ترانكس في عام 2020، وسرعان ما أثبتت نفسها كشركة رائدة في تصنيع معدات التدريب بالطيران.">Founded in 2020, TRANEX has quickly established itself as a leader in flywheel training equipment manufacturing. What began as a small team of engineers and fitness experts has grown into a company serving professional GYMs and training facilities worldwide.</p>
-                        </div>
-                        <div class="about-item">
-                            <div class="about-icon">🎯</div>
-                            <h3>Our Mission</h3>
-                            <p data-en="To empower athletes and fitness enthusiasts with innovative flywheel technology that enhances performance, prevents injuries, and optimizes training efficiency through superior manufacturing and development." data-ar="تمكين الرياضيين وهواة اللياقة البدنية بالتكنولوجيا المبتكرة للطيران.">To empower athletes and fitness enthusiasts with innovative flywheel technology that enhances performance, prevents injuries, and optimizes training efficiency through superior manufacturing and development.</p>
-                        </div>
-                        <div class="about-item">
-                            <div class="about-icon">⚡</div>
-                            <h3>Our Commitment</h3>
-                            <p data-en="We maintain the highest standards in materials, manufacturing, and testing to ensure our flywheel equipment delivers consistent, reliable performance for professional GYMs and training centers." data-ar="نحافظ على أعلى المعايير في المواد والتصنيع والاختبار.">We maintain the highest standards in materials, manufacturing, and testing to ensure our flywheel equipment delivers consistent, reliable performance for professional GYMs and training centers.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Application Section -->
-        <section class="application-section">
-            <div class="container">
-                <h2 class="section-title" data-en="Data Recording Application" data-ar="تطبيق تسجيل البيانات">Data Recording Application</h2>
-                <div class="app-content">
-                    <div class="app-description">
-                        <h3>Flywheel Training Data Analytics</h3>
-                        <p data-en="Our advanced application records and analyzes data from flywheel training equipment, providing real-time insights into performance metrics, training progress, and equipment efficiency." data-ar="يسجل تطبيقنا المتقدم ويحلل البيانات من معدات التدريب بالطيران.">Our advanced application records and analyzes data from flywheel training equipment, providing real-time insights into performance metrics, training progress, and equipment efficiency.</p>
-                        
-                        <div class="app-features">
-                            <div class="feature">
-                                <div class="feature-icon">📊</div>
-                                <h4>Real-time Monitoring</h4>
-                                <p>Track performance metrics during training sessions</p>
-                            </div>
-                            <div class="feature">
-                                <div class="feature-icon">📈</div>
-                                <h4>Data Analytics</h4>
-                                <p>Comprehensive analysis of training data and progress</p>
-                            </div>
-                            <div class="feature">
-                                <div class="feature-icon">🔧</div>
-                                <h4>Equipment Diagnostics</h4>
-                                <p>Monitor flywheel equipment health and maintenance needs</p>
-                            </div>
-                            <div class="feature">
-                                <div class="feature-icon">📋</div>
-                                <h4>Performance Reports</h4>
-                                <p>Detailed reports for trainers and athletes</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="app-mockup">
-                        <div class="mockup-container">
-                            <img src="src/assets/images/logo.png" alt="TRANEX App Interface" class="app-logo">
-                            <div class="mockup-overlay">
-                                <div class="mockup-screen">
-                                    <div class="mockup-header">TRANEX Analytics</div>
-                                    <div class="mockup-content">
-                                        <div class="metric-card">
-                                            <div class="metric-value">1,245</div>
-                                            <div class="metric-label">RPM</div>
-                                        </div>
-                                        <div class="metric-card">
-                                            <div class="metric-value">85%</div>
-                                            <div class="metric-label">Efficiency</div>
-                                        </div>
-                                        <div class="metric-card">
-                                            <div class="metric-value">42min</div>
-                                            <div class="metric-label">Session</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Products Section -->
-        <section class="products-section">
-            <div class="container">
-                <h2 class="section-title" data-en="Our Products" data-ar="منتجاتنا">Our Products</h2>
-                <div class="products-row">
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="src/assets/images/logo.png" alt="Pro Flywheel System" class="product-logo">
-                            <div class="product-badge">Professional</div>
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-name">Pro Flywheel System</h3>
-                            <p class="product-description">Professional-grade flywheel training equipment for elite athletes and commercial GYMs</p>
-                            <div class="product-price">$2,499</div>
-                            <a href="/src/pages/store.html" class="btn btn--primary">View Details</a>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="src/assets/images/logo.png" alt="Compact Flywheel" class="product-logo">
-                            <div class="product-badge">Compact</div>
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-name">Compact Flywheel</h3>
-                            <p class="product-description">Space-efficient flywheel system perfect for smaller training facilities</p>
-                            <div class="product-price">$1,799</div>
-                            <a href="/src/pages/store.html" class="btn btn--primary">View Details</a>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="src/assets/images/logo.png" alt="Smart Flywheel" class="product-logo">
-                            <div class="product-badge">Smart</div>
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-name">Smart Flywheel</h3>
-                            <p class="product-description">IoT-enabled flywheel with integrated data recording and analytics</p>
-                            <div class="product-price">$3,299</div>
-                            <a href="/src/pages/store.html" class="btn btn--primary">View Details</a>
-                        </div>
-                    </div>
-                    
-                    <div class="product-card">
-                        <div class="product-image">
-                            <img src="src/assets/images/logo.png" alt="Flywheel Accessories" class="product-logo">
-                            <div class="product-badge">Complete</div>
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-name">Accessories Kit</h3>
-                            <p class="product-description">Complete set of accessories and replacement parts for all flywheel systems</p>
-                            <div class="product-price">$299</div>
-                            <a href="/src/pages/store.html" class="btn btn--primary">View Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="container">
-                <div class="cta-content">
-                    <h2 class="cta-title" data-en="Ready to Elevate Your GYM?" data-ar="جاهز لترقية صالة الألعاب الرياضية؟">Ready to Elevate Your GYM?</h2>
-                    <p class="cta-text" data-en="Contact us today to discuss how TRANEX flywheel training equipment can transform your facility" data-ar="اتصل بنا اليوم لمناقشة كيف يمكن لمعدات التدريب بالطيران من ترانكس تحويل منشأتك">Contact us today to discuss how TRANEX flywheel training equipment can transform your facility</p>
-                    <div class="cta-actions">
-                        <a href="/src/pages/contact.html" class="btn btn--primary" data-en="Get Quote" data-ar="احصل على عرض سعر">Get Quote</a>
-                        <a href="/src/pages/store.html" class="btn btn--secondary" data-en="View Catalog" data-ar="عرض الكتالوج">View Catalog</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <!-- Footer Component Container -->
-    <div id="footer-container"></div>
-    
-    <!-- Slider Script -->
-    <script>
-        let slideIndex = 0;
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-        
-        function showSlide(n) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-            
-            if (n >= slides.length) slideIndex = 0;
-            if (n < 0) slideIndex = slides.length - 1;
-            
-            slides[slideIndex].classList.add('active');
-            dots[slideIndex].classList.add('active');
-        }
-        
-        function changeSlide(n) {
-            slideIndex += n;
-            showSlide(slideIndex);
-        }
-        
-        function currentSlide(n) {
-            slideIndex = n - 1;
-            showSlide(slideIndex);
-        }
-        
-        // Auto-play slider
-        setInterval(() => {
-            slideIndex++;
-            showSlide(slideIndex);
-        }, 5000);
-    </script>
-    
-    <!-- Main Script -->
-    <script type="module">
-        import componentLoader from './src/utils/component-loader.js';
-        
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                const currentLang = document.documentElement.getAttribute('lang') || 'en';
-                
-                await componentLoader.initializeComponents({
-                    '/src/components/header.html': '#header-container',
-                    '/src/components/footer.html': '#footer-container'
-                }, { language: currentLang });
-                
-                initializeTheme();
-                
-                const themeToggle = document.getElementById('theme-toggle');
-                if (themeToggle) {
-                    themeToggle.addEventListener('click', toggleTheme);
-                }
-                
-                const langToggle = document.getElementById('lang-toggle');
-                if (langToggle) {
-                    langToggle.addEventListener('click', () => {
-                        const currentLang = document.documentElement.getAttribute('lang') || 'en';
-                        switchLanguage(currentLang === 'en' ? 'ar' : 'en');
-                    });
-                }
-                
-                console.log('Components loaded successfully');
-            } catch (error) {
-                console.error('Error loading components:', error);
-            }
-        });
-    </script>
-    
-    <script src="src/scripts/main.js"></script>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>
+			TRANEX - Manufacturing & Development of Flywheel Training Equipment
+			for GYMs
+		</title>
+		<meta
+			name="description"
+			content="TRANEX specializes in manufacturing and developing flywheel training equipment for professional GYMs and training facilities. Elite sports performance technology."
+		/>
+		<link rel="canonical" href="https://tranex.com/" />
+
+		<!-- OpenGraph -->
+		<meta
+			property="og:title"
+			content="TRANEX - Flywheel Training Equipment Manufacturing"
+		/>
+		<meta
+			property="og:description"
+			content="Professional flywheel training equipment manufacturing and development for GYMs and training facilities."
+		/>
+		<meta
+			property="og:image"
+			content="https://tranex.com/src/assets/images/logo.png"
+		/>
+		<meta property="og:url" content="https://tranex.com/" />
+		<meta property="og:type" content="website" />
+
+		<!-- Favicon -->
+		<link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico" />
+
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<link rel="stylesheet" href="src/styles/main.css" />
+
+		<!-- Component Loader -->
+	</head>
+	<body>
+		<!-- Header Component Container -->
+		<div id="header-container"></div>
+
+		<!-- Main Content -->
+		<main class="main-content">
+			<!-- Hero Image Slider -->
+			<section class="hero-slider">
+				<div class="slider-container">
+					<div class="slide active">
+						<div class="slide-background">
+							<img
+								src="src/assets/images/logo.png"
+								alt="TRANEX Manufacturing Excellence"
+								class="slide-logo"
+							/>
+							<div class="slide-overlay"></div>
+						</div>
+						<div class="slide-content">
+							<div class="container">
+								<h1 class="slide-title">
+									Manufacturing Excellence
+								</h1>
+								<p class="slide-subtitle">
+									Professional flywheel training equipment for
+									elite performance
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="slide">
+						<div class="slide-background">
+							<img
+								src="src/assets/images/logo.png"
+								alt="TRANEX Innovation & Development"
+								class="slide-logo"
+							/>
+							<div class="slide-overlay"></div>
+						</div>
+						<div class="slide-content">
+							<div class="container">
+								<h1 class="slide-title">
+									Innovation & Development
+								</h1>
+								<p class="slide-subtitle">
+									Cutting-edge technology for modern GYMs
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="slide">
+						<div class="slide-background">
+							<img
+								src="src/assets/images/logo.png"
+								alt="TRANEX GYM Solutions"
+								class="slide-logo"
+							/>
+							<div class="slide-overlay"></div>
+						</div>
+						<div class="slide-content">
+							<div class="container">
+								<h1 class="slide-title">GYM Solutions</h1>
+								<p class="slide-subtitle">
+									Complete flywheel training systems for
+									fitness centers
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Slider Navigation -->
+				<div class="slider-nav">
+					<button
+						class="slider-btn prev-btn"
+						onclick="changeSlide(-1)"
+						aria-label="Previous slide"
+					>
+						❮
+					</button>
+					<button
+						class="slider-btn next-btn"
+						onclick="changeSlide(1)"
+						aria-label="Next slide"
+					>
+						❯
+					</button>
+				</div>
+
+				<!-- Slider Dots -->
+				<div class="slider-dots">
+					<button
+						class="dot active"
+						onclick="currentSlide(1)"
+						aria-label="Go to slide 1"
+					></button>
+					<button
+						class="dot"
+						onclick="currentSlide(2)"
+						aria-label="Go to slide 2"
+					></button>
+					<button
+						class="dot"
+						onclick="currentSlide(3)"
+						aria-label="Go to slide 3"
+					></button>
+				</div>
+			</section>
+
+			<!-- About Section -->
+			<section class="about-section">
+				<div class="container">
+					<div class="about-content">
+						<h2
+							class="section-title"
+							data-en="Who We Are"
+							data-ar="من نحن"
+						>
+							Who We Are
+						</h2>
+						<div class="about-grid">
+							<div class="about-item">
+								<div class="about-icon">🏭</div>
+								<h3>Our Story</h3>
+								<p
+									data-en="Founded in 2020, TRANEX has quickly established itself as a leader in flywheel training equipment manufacturing. What began as a small team of engineers and fitness experts has grown into a company serving professional GYMs and training facilities worldwide."
+									data-ar="تأسست ترانكس في عام 2020، وسرعان ما أثبتت نفسها كشركة رائدة في تصنيع معدات التدريب بالطيران."
+								>
+									Founded in 2020, TRANEX has quickly
+									established itself as a leader in flywheel
+									training equipment manufacturing. What began
+									as a small team of engineers and fitness
+									experts has grown into a company serving
+									professional GYMs and training facilities
+									worldwide.
+								</p>
+							</div>
+							<div class="about-item">
+								<div class="about-icon">🎯</div>
+								<h3>Our Mission</h3>
+								<p
+									data-en="To empower athletes and fitness enthusiasts with innovative flywheel technology that enhances performance, prevents injuries, and optimizes training efficiency through superior manufacturing and development."
+									data-ar="تمكين الرياضيين وهواة اللياقة البدنية بالتكنولوجيا المبتكرة للطيران."
+								>
+									To empower athletes and fitness enthusiasts
+									with innovative flywheel technology that
+									enhances performance, prevents injuries, and
+									optimizes training efficiency through
+									superior manufacturing and development.
+								</p>
+							</div>
+							<div class="about-item">
+								<div class="about-icon">⚡</div>
+								<h3>Our Commitment</h3>
+								<p
+									data-en="We maintain the highest standards in materials, manufacturing, and testing to ensure our flywheel equipment delivers consistent, reliable performance for professional GYMs and training centers."
+									data-ar="نحافظ على أعلى المعايير في المواد والتصنيع والاختبار."
+								>
+									We maintain the highest standards in
+									materials, manufacturing, and testing to
+									ensure our flywheel equipment delivers
+									consistent, reliable performance for
+									professional GYMs and training centers.
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Application Section -->
+			<section class="application-section">
+				<div class="container">
+					<h2
+						class="section-title"
+						data-en="Data Recording Application"
+						data-ar="تطبيق تسجيل البيانات"
+					>
+						Data Recording Application
+					</h2>
+					<div class="app-content">
+						<div class="app-description">
+							<h3>Flywheel Training Data Analytics</h3>
+							<p
+								data-en="Our advanced application records and analyzes data from flywheel training equipment, providing real-time insights into performance metrics, training progress, and equipment efficiency."
+								data-ar="يسجل تطبيقنا المتقدم ويحلل البيانات من معدات التدريب بالطيران."
+							>
+								Our advanced application records and analyzes
+								data from flywheel training equipment, providing
+								real-time insights into performance metrics,
+								training progress, and equipment efficiency.
+							</p>
+
+							<div class="app-features">
+								<div class="feature">
+									<div class="feature-icon">📊</div>
+									<h4>Real-time Monitoring</h4>
+									<p>
+										Track performance metrics during
+										training sessions
+									</p>
+								</div>
+								<div class="feature">
+									<div class="feature-icon">📈</div>
+									<h4>Data Analytics</h4>
+									<p>
+										Comprehensive analysis of training data
+										and progress
+									</p>
+								</div>
+								<div class="feature">
+									<div class="feature-icon">🔧</div>
+									<h4>Equipment Diagnostics</h4>
+									<p>
+										Monitor flywheel equipment health and
+										maintenance needs
+									</p>
+								</div>
+								<div class="feature">
+									<div class="feature-icon">📋</div>
+									<h4>Performance Reports</h4>
+									<p>
+										Detailed reports for trainers and
+										athletes
+									</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="app-mockup">
+							<div class="mockup-container">
+								<img
+									src="src/assets/images/logo.png"
+									alt="TRANEX App Interface"
+									class="app-logo"
+								/>
+								<div class="mockup-overlay">
+									<div class="mockup-screen">
+										<div class="mockup-header">
+											TRANEX Analytics
+										</div>
+										<div class="mockup-content">
+											<div class="metric-card">
+												<div class="metric-value">
+													1,245
+												</div>
+												<div class="metric-label">
+													RPM
+												</div>
+											</div>
+											<div class="metric-card">
+												<div class="metric-value">
+													85%
+												</div>
+												<div class="metric-label">
+													Efficiency
+												</div>
+											</div>
+											<div class="metric-card">
+												<div class="metric-value">
+													42min
+												</div>
+												<div class="metric-label">
+													Session
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Products Section -->
+			<section class="products-section">
+				<div class="container">
+					<h2
+						class="section-title"
+						data-en="Our Products"
+						data-ar="منتجاتنا"
+					>
+						Our Products
+					</h2>
+					<div class="products-row">
+						<div class="product-card">
+							<div class="product-image">
+								<img
+									src="src/assets/images/logo.png"
+									alt="Pro Flywheel System"
+									class="product-logo"
+								/>
+								<div class="product-badge">Professional</div>
+							</div>
+							<div class="product-info">
+								<h3 class="product-name">
+									Pro Flywheel System
+								</h3>
+								<p class="product-description">
+									Professional-grade flywheel training
+									equipment for elite athletes and commercial
+									GYMs
+								</p>
+								<div class="product-price">$2,499</div>
+								<a
+									href="/src/pages/store.html"
+									class="btn btn--primary"
+									>View Details</a
+								>
+							</div>
+						</div>
+
+						<div class="product-card">
+							<div class="product-image">
+								<img
+									src="src/assets/images/logo.png"
+									alt="Compact Flywheel"
+									class="product-logo"
+								/>
+								<div class="product-badge">Compact</div>
+							</div>
+							<div class="product-info">
+								<h3 class="product-name">Compact Flywheel</h3>
+								<p class="product-description">
+									Space-efficient flywheel system perfect for
+									smaller training facilities
+								</p>
+								<div class="product-price">$1,799</div>
+								<a
+									href="/src/pages/store.html"
+									class="btn btn--primary"
+									>View Details</a
+								>
+							</div>
+						</div>
+
+						<div class="product-card">
+							<div class="product-image">
+								<img
+									src="src/assets/images/logo.png"
+									alt="Smart Flywheel"
+									class="product-logo"
+								/>
+								<div class="product-badge">Smart</div>
+							</div>
+							<div class="product-info">
+								<h3 class="product-name">Smart Flywheel</h3>
+								<p class="product-description">
+									IoT-enabled flywheel with integrated data
+									recording and analytics
+								</p>
+								<div class="product-price">$3,299</div>
+								<a
+									href="/src/pages/store.html"
+									class="btn btn--primary"
+									>View Details</a
+								>
+							</div>
+						</div>
+
+						<div class="product-card">
+							<div class="product-image">
+								<img
+									src="src/assets/images/logo.png"
+									alt="Flywheel Accessories"
+									class="product-logo"
+								/>
+								<div class="product-badge">Complete</div>
+							</div>
+							<div class="product-info">
+								<h3 class="product-name">Accessories Kit</h3>
+								<p class="product-description">
+									Complete set of accessories and replacement
+									parts for all flywheel systems
+								</p>
+								<div class="product-price">$299</div>
+								<a
+									href="/src/pages/store.html"
+									class="btn btn--primary"
+									>View Details</a
+								>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- CTA Section -->
+			<section class="cta-section">
+				<div class="container">
+					<div class="cta-content">
+						<h2
+							class="cta-title"
+							data-en="Ready to Elevate Your GYM?"
+							data-ar="جاهز لترقية صالة الألعاب الرياضية؟"
+						>
+							Ready to Elevate Your GYM?
+						</h2>
+						<p
+							class="cta-text"
+							data-en="Contact us today to discuss how TRANEX flywheel training equipment can transform your facility"
+							data-ar="اتصل بنا اليوم لمناقشة كيف يمكن لمعدات التدريب بالطيران من ترانكس تحويل منشأتك"
+						>
+							Contact us today to discuss how TRANEX flywheel
+							training equipment can transform your facility
+						</p>
+						<div class="cta-actions">
+							<a
+								href="/src/pages/contact.html"
+								class="btn btn--primary"
+								data-en="Get Quote"
+								data-ar="احصل على عرض سعر"
+								>Get Quote</a
+							>
+							<a
+								href="/src/pages/store.html"
+								class="btn btn--secondary"
+								data-en="View Catalog"
+								data-ar="عرض الكتالوج"
+								>View Catalog</a
+							>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- Footer Component Container -->
+		<div id="footer-container"></div>
+
+		<!-- Slider Script -->
+		<script>
+			let slideIndex = 0;
+			const slides = document.querySelectorAll(".slide");
+			const dots = document.querySelectorAll(".dot");
+
+			function showSlide(n) {
+				slides.forEach((slide) => slide.classList.remove("active"));
+				dots.forEach((dot) => dot.classList.remove("active"));
+
+				if (n >= slides.length) slideIndex = 0;
+				if (n < 0) slideIndex = slides.length - 1;
+
+				slides[slideIndex].classList.add("active");
+				dots[slideIndex].classList.add("active");
+			}
+
+			function changeSlide(n) {
+				slideIndex += n;
+				showSlide(slideIndex);
+			}
+
+			function currentSlide(n) {
+				slideIndex = n - 1;
+				showSlide(slideIndex);
+			}
+
+			// Auto-play slider
+			setInterval(() => {
+				slideIndex++;
+				showSlide(slideIndex);
+			}, 5000);
+		</script>
+
+		<!-- Main Script -->
+		<script type="module">
+			import componentLoader from "./src/utils/component-loader.js";
+
+			document.addEventListener("DOMContentLoaded", async () => {
+				try {
+					const currentLang =
+						document.documentElement.getAttribute("lang") || "en";
+
+					// Wait for components to load first
+					await componentLoader.initializeComponents(
+						{
+							"/src/components/header.html": "#header-container",
+							"/src/components/footer.html": "#footer-container",
+						},
+						{ language: currentLang }
+					);
+
+					// Now initialize your functionality AFTER components are loaded
+					initializeTheme();
+					initializeMobileMenu();
+					// initializeAuthState();
+
+					console.log(
+						"Components and functionality loaded successfully"
+					);
+				} catch (error) {
+					console.error("Error loading components:", error);
+				}
+			});
+
+			function initializeMobileMenu() {
+				const mobileMenuToggle = document.querySelector(
+					".mobile-menu-toggle"
+				);
+				if (mobileMenuToggle) {
+					mobileMenuToggle.addEventListener(
+						"click",
+						toggleMobileMenu
+					);
+				}
+				// Other mobile menu initialization code...
+			}
+		</script>
+
+		<script src="src/scripts/main.js"></script>
+	</body>
 </html>

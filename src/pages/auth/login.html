@@ -1,178 +1,267 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - TRANEX</title>
-    <meta name="description" content="Login to your TRANEX account to access your profile, orders, and more.">
-    <link rel="canonical" href="https://tranex.com/src/pages/auth/login.html">
-    
-    <!-- OpenGraph -->
-    <meta property="og:title" content="Login - TRANEX">
-    <meta property="og:description" content="Login to your TRANEX account to access your profile, orders, and more.">
-    <meta property="og:image" content="https://tranex.com/assets/images/og-login.jpg">
-    <meta property="og:url" content="https://tranex.com/src/pages/auth/login.html">
-    <meta property="og:type" content="website">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="../../styles/main.css">
-    <link rel="stylesheet" href="../../../src/styles/auth.css">
-    
-    <!-- Component Loader -->
-    <script type="module" src="../../utils/component-loader.js"></script>
-    
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-</head>
-<body>
-    <!-- Header Component Container -->
-    <div id="header-container"></div>
-    
-    <!-- Main Content -->
-    <main class="main-content">
-        <section class="auth-section">
-            <div class="container">
-                <div class="auth-container">
-                    <div class="auth-card">
-                        <div class="auth-header">
-                            <h1 class="auth-title" data-en="Login" data-ar="تسجيل الدخول">Login</h1>
-                            <p class="auth-subtitle" data-en="Welcome back! Please enter your details" data-ar="مرحبًا بعودتك! الرجاء إدخال بياناتك">Welcome back! Please enter your details</p>
-                        </div>
-                        
-                        <div class="auth-form">
-                            <div class="form-message" id="auth-message"></div>
-                            
-                            <form id="login-form">
-                                <div class="form-group">
-                                    <label for="email" data-en="Email" data-ar="البريد الإلكتروني">Email</label>
-                                    <input type="email" id="email" name="email" required>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="password" data-en="Password" data-ar="كلمة المرور">Password</label>
-                                    <input type="password" id="password" name="password" required>
-                                </div>
-                                
-                                <div class="form-options">
-                                    <div class="remember-me">
-                                        <input type="checkbox" id="remember" name="remember">
-                                        <label for="remember" data-en="Remember me" data-ar="تذكرني">Remember me</label>
-                                    </div>
-                                    
-                                    <a href="reset-password.html" class="forgot-password" data-en="Forgot password?" data-ar="نسيت كلمة المرور؟">Forgot password?</a>
-                                </div>
-                                
-                                <button type="submit" class="btn btn--primary btn--full" data-en="Sign in" data-ar="تسجيل الدخول">Sign in</button>
-                            </form>
-                            
-                            <div class="auth-divider">
-                                <span data-en="OR" data-ar="أو">OR</span>
-                            </div>
-                            
-                            <button class="btn btn--outline btn--full social-login">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-                                </svg>
-                                <span data-en="Sign in with Google" data-ar="تسجيل الدخول بواسطة جوجل">Sign in with Google</span>
-                            </button>
-                            
-                            <div class="auth-footer">
-                                <p data-en="Don't have an account?" data-ar="ليس لديك حساب؟">Don't have an account? <a href="register.html" data-en="Sign up" data-ar="إنشاء حساب">Sign up</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="auth-image">
-                        <img src="../../assets/images/auth-image.jpg" alt="Login" class="responsive-image">
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <!-- Footer Component Container -->
-    <div id="footer-container"></div>
-    
-    <!-- Main Script -->
-    <script type="module">
-        import componentLoader from '../../utils/component-loader.js';
-        import { signIn } from '../../../config/supabase.js';
-        
-        // Initialize components when DOM is loaded
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                // Get current language
-                const currentLang = document.documentElement.getAttribute('lang') || 'en';
-                
-                // Load components
-                await componentLoader.initializeComponents({
-                    '/src/components/header.html': '#header-container',
-                    '/src/components/footer.html': '#footer-container'
-                }, { language: currentLang });
-                
-                // Initialize theme
-                initializeTheme();
-                
-                // Set up event listeners for theme and language toggles
-                document.getElementById('theme-toggle').addEventListener('click', function() {
-                    toggleTheme();
-                });
-                
-                document.getElementById('lang-toggle').addEventListener('click', function() {
-                    switchLanguage();
-                });
-                
-                // Handle login form submission
-                const loginForm = document.getElementById('login-form');
-                const messageEl = document.getElementById('auth-message');
-                
-                loginForm.addEventListener('submit', async (e) => {
-                    e.preventDefault();
-                    
-                    const email = document.getElementById('email').value;
-                    const password = document.getElementById('password').value;
-                    
-                    try {
-                        messageEl.textContent = 'Signing in...';
-                        messageEl.className = 'form-message info';
-                        
-                        const { data, error } = await signIn(email, password);
-                        
-                        if (error) throw error;
-                        
-                        messageEl.textContent = 'Login successful! Redirecting...';
-                        messageEl.className = 'form-message success';
-                        
-                        // Redirect to dashboard or home page after successful login
-                        setTimeout(() => {
-                            window.location.href = '/';
-                        }, 1500);
-                        
-                    } catch (error) {
-                        console.error('Login error:', error);
-                        messageEl.textContent = error.message || 'Failed to sign in. Please check your credentials.';
-                        messageEl.className = 'form-message error';
-                    }
-                });
-                
-                console.log('Components loaded successfully');
-            } catch (error) {
-                console.error('Error loading components:', error);
-            }
-        });
-    </script>
-    
-    <script src="../../scripts/main.js"></script>
-    <script src="../../../src/scripts/auth.js"></script>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Login - TRANEX</title>
+		<meta
+			name="description"
+			content="Login to your TRANEX account to access your profile, orders, and more."
+		/>
+		<link
+			rel="canonical"
+			href="https://tranex.com/src/pages/auth/login.html"
+		/>
+
+		<script src="https://cdn.tailwindcss.com"></script>
+		<style>
+			@layer utilities {
+				.bg-surface {
+					background-color: var(--surface);
+				}
+				.bg-primary {
+					background-color: var(--primary);
+				}
+				.bg-accent {
+					background-color: var(--accent);
+				}
+				.text-main {
+					color: var(--text);
+				}
+				.text-muted {
+					color: var(--muted);
+				}
+				.text-primary {
+					color: var(--primary);
+				}
+				.text-accent {
+					color: var(--accent);
+				}
+				.border-main {
+					border-color: var(--border);
+				}
+
+				.btn-primary {
+					background-color: var(--primary);
+					color: var(--primary-contrast);
+					border-radius: var(--radius-md);
+					padding: var(--space-3) var(--space-4);
+					transition: var(--transition);
+				}
+				.btn-primary:hover {
+					filter: brightness(0.9);
+				}
+
+				.btn-outline {
+					border: 1px solid var(--border);
+					background-color: var(--bg);
+					color: var(--text);
+					border-radius: var(--radius-md);
+					padding: var(--space-3) var(--space-4);
+					transition: var(--transition);
+				}
+				.btn-outline:hover {
+					background-color: var(--hover);
+				}
+
+				.input-main {
+					width: 100%;
+					padding: var(--space-2) var(--space-3);
+					border: 1px solid var(--border);
+					border-radius: var(--radius-md);
+					background-color: var(--bg);
+					color: var(--text);
+					transition: var(--transition);
+				}
+				.input-main:focus {
+					outline: none;
+					border-color: var(--focus);
+					box-shadow: 0 0 0 2px var(--focus);
+				}
+			}
+		</style>
+
+		<!-- OpenGraph -->
+		<meta property="og:title" content="Login - TRANEX" />
+		<meta
+			property="og:description"
+			content="Login to your TRANEX account to access your profile, orders, and more."
+		/>
+		<meta
+			property="og:image"
+			content="https://tranex.com/assets/images/og-login.jpg"
+		/>
+		<meta
+			property="og:url"
+			content="https://tranex.com/src/pages/auth/login.html"
+		/>
+		<meta property="og:type" content="website" />
+
+		<!-- Favicon -->
+		<link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico" />
+
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<link rel="stylesheet" href="../../styles/main.css" />
+		<link rel="stylesheet" href="../../../src/styles/auth.css" />
+
+		<!-- Component Loader -->
+		<script type="module" src="../../utils/component-loader.js"></script>
+
+		<!-- Supabase -->
+		<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+	</head>
+	<body>
+		<!-- Header Component Container -->
+		<div id="header-container"></div>
+
+		<!-- Main Content -->
+		<main
+			class="flex items-center justify-center min-h-screen bg-[var(--surface)]"
+		>
+			<section
+				class="w-full max-w-[90vw] md:max-w-5xl grid grid-cols-1 md:grid-cols-2 overflow-hidden border border-[var(--border)] [border-radius:var(--radius-xl)] bg-[var(--bg)] text-[var(--text)] [box-shadow:var(--shadow-lg)]"
+			>
+				<!-- Left: Form -->
+				<div
+					class="flex flex-col justify-center p-[var(--space-7)] md:p-[var(--space-8)] "
+				>
+					<h1
+						class="text-3xl font-semibold mb-[var(--space-2)]"
+						data-en="Login"
+						data-ar="تسجيل الدخول"
+					>
+						Login
+					</h1>
+
+					<p
+						class="mb-[var(--space-6)] text-[var(--muted)]"
+						data-en="Welcome back! Please enter your details"
+						data-ar="مرحبًا بعودتك! الرجاء إدخال بياناتك"
+					>
+						Welcome back! Please enter your details
+					</p>
+
+					<div
+						id="auth-message"
+						class="mb-[var(--space-4)] text-sm"
+					></div>
+
+					<form id="login-form" class="space-y-[var(--space-4)]">
+						<div>
+							<label for="email" class="block text-sm font-medium"
+								>Email</label
+							>
+							<input
+								type="email"
+								id="email"
+								name="email"
+								required
+								class="mt-[var(--space-1)] w-full px-[var(--space-3)] py-[var(--space-3)] bg-[var(--bg)] text-[var(--text)] border border-[var(--border)] [border-radius:var(--radius-md)] outline-none focus:ring-2 focus:ring-[var(--focus)] focus:border-[var(--focus)] placeholder:text-[var(--muted)]"
+							/>
+						</div>
+
+						<div>
+							<label
+								for="password"
+								class="block text-sm font-medium"
+								>Password</label
+							>
+							<input
+								type="password"
+								id="password"
+								name="password"
+								required
+								class="mt-[var(--space-1)] w-full px-[var(--space-3)] py-[var(--space-3)] bg-[var(--bg)] text-[var(--text)] border border-[var(--border)] [border-radius:var(--radius-md)] outline-none focus:ring-2 focus:ring-[var(--focus)] focus:border-[var(--focus)] placeholder:text-[var(--muted)]"
+							/>
+						</div>
+
+						<div class="flex items-center justify-between text-sm">
+							<label
+								class="flex items-center gap-[var(--space-2)]"
+							>
+								<input
+									type="checkbox"
+									id="remember"
+									name="remember"
+									class="rounded border-[var(--border)] [accent-color:var(--primary)]"
+								/>
+								<span>Remember me</span>
+							</label>
+							<a
+								href="reset-password.html"
+								class="hover:underline text-[var(--primary)]"
+							>
+								Forgot password?
+							</a>
+						</div>
+
+						<button
+							type="submit"
+							class="w-full py-[var(--space-3)] bg-[var(--primary)] text-[var(--primary-contrast)] [border-radius:var(--radius-md)] transition hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-[var(--focus)]"
+						>
+							Sign in
+						</button>
+					</form>
+
+					<div class="my-[var(--space-6)] flex items-center">
+						<div
+							class="flex-grow border-t border-[var(--border)]"
+						></div>
+						<span
+							class="px-[var(--space-4)] text-sm text-[var(--muted)]"
+							>OR</span
+						>
+						<div
+							class="flex-grow border-t border-[var(--border)]"
+						></div>
+					</div>
+
+					<button
+						class="w-full flex items-center justify-center gap-[var(--space-3)] py-[var(--space-3)] border border-[var(--border)] bg-[var(--bg)] text-[var(--text)] [border-radius:var(--radius-md)] transition hover:bg-[var(--hover)] focus:outline-none focus:ring-2 focus:ring-[var(--focus)]"
+					>
+						<img
+							src="https://www.svgrepo.com/show/475656/google-color.svg"
+							class="w-5 h-5"
+							alt="Google"
+						/>
+						<span>Sign in with Google</span>
+					</button>
+
+					<p class="mt-[var(--space-6)] text-sm text-center">
+						Don't have an account?
+						<a
+							href="register.html"
+							class="hover:underline text-[var(--primary)]"
+							>Sign up</a
+						>
+					</p>
+				</div>
+
+				<!-- Right: Image -->
+				<div class="hidden md:block">
+					<img
+						src="../../assets/images/auth-image.jpg"
+						alt="Login"
+						class="w-full h-full object-cover"
+					/>
+				</div>
+			</section>
+		</main>
+
+		<!-- Footer Component Container -->
+		<div id="footer-container"></div>
+
+		<!-- Main Script -->
+		</script>
+
+		<script src="../../scripts/main.js"></script>
+		<script src="../../../src/scripts/auth.js"></script>
+	</body>
 </html>
