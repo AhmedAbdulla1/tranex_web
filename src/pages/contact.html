@@ -23,10 +23,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="src/styles/main.css">
     
     <!-- Component Loader -->
-    <script type="module" src="../utils/component-loader.js"></script>
     
     <!-- JSON-LD Schema -->
     <script type="application/ld+json">
@@ -143,40 +142,51 @@
     
     <!-- Main Script -->
     <script type="module">
-        import componentLoader from '../../src/utils/component-loader.js';
-        
-        // Initialize components when DOM is loaded
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                // Get current language
-                const currentLang = document.documentElement.getAttribute('lang') || 'en';
-                
-                // Load components
-                await componentLoader.initializeComponents({
-                    '/src/components/header.html': '#header-container',
-                    '/src/components/footer.html': '#footer-container'
-                }, { language: currentLang });
-                
-                // Initialize theme
-                initializeTheme();
-                
-                // Set up event listeners for theme and language toggles
-                document.getElementById('theme-toggle').addEventListener('click', function() {
-                    toggleTheme();
-                });
-                
-                document.getElementById('lang-toggle').addEventListener('click', function() {
-                    switchLanguage();
-                });
-                
-                console.log('Components loaded successfully');
-            } catch (error) {
-                console.error('Error loading components:', error);
-            }
-        });
-    </script>
+			import componentLoader from "./src/utils/component-loader.js";
+
+			// Initialize components when DOM is loaded
+			document.addEventListener("DOMContentLoaded", async () => {
+				try {
+					// Get current language
+					const currentLang =
+						document.documentElement.getAttribute("lang") || "en";
+
+					// Load components
+					await componentLoader.initializeComponents(
+						{
+							"./src/components/header.html": "#header-container",
+							"./src/components/footer.html": "#footer-container",
+						},
+						{ language: currentLang }
+					);
+
+					// Initialize theme
+					initializeTheme();
+
+					// Set up event listeners for theme and language toggles
+					const themeToggle = document.querySelector(".theme-toggle");
+					if (themeToggle) {
+						themeToggle.addEventListener("click", toggleTheme);
+					}
+
+					const langToggle = document.querySelector(".lang-btn");
+					if (langToggle) {
+						langToggle.addEventListener("click", () => {
+							const currentLang =
+								document.documentElement.getAttribute("lang") ||
+								"en";
+							switchLanguage(currentLang === "en" ? "ar" : "en");
+						});
+					}
+
+					console.log("Components loaded successfully");
+				} catch (error) {
+					console.error("Error loading components:", error);
+				}
+			});
+		</script>
     
-    <script src="../scripts/main.js"></script>
-    <script src="../scripts/contact.js"></script>
+    <script src="src/scripts/main.js"></script>
+    <script src="src/scripts/contact.js"></script>
 </body>
 </html>

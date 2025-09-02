@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/src/styles/main.css">
     
     <!-- Component Loader -->
-    <script type="module" src="../utils/component-loader.js"></script>
+    <script type="module" src="src/utils/component-loader.js"></script>
 </head>
 <body>
     <!-- Header Component Container -->
@@ -128,62 +128,51 @@
     
     <!-- Main Script -->
     <script type="module">
-        import componentLoader from '../utils/component-loader.js';
-        
-        // Initialize components when DOM is loaded
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                // Get current language
-                const currentLang = document.documentElement.getAttribute('lang') || 'en';
-                
-                // Load components
-                await componentLoader.initializeComponents({
-                    '/src/components/header.html': '#header-container',
-                    '/src/components/footer.html': '#footer-container'
-                }, { language: currentLang });
-                
-                // Initialize theme
-                initializeTheme();
-                
-                // Check authentication
-                const isLoggedIn = localStorage.getItem('tranex_auth') !== null;
-                if (!isLoggedIn) {
-                    window.location.href = `/src/pages/auth/login.html?redirect=${encodeURIComponent(window.location.pathname)}`;
-                    return;
-                }
-                
-                // Handle form submission
-                const checkoutForm = document.getElementById('checkout-form');
-                if (checkoutForm) {
-                    checkoutForm.addEventListener('submit', async (e) => {
-                        e.preventDefault();
-                        
-                        // Simulate order processing
-                        const orderBtn = checkoutForm.querySelector('button[type="submit"]');
-                        orderBtn.disabled = true;
-                        orderBtn.textContent = 'Processing...';
-                        
-                        // Simulate API call
-                        setTimeout(() => {
-                            // Clear cart
-                            if (window.cart) {
-                                window.cart.clearCart();
-                            }
-                            
-                            // Redirect to success page
-                            window.location.href = '/src/pages/order-success.html';
-                        }, 2000);
-                    });
-                }
-                
-                console.log('Components loaded successfully');
-            } catch (error) {
-                console.error('Error loading components:', error);
-            }
-        });
-    </script>
+			import componentLoader from "./src/utils/component-loader.js";
+
+			// Initialize components when DOM is loaded
+			document.addEventListener("DOMContentLoaded", async () => {
+				try {
+					// Get current language
+					const currentLang =
+						document.documentElement.getAttribute("lang") || "en";
+
+					// Load components
+					await componentLoader.initializeComponents(
+						{
+							"./src/components/header.html": "#header-container",
+							"./src/components/footer.html": "#footer-container",
+						},
+						{ language: currentLang }
+					);
+
+					// Initialize theme
+					initializeTheme();
+
+					// Set up event listeners for theme and language toggles
+					const themeToggle = document.querySelector(".theme-toggle");
+					if (themeToggle) {
+						themeToggle.addEventListener("click", toggleTheme);
+					}
+
+					const langToggle = document.querySelector(".lang-btn");
+					if (langToggle) {
+						langToggle.addEventListener("click", () => {
+							const currentLang =
+								document.documentElement.getAttribute("lang") ||
+								"en";
+							switchLanguage(currentLang === "en" ? "ar" : "en");
+						});
+					}
+
+					console.log("Components loaded successfully");
+				} catch (error) {
+					console.error("Error loading components:", error);
+				}
+			});
+		</script>
     
-    <script src="../scripts/main.js"></script>
-    <script src="../../src/scripts/auth.js"></script>
+    <script src="src/scripts/main.js"></script>
+    <script src="src/scripts/auth.js"></script>
 </body>
 </html>

@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="/src/styles/main.css">
     
     <!-- Component Loader -->
-    <script type="module" src="../utils/component-loader.js"></script>
 </head>
 <body>
     <!-- Header Component Container -->
@@ -91,67 +90,51 @@
     
     <!-- Main Script -->
     <script type="module">
-        import componentLoader from '../utils/component-loader.js';
-        
-        // Initialize components when DOM is loaded
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                // Get current language
-                const currentLang = document.documentElement.getAttribute('lang') || 'en';
-                
-                // Load components
-                await componentLoader.initializeComponents({
-                    '/src/components/header.html': '#header-container',
-                    '/src/components/footer.html': '#footer-container'
-                }, { language: currentLang });
-                
-                // Initialize theme
-                initializeTheme();
-                
-                // Set up event listeners for theme and language toggles
-                document.getElementById('theme-toggle').addEventListener('click', function() {
-                    toggleTheme();
-                });
-                
-                document.getElementById('lang-toggle').addEventListener('click', function() {
-                    switchLanguage();
-                });
-                
-                // Set up clear cart button
-                const clearCartBtn = document.getElementById('clear-cart');
-                if (clearCartBtn) {
-                    clearCartBtn.addEventListener('click', () => {
-                        if (window.cart) {
-                            window.cart.clearCart();
-                        }
-                    });
-                }
-                
-                // Set up checkout button
-                const checkoutBtn = document.querySelector('.checkout-btn');
-                if (checkoutBtn) {
-                    checkoutBtn.addEventListener('click', () => {
-                        // Check if user is logged in
-                        const isLoggedIn = localStorage.getItem('tranex_auth') !== null;
-                        
-                        if (isLoggedIn) {
-                            // Redirect to checkout page
-                            window.location.href = '/src/pages/checkout.html';
-                        } else {
-                            // Redirect to login page with return URL
-                            window.location.href = `/src/pages/auth/login.html?redirect=${encodeURIComponent('/src/pages/checkout.html')}`;
-                        }
-                    });
-                }
-                
-                console.log('Components loaded successfully');
-            } catch (error) {
-                console.error('Error loading components:', error);
-            }
-        });
-    </script>
+			import componentLoader from "./src/utils/component-loader.js";
+
+			// Initialize components when DOM is loaded
+			document.addEventListener("DOMContentLoaded", async () => {
+				try {
+					// Get current language
+					const currentLang =
+						document.documentElement.getAttribute("lang") || "en";
+
+					// Load components
+					await componentLoader.initializeComponents(
+						{
+							"./src/components/header.html": "#header-container",
+							"./src/components/footer.html": "#footer-container",
+						},
+						{ language: currentLang }
+					);
+
+					// Initialize theme
+					initializeTheme();
+
+					// Set up event listeners for theme and language toggles
+					const themeToggle = document.querySelector(".theme-toggle");
+					if (themeToggle) {
+						themeToggle.addEventListener("click", toggleTheme);
+					}
+
+					const langToggle = document.querySelector(".lang-btn");
+					if (langToggle) {
+						langToggle.addEventListener("click", () => {
+							const currentLang =
+								document.documentElement.getAttribute("lang") ||
+								"en";
+							switchLanguage(currentLang === "en" ? "ar" : "en");
+						});
+					}
+
+					console.log("Components loaded successfully");
+				} catch (error) {
+					console.error("Error loading components:", error);
+				}
+			});
+		</script>
     
-    <script src="../scripts/main.js"></script>
-    <script src="../../src/scripts/auth.js"></script>
+    <script src="src/scripts/main.js"></script>
+    <script src="src/scripts/auth.js"></script>
 </body>
 </html>
