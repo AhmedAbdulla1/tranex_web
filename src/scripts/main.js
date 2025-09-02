@@ -294,9 +294,11 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', (e) => {
     const menu = document.querySelector('.mobile-nav');
     const toggle = document.querySelector('.mobile-menu-toggle');
-    console.log(e.target, toggle);
 
-    if (menu && toggle && !menu.contains(e.target) && !toggle.contains(e.target)) {
+    if (e.target.closest('.mobile-nav') || e.target.closest('.mobile-menu-toggle')) return;
+
+
+    if (menu && toggle) {
       menu.setAttribute('aria-hidden', 'true');
       toggle.setAttribute('aria-expanded', 'false');
       toggle.classList.remove('is-active');
