@@ -14,174 +14,332 @@
 		<div id="header-container"></div>
 
 		<!-- Main Content -->
-		<main class="main-content">
-			<section class="cart-section" id="cart-page">
-				<div class="container">
-					<div class="section-header">
+		<main>
+			<section id="cart-page" class="py-8 sm:py-12 lg:py-16">
+				<div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+					<!-- Section Header -->
+					<div class="text-center mb-8 lg:mb-12">
 						<h1
-							class="section-title"
+							class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text)]"
 							data-en="Shopping Cart"
 							data-ar="سلة التسوق"
 						>
 							Shopping Cart
 						</h1>
+						<p class="text-[var(--muted)] mt-2 text-lg">
+							Review your items and proceed to checkout.
+						</p>
 					</div>
 
-					<div class="cart-content">
-						<table class="cart-table" id="cart-table">
-							<thead>
-								<tr>
-									<th data-en="Product" data-ar="المنتج">
-										Product
-									</th>
-									<th data-en="Name" data-ar="الاسم">Name</th>
-									<th data-en="Price" data-ar="السعر">
-										Price
-									</th>
-									<th data-en="Quantity" data-ar="الكمية">
-										Quantity
-									</th>
-									<th
-										data-en="Subtotal"
-										data-ar="المجموع الفرعي"
+					<div
+						class="grid grid-cols-1 lg:grid-cols-3 lg:gap-8 xl:gap-12"
+					>
+						<!-- Cart Items and Actions (Left/Main Column) -->
+						<div class="lg:col-span-2">
+							<div
+								class="bg-[var(--surface)] rounded-[var(--radius-lg)] shadow-[var(--shadow-md)] overflow-hidden"
+							>
+								<table id="cart-table" class="w-full text-left">
+									<thead
+										class="bg-[var(--hover)] border-b-2 border-[var(--border)]"
 									>
-										Subtotal
-									</th>
-									<th data-en="Remove" data-ar="إزالة">
-										Remove
-									</th>
-								</tr>
-							</thead>
-							<tbody>
-								<!-- Cart items will be dynamically inserted here -->
-							</tbody>
-						</table>
-
-						<div class="empty-cart" id="empty-cart">
-							<div class="empty-cart-icon">
-								<svg
-									width="80"
-									height="80"
-									viewBox="0 0 24 24"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17M17 17a2 2 0 100 4 2 2 0 000-4zm0 0H9m0 0a2 2 0 100 4 2 2 0 000-4z"
-										stroke="currentColor"
-										stroke-width="1.5"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-									/>
-								</svg>
+										<tr>
+											<th
+												class="p-4 text-sm font-semibold text-[var(--muted)] uppercase tracking-wider"
+												data-en="Product"
+												data-ar="المنتج"
+											>
+												Product
+											</th>
+											<th
+												class="p-4 text-sm font-semibold text-[var(--muted)] uppercase tracking-wider hidden sm:table-cell"
+												data-en="Price"
+												data-ar="السعر"
+											>
+												Price
+											</th>
+											<th
+												class="p-4 text-sm font-semibold text-[var(--muted)] uppercase tracking-wider"
+												data-en="Quantity"
+												data-ar="الكمية"
+											>
+												Quantity
+											</th>
+											<th
+												class="p-4 text-sm font-semibold text-[var(--muted)] uppercase tracking-wider hidden sm:table-cell"
+												data-en="Subtotal"
+												data-ar="المجموع الفرعي"
+											>
+												Subtotal
+											</th>
+											<th
+												class="p-4 text-sm font-semibold text-[var(--muted)] uppercase tracking-wider"
+												data-en="Remove"
+												data-ar="إزالة"
+											>
+												<span class="sr-only"
+													>Remove</span
+												>
+											</th>
+										</tr>
+									</thead>
+									<tbody id="cart-body">
+										<!-- Demo Cart Item -->
+										<tr
+											class="border-b border-[var(--border)]"
+										>
+											<td class="p-4">
+												<div
+													class="flex items-center space-x-4"
+												>
+													<img
+														src="https://placehold.co/80x80/0066cc/ffffff?text=Item"
+														alt="Product Image"
+														class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-[var(--radius-md)]"
+													/>
+													<div>
+														<p
+															class="font-semibold text-[var(--text)]"
+														>
+															Premium Wireless
+															Headphones
+														</p>
+														<p
+															class="text-sm text-[var(--muted)]"
+														>
+															Color: Matte Black
+														</p>
+													</div>
+												</div>
+											</td>
+											<td
+												class="p-4 font-medium text-[var(--text)] hidden sm:table-cell"
+											>
+												$149.99
+											</td>
+											<td class="p-4">
+												<input
+													type="number"
+													value="1"
+													min="1"
+													class="w-16 rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--bg)] p-2 text-center focus:ring-2 focus:ring-[var(--focus)]"
+												/>
+											</td>
+											<td
+												class="p-4 font-bold text-[var(--text)] hidden sm:table-cell"
+											>
+												$149.99
+											</td>
+											<td class="p-4">
+												<button
+													class="text-[var(--muted)] hover:text-[var(--danger)] transition-colors"
+												>
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														width="24"
+														height="24"
+														viewBox="0 0 24 24"
+														fill="none"
+														stroke="currentColor"
+														stroke-width="2"
+														stroke-linecap="round"
+														stroke-linejoin="round"
+													>
+														<polyline
+															points="3 6 5 6 21 6"
+														></polyline>
+														<path
+															d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+														></path>
+														<line
+															x1="10"
+															y1="11"
+															x2="10"
+															y2="17"
+														></line>
+														<line
+															x1="14"
+															y1="11"
+															x2="14"
+															y2="17"
+														></line>
+													</svg>
+												</button>
+											</td>
+										</tr>
+										<!-- More cart items will be dynamically inserted here -->
+									</tbody>
+								</table>
 							</div>
-							<h2
-								data-en="Your Cart is Empty"
-								data-ar="سلة التسوق فارغة"
-							>
-								Your Cart is Empty
-							</h2>
-							<p
-								data-en="Looks like you haven't added any products to your cart yet."
-								data-ar="يبدو أنك لم تضف أي منتجات إلى سلة التسوق الخاصة بك حتى الآن."
-							>
-								Looks like you haven't added any products to
-								your cart yet.
-							</p>
-							<a
-								href="/"
-								class="btn btn--primary"
-								data-en="Continue Shopping"
-								data-ar="مواصلة التسوق"
-								>Continue Shopping</a
-							>
-						</div>
 
-						<div class="cart-actions">
-							<div class="cart-coupon">
-								<input
-									type="text"
-									placeholder="Coupon code"
-									data-en-placeholder="Coupon code"
-									data-ar-placeholder="رمز القسيمة"
-								/>
-								<button
-									class="btn btn--outline"
-									data-en="Apply Coupon"
-									data-ar="تطبيق القسيمة"
+							<!-- Empty Cart Message -->
+							<div
+								id="empty-cart"
+								class="hidden text-center py-16 px-6 bg-[var(--surface)] rounded-[var(--radius-lg)] mt-6"
+							>
+								<div
+									class="flex justify-center text-[var(--muted)] mb-4"
 								>
-									Apply Coupon
+									<svg
+										width="80"
+										height="80"
+										viewBox="0 0 24 24"
+										fill="none"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path
+											d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17M17 17a2 2 0 100 4 2 2 0 000-4zm0 0H9m0 0a2 2 0 100 4 2 2 0 000-4z"
+											stroke="currentColor"
+											stroke-width="1.5"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+										/>
+									</svg>
+								</div>
+								<h2
+									class="text-2xl font-semibold mb-2"
+									data-en="Your Cart is Empty"
+									data-ar="سلة التسوق فارغة"
+								>
+									Your Cart is Empty
+								</h2>
+								<p
+									class="text-[var(--muted)] max-w-sm mx-auto mb-6"
+									data-en="Looks like you haven't added any products to your cart yet."
+									data-ar="يبدو أنك لم تضف أي منتجات إلى سلة التسوق الخاصة بك حتى الآن."
+								>
+									Looks like you haven't added any products to
+									your cart yet.
+								</p>
+								<a
+									href="/"
+									class="inline-block bg-[var(--primary)] text-[var(--primary-contrast)] font-semibold px-6 py-3 rounded-[var(--radius-md)] hover:opacity-90 transition-opacity"
+									data-en="Continue Shopping"
+									data-ar="مواصلة التسوق"
+								>
+									Continue Shopping
+								</a>
+							</div>
+
+							<!-- Cart Actions: Coupon & Clear -->
+							<div
+								class="flex flex-col sm:flex-row justify-between items-center mt-6 space-y-4 sm:space-y-0"
+							>
+								<div
+									class="flex items-center gap-2 w-full sm:w-auto"
+								>
+									<input
+										type="text"
+										placeholder="Coupon code"
+										class="w-full sm:w-auto flex-grow rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--surface)] p-3 focus:ring-2 focus:ring-[var(--focus)] focus:border-transparent"
+										data-en-placeholder="Coupon code"
+										data-ar-placeholder="رمز القسيمة"
+									/>
+									<button
+										class="bg-[var(--secondary)] text-white font-semibold px-5 py-3 rounded-[var(--radius-md)] hover:opacity-90 transition-opacity"
+										data-en="Apply"
+										data-ar="تطبيق"
+									>
+										Apply
+									</button>
+								</div>
+								<button
+									id="clear-cart"
+									class="w-full sm:w-auto border border-[var(--border)] text-[var(--text)] font-semibold px-5 py-3 rounded-[var(--radius-md)] hover:bg-[var(--hover)] transition-colors"
+									data-en="Clear Cart"
+									data-ar="تفريغ السلة"
+								>
+									Clear Cart
 								</button>
 							</div>
+						</div>
 
-							<button
-								class="btn btn--outline"
-								id="clear-cart"
-								data-en="Clear Cart"
-								data-ar="تفريغ السلة"
+						<!-- Cart Totals (Right/Sidebar Column) -->
+						<div class="lg:col-span-1 mt-8 lg:mt-0">
+							<div
+								class="bg-[var(--surface)] p-6 rounded-[var(--radius-lg)] shadow-[var(--shadow-md)] sticky top-8"
 							>
-								Clear Cart
-							</button>
+								<h2
+									class="text-xl font-bold mb-4 pb-4 border-b border-[var(--border)]"
+									data-en="Cart Totals"
+									data-ar="إجمالي السلة"
+								>
+									Cart Totals
+								</h2>
+								<div class="space-y-3">
+									<div
+										class="flex justify-between items-center"
+									>
+										<div
+											class="text-[var(--muted)]"
+											data-en="Subtotal"
+											data-ar="المجموع الفرعي"
+										>
+											Subtotal
+										</div>
+										<div
+											id="cart-subtotal"
+											class="font-semibold text-[var(--text)]"
+										>
+											$149.99
+										</div>
+									</div>
+									<div
+										class="flex justify-between items-center"
+									>
+										<div
+											class="text-[var(--muted)]"
+											data-en="Shipping"
+											data-ar="الشحن"
+										>
+											Shipping
+										</div>
+										<div
+											class="font-semibold text-[var(--success)]"
+											data-en="Free"
+											data-ar="مجاني"
+										>
+											Free
+										</div>
+									</div>
+									<div
+										class="flex justify-between items-center text-sm text-[var(--muted)]"
+									>
+										<div data-en="Discount" data-ar="خصم">
+											Discount
+										</div>
+										<div
+											id="cart-discount"
+											class="font-semibold text-[var(--danger)]"
+										>
+											-$0.00
+										</div>
+									</div>
+								</div>
+								<div
+									class="flex justify-between items-center text-lg font-bold border-t border-[var(--border)] pt-4 mt-4"
+								>
+									<div
+										class="totals-label"
+										data-en="Total"
+										data-ar="الإجمالي"
+									>
+										Total
+									</div>
+									<div
+										id="cart-total"
+										class="text-[var(--primary)]"
+									>
+										$149.99
+									</div>
+								</div>
+								<button
+									class="w-full mt-6 bg-[var(--primary)] text-[var(--primary-contrast)] font-bold py-3 px-6 rounded-[var(--radius-lg)] shadow-[var(--shadow-md)] hover:opacity-90 transition-all text-lg"
+								>
+									Proceed to Checkout
+								</button>
+							</div>
 						</div>
-					</div>
-
-					<div class="cart-totals">
-						<h2 data-en="Cart Totals" data-ar="إجمالي السلة">
-							Cart Totals
-						</h2>
-
-						<div class="totals-table">
-							<div class="totals-row">
-								<div
-									class="totals-label"
-									data-en="Subtotal"
-									data-ar="المجموع الفرعي"
-								>
-									Subtotal
-								</div>
-								<div class="totals-value" id="cart-subtotal">
-									$0.00
-								</div>
-							</div>
-
-							<div class="totals-row">
-								<div
-									class="totals-label"
-									data-en="Shipping"
-									data-ar="الشحن"
-								>
-									Shipping
-								</div>
-								<div
-									class="totals-value"
-									data-en="Free shipping"
-									data-ar="شحن مجاني"
-								>
-									Free shipping
-								</div>
-							</div>
-
-							<div class="totals-row total">
-								<div
-									class="totals-label"
-									data-en="Total"
-									data-ar="الإجمالي"
-								>
-									Total
-								</div>
-								<div class="totals-value" id="cart-total">
-									$0.00
-								</div>
-							</div>
-						</div>
-
-						<button
-							class="btn btn--primary btn--full checkout-btn"
-							data-en="Proceed to Checkout"
-							data-ar="المتابعة إلى الدفع"
-						>
-							Proceed to Checkout
-						</button>
 					</div>
 				</div>
 			</section>
