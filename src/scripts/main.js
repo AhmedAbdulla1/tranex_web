@@ -17,6 +17,7 @@ function initializeTheme() {
 }
 
 function toggleTheme() {
+  console.log('Toggle Theme V2.0');
   const currentTheme = document.documentElement.getAttribute('data-theme');
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
