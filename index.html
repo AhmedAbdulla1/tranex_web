@@ -41,7 +41,7 @@
 			rel="stylesheet"
 		/>
 
-		<link rel="stylesheet" href="./src/styles/main.css" />
+		<link rel="stylesheet" href="src/styles/main.css" />
 
 		<!-- Component Loader -->
 	</head>
@@ -57,7 +57,7 @@
 					<div class="slide active">
 						<div class="slide-background">
 							<img
-								src="./src/assets/images/logo.png"
+								src="src/assets/images/logo.png"
 								alt="TRANEX Manufacturing Excellence"
 								class="slide-logo"
 							/>
@@ -79,7 +79,7 @@
 					<div class="slide">
 						<div class="slide-background">
 							<img
-								src="./src/assets/images/logo.png"
+								src="src/assets/images/logo.png"
 								alt="TRANEX Innovation & Development"
 								class="slide-logo"
 							/>
@@ -100,7 +100,7 @@
 					<div class="slide">
 						<div class="slide-background">
 							<img
-								src="./src/assets/images/logo.png"
+								src="src/assets/images/logo.png"
 								alt="TRANEX GYM Solutions"
 								class="slide-logo"
 							/>
@@ -279,7 +279,7 @@
 						<div class="app-mockup">
 							<div class="mockup-container">
 								<img
-									src="./src/assets/images/logo.png"
+									src="src/assets/images/logo.png"
 									alt="TRANEX App Interface"
 									class="app-logo"
 								/>
@@ -336,7 +336,7 @@
 						<div class="product-card">
 							<div class="product-image">
 								<img
-									src="./src/assets/images/logo.png"
+									src="src/assets/images/logo.png"
 									alt="Pro Flywheel System"
 									class="product-logo"
 								/>
@@ -353,7 +353,7 @@
 								</p>
 								<div class="product-price">$2,499</div>
 								<a
-									href="./src/pages/store.html"
+									href="src/pages/store.html"
 									class="btn btn--primary"
 									>View Details</a
 								>
@@ -363,7 +363,7 @@
 						<div class="product-card">
 							<div class="product-image">
 								<img
-									src="./src/assets/images/logo.png"
+									src="src/assets/images/logo.png"
 									alt="Compact Flywheel"
 									class="product-logo"
 								/>
@@ -377,7 +377,7 @@
 								</p>
 								<div class="product-price">$1,799</div>
 								<a
-									href="./src/pages/store.html"
+									href="src/pages/store.html"
 									class="btn btn--primary"
 									>View Details</a
 								>
@@ -387,7 +387,7 @@
 						<div class="product-card">
 							<div class="product-image">
 								<img
-									src="./src/assets/images/logo.png"
+									src="src/assets/images/logo.png"
 									alt="Smart Flywheel"
 									class="product-logo"
 								/>
@@ -401,7 +401,7 @@
 								</p>
 								<div class="product-price">$3,299</div>
 								<a
-									href="./src/pages/store.html"
+									href="src/pages/store.html"
 									class="btn btn--primary"
 									>View Details</a
 								>
@@ -411,7 +411,7 @@
 						<div class="product-card">
 							<div class="product-image">
 								<img
-									src="./src/assets/images/logo.png"
+									src="src/assets/images/logo.png"
 									alt="Flywheel Accessories"
 									class="product-logo"
 								/>
@@ -425,7 +425,7 @@
 								</p>
 								<div class="product-price">$299</div>
 								<a
-									href="./src/pages/store.html"
+									href="src/pages/store.html"
 									class="btn btn--primary"
 									>View Details</a
 								>
@@ -456,14 +456,14 @@
 						</p>
 						<div class="cta-actions">
 							<a
-								href="./src/pages/contact.html"
+								href="src/pages/contact.html"
 								class="btn btn--primary"
 								data-en="Get Quote"
 								data-ar="احصل على عرض سعر"
 								>Get Quote</a
 							>
 							<a
-								href="./src/pages/store.html"
+								href="src/pages/store.html"
 								class="btn btn--secondary"
 								data-en="View Catalog"
 								data-ar="عرض الكتالوج"
@@ -514,7 +514,7 @@
 
 		<!-- Main Script -->
 		<script type="module">
-			import componentLoader from "./src/utils/component-loader.js";
+			import componentLoader from "src/utils/component-loader.js";
 
 			document.addEventListener("DOMContentLoaded", async () => {
 				try {
@@ -524,8 +524,8 @@
 					// Wait for components to load first
 					await componentLoader.initializeComponents(
 						{
-							"./src/components/header.html": "#header-container",
-							"./src/components/footer.html": "#footer-container",
+							"src/components/header.html": "#header-container",
+							"src/components/footer.html": "#footer-container",
 						},
 						{ language: currentLang }
 					);
@@ -557,6 +557,6 @@
 			}
 		</script>
 
-		<script src="./src/scripts/main.js"></script>
+		<script src="src/scripts/main.js"></script>
 	</body>
 </html>
