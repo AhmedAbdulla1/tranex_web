@@ -181,6 +181,7 @@ function updateLanguageSwitcher() {
 
 // ثبت الليسنر مرة واحدة بس عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('theme toggle issue v1.0')
   const langButton = document.querySelector('.lang-btn');
   if (langButton) {
     langButton.addEventListener('click', () => {

@@ -1,130 +1,242 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart - TRANEX</title>
-    <base href="https://tranex.site/" />
-    <link rel="stylesheet" href="/src/styles/main.css">
-    
-    <!-- Component Loader -->
-</head>
-<body>
-    <!-- Header Component Container -->
-    <div id="header-container"></div>
-    
-    <!-- Main Content -->
-    <main class="main-content">
-        <section class="cart-section" id="cart-page">
-            <div class="container">
-                <div class="section-header">
-                    <h1 class="section-title" data-en="Shopping Cart" data-ar="سلة التسوق">Shopping Cart</h1>
-                </div>
-                
-                <div class="cart-content">
-                    <table class="cart-table" id="cart-table">
-                        <thead>
-                            <tr>
-                                <th data-en="Product" data-ar="المنتج">Product</th>
-                                <th data-en="Name" data-ar="الاسم">Name</th>
-                                <th data-en="Price" data-ar="السعر">Price</th>
-                                <th data-en="Quantity" data-ar="الكمية">Quantity</th>
-                                <th data-en="Subtotal" data-ar="المجموع الفرعي">Subtotal</th>
-                                <th data-en="Remove" data-ar="إزالة">Remove</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Cart items will be dynamically inserted here -->
-                        </tbody>
-                    </table>
-                    
-                    <div class="empty-cart" id="empty-cart">
-                        <div class="empty-cart-icon">
-                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17M17 17a2 2 0 100 4 2 2 0 000-4zm0 0H9m0 0a2 2 0 100 4 2 2 0 000-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <h2 data-en="Your Cart is Empty" data-ar="سلة التسوق فارغة">Your Cart is Empty</h2>
-                        <p data-en="Looks like you haven't added any products to your cart yet." data-ar="يبدو أنك لم تضف أي منتجات إلى سلة التسوق الخاصة بك حتى الآن.">Looks like you haven't added any products to your cart yet.</p>
-                        <a href="/" class="btn btn--primary" data-en="Continue Shopping" data-ar="مواصلة التسوق">Continue Shopping</a>
-                    </div>
-                    
-                    <div class="cart-actions">
-                        <div class="cart-coupon">
-                            <input type="text" placeholder="Coupon code" data-en-placeholder="Coupon code" data-ar-placeholder="رمز القسيمة">
-                            <button class="btn btn--outline" data-en="Apply Coupon" data-ar="تطبيق القسيمة">Apply Coupon</button>
-                        </div>
-                        
-                        <button class="btn btn--outline" id="clear-cart" data-en="Clear Cart" data-ar="تفريغ السلة">Clear Cart</button>
-                    </div>
-                </div>
-                
-                <div class="cart-totals">
-                    <h2 data-en="Cart Totals" data-ar="إجمالي السلة">Cart Totals</h2>
-                    
-                    <div class="totals-table">
-                        <div class="totals-row">
-                            <div class="totals-label" data-en="Subtotal" data-ar="المجموع الفرعي">Subtotal</div>
-                            <div class="totals-value" id="cart-subtotal">$0.00</div>
-                        </div>
-                        
-                        <div class="totals-row">
-                            <div class="totals-label" data-en="Shipping" data-ar="الشحن">Shipping</div>
-                            <div class="totals-value" data-en="Free shipping" data-ar="شحن مجاني">Free shipping</div>
-                        </div>
-                        
-                        <div class="totals-row total">
-                            <div class="totals-label" data-en="Total" data-ar="الإجمالي">Total</div>
-                            <div class="totals-value" id="cart-total">$0.00</div>
-                        </div>
-                    </div>
-                    
-                    <button class="btn btn--primary btn--full checkout-btn" data-en="Proceed to Checkout" data-ar="المتابعة إلى الدفع">Proceed to Checkout</button>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <!-- Footer Component Container -->
-    <div id="footer-container"></div>
-    
-    <!-- Main Script -->
-    <script type="module">
-    import componentLoader from "./src/utils/component-loader.js";
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Shopping Cart - TRANEX</title>
+		<base href="https://tranex.site/" />
+		<link rel="stylesheet" href="/src/styles/main.css" />
 
-    document.addEventListener("DOMContentLoaded", async () => {
-        try {
-            const currentLang = document.documentElement.getAttribute("lang") || "en";
+		<!-- Component Loader -->
+	</head>
+	<body>
+		<!-- Header Component Container -->
+		<div id="header-container"></div>
 
-            // Wait for components to load first
-            await componentLoader.initializeComponents({
-                "./src/components/header.html": "#header-container",
-                "./src/components/footer.html": "#footer-container",
-            }, { language: currentLang });
+		<!-- Main Content -->
+		<main class="main-content">
+			<section class="cart-section" id="cart-page">
+				<div class="container">
+					<div class="section-header">
+						<h1
+							class="section-title"
+							data-en="Shopping Cart"
+							data-ar="سلة التسوق"
+						>
+							Shopping Cart
+						</h1>
+					</div>
 
-            // Now initialize functionality AFTER components are loaded
-            initializeTheme();
-            initializeMobileMenu(); // ✨ ADD THIS LINE
+					<div class="cart-content">
+						<table class="cart-table" id="cart-table">
+							<thead>
+								<tr>
+									<th data-en="Product" data-ar="المنتج">
+										Product
+									</th>
+									<th data-en="Name" data-ar="الاسم">Name</th>
+									<th data-en="Price" data-ar="السعر">
+										Price
+									</th>
+									<th data-en="Quantity" data-ar="الكمية">
+										Quantity
+									</th>
+									<th
+										data-en="Subtotal"
+										data-ar="المجموع الفرعي"
+									>
+										Subtotal
+									</th>
+									<th data-en="Remove" data-ar="إزالة">
+										Remove
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- Cart items will be dynamically inserted here -->
+							</tbody>
+						</table>
 
-            // Note: The theme/lang toggles will be handled by main.js,
-            // but the mobile menu needs this special handling because of the dynamic load.
+						<div class="empty-cart" id="empty-cart">
+							<div class="empty-cart-icon">
+								<svg
+									width="80"
+									height="80"
+									viewBox="0 0 24 24"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17M17 17a2 2 0 100 4 2 2 0 000-4zm0 0H9m0 0a2 2 0 100 4 2 2 0 000-4z"
+										stroke="currentColor"
+										stroke-width="1.5"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+									/>
+								</svg>
+							</div>
+							<h2
+								data-en="Your Cart is Empty"
+								data-ar="سلة التسوق فارغة"
+							>
+								Your Cart is Empty
+							</h2>
+							<p
+								data-en="Looks like you haven't added any products to your cart yet."
+								data-ar="يبدو أنك لم تضف أي منتجات إلى سلة التسوق الخاصة بك حتى الآن."
+							>
+								Looks like you haven't added any products to
+								your cart yet.
+							</p>
+							<a
+								href="/"
+								class="btn btn--primary"
+								data-en="Continue Shopping"
+								data-ar="مواصلة التسوق"
+								>Continue Shopping</a
+							>
+						</div>
 
-            console.log("Components loaded successfully");
-        } catch (error) {
-            console.error("Error loading components:", error);
-        }
-    });
+						<div class="cart-actions">
+							<div class="cart-coupon">
+								<input
+									type="text"
+									placeholder="Coupon code"
+									data-en-placeholder="Coupon code"
+									data-ar-placeholder="رمز القسيمة"
+								/>
+								<button
+									class="btn btn--outline"
+									data-en="Apply Coupon"
+									data-ar="تطبيق القسيمة"
+								>
+									Apply Coupon
+								</button>
+							</div>
 
-    // ✨ ADD THIS FUNCTION
-    function initializeMobileMenu() {
-        const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
-        if (mobileMenuToggle) {
-            mobileMenuToggle.addEventListener("click", toggleMobileMenu);
-        }
-    }
-</script>
-    
-    <script src="src/scripts/main.js"></script>
-    <script src="src/scripts/auth.js"></script>
-</body>
+							<button
+								class="btn btn--outline"
+								id="clear-cart"
+								data-en="Clear Cart"
+								data-ar="تفريغ السلة"
+							>
+								Clear Cart
+							</button>
+						</div>
+					</div>
+
+					<div class="cart-totals">
+						<h2 data-en="Cart Totals" data-ar="إجمالي السلة">
+							Cart Totals
+						</h2>
+
+						<div class="totals-table">
+							<div class="totals-row">
+								<div
+									class="totals-label"
+									data-en="Subtotal"
+									data-ar="المجموع الفرعي"
+								>
+									Subtotal
+								</div>
+								<div class="totals-value" id="cart-subtotal">
+									$0.00
+								</div>
+							</div>
+
+							<div class="totals-row">
+								<div
+									class="totals-label"
+									data-en="Shipping"
+									data-ar="الشحن"
+								>
+									Shipping
+								</div>
+								<div
+									class="totals-value"
+									data-en="Free shipping"
+									data-ar="شحن مجاني"
+								>
+									Free shipping
+								</div>
+							</div>
+
+							<div class="totals-row total">
+								<div
+									class="totals-label"
+									data-en="Total"
+									data-ar="الإجمالي"
+								>
+									Total
+								</div>
+								<div class="totals-value" id="cart-total">
+									$0.00
+								</div>
+							</div>
+						</div>
+
+						<button
+							class="btn btn--primary btn--full checkout-btn"
+							data-en="Proceed to Checkout"
+							data-ar="المتابعة إلى الدفع"
+						>
+							Proceed to Checkout
+						</button>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- Footer Component Container -->
+		<div id="footer-container"></div>
+
+		<!-- Main Script -->
+		<script type="module">
+			import componentLoader from "./src/utils/component-loader.js";
+
+			document.addEventListener("DOMContentLoaded", async () => {
+				try {
+					const currentLang =
+						document.documentElement.getAttribute("lang") || "en";
+
+					// Wait for components to load first
+					await componentLoader.initializeComponents(
+						{
+							"./src/components/header.html": "#header-container",
+							"./src/components/footer.html": "#footer-container",
+						},
+						{ language: currentLang }
+					);
+
+					// Now initialize functionality AFTER components are loaded
+					initializeTheme();
+					initializeMobileMenu();
+					initializeAuthState();
+
+					// Note: The theme/lang toggles will be handled by main.js,
+					// but the mobile menu needs this special handling because of the dynamic load.
+
+					console.log("Components loaded successfully");
+				} catch (error) {
+					console.error("Error loading components:", error);
+				}
+			});
+
+			// ✨ ADD THIS FUNCTION
+			function initializeMobileMenu() {
+				const mobileMenuToggle = document.querySelector(
+					".mobile-menu-toggle"
+				);
+				if (mobileMenuToggle) {
+					mobileMenuToggle.addEventListener(
+						"click",
+						toggleMobileMenu
+					);
+				}
+			}
+		</script>
+
+		<script src="src/scripts/main.js"></script>
+		<script src="src/scripts/auth.js"></script>
+	</body>
 </html>
