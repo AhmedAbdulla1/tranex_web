@@ -11,7 +11,7 @@ function initializeTheme() {
   const savedTheme = localStorage.getItem('tranex-theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-  
+
   document.documentElement.setAttribute('data-theme', theme);
   updateThemeIcon(theme);
 }
@@ -19,11 +19,11 @@ function initializeTheme() {
 function toggleTheme() {
   const currentTheme = document.documentElement.getAttribute('data-theme');
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  
+
   document.documentElement.setAttribute('data-theme', newTheme);
   localStorage.setItem('tranex-theme', newTheme);
   updateThemeIcon(newTheme);
-  
+
   // Add theme transition animation
   document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
 }
@@ -31,7 +31,7 @@ function toggleTheme() {
 function updateThemeIcon(theme) {
   const button = document.querySelector('.theme-toggle');
   if (button) {
-    button.setAttribute('aria-label', 
+    button.setAttribute('aria-label',
       theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
     );
   }
@@ -47,22 +47,22 @@ function getCurrentLanguage() {
 
 function switchLanguage(targetLang) {
   const currentLang = getCurrentLanguage();
-  
+
   if (currentLang === targetLang) return;
-  
+
   // Update HTML attributes
   document.documentElement.setAttribute('lang', targetLang);
   document.documentElement.setAttribute('dir', targetLang === 'ar' ? 'rtl' : 'ltr');
-  
+
   // Update content based on language
   updatePageContent(targetLang);
-  
+
   // Update language switcher
   updateLanguageSwitcher();
-  
+
   // Store preference
   localStorage.setItem('tranex-language', targetLang);
-  
+
   // Add animation effect
   document.body.style.opacity = '0';
   setTimeout(() => {
@@ -74,14 +74,14 @@ function updatePageContent(lang) {
   // Update page title and meta description
   if (lang === 'ar') {
     document.title = document.title.replace('TRANEX', 'ترانكس');
-    document.querySelector('meta[name="description"]')?.setAttribute('content', 
+    document.querySelector('meta[name="description"]')?.setAttribute('content',
       'ترانكس توفر حلول تكنولوجية متطورة للشركات والمنظمات. حلول مبتكرة وموثوقة وقابلة للتطوير للعالم الحديث.');
   } else {
     document.title = document.title.replace('ترانكس', 'TRANEX');
-    document.querySelector('meta[name="description"]')?.setAttribute('content', 
+    document.querySelector('meta[name="description"]')?.setAttribute('content',
       'TRANEX provides cutting-edge technology solutions for businesses and organizations. Innovative, reliable, and scalable solutions for the modern world.');
   }
-  
+
   // Update navigation text
   const navLinks = document.querySelectorAll('.nav-link');
   navLinks.forEach(link => {
@@ -99,7 +99,7 @@ function updatePageContent(lang) {
       if (link.textContent === 'المتجر') link.textContent = 'Store';
     }
   });
-  
+
   // Update all elements with data-en and data-ar attributes
   document.querySelectorAll('[data-en][data-ar]').forEach(element => {
     const enText = element.getAttribute('data-en');
@@ -108,7 +108,7 @@ function updatePageContent(lang) {
       element.textContent = lang === 'ar' ? arText : enText;
     }
   });
-  
+
   // Update mobile navigation
   const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
   mobileNavLinks.forEach(link => {
@@ -124,11 +124,11 @@ function updatePageContent(lang) {
       if (link.textContent === 'اتصل بنا') link.textContent = 'Contact';
     }
   });
-  
+
   // Update hero content
   const heroTitle = document.querySelector('.hero__title');
   const heroSubtitle = document.querySelector('.hero__subtitle');
-  
+
   if (heroTitle && heroSubtitle) {
     if (lang === 'ar') {
       if (heroTitle.textContent === 'Next-Gen Technology Solutions') {
@@ -146,7 +146,7 @@ function updatePageContent(lang) {
       }
     }
   }
-  
+
   // Update CTA buttons
   const ctaButtons = document.querySelectorAll('.btn--primary');
   ctaButtons.forEach(button => {
@@ -167,7 +167,7 @@ function updatePageContent(lang) {
 function updateLanguageSwitcher() {
   const currentLang = getCurrentLanguage();
   const langButton = document.querySelector('.lang-btn');
-  
+
   if (langButton) {
     if (currentLang === 'ar') {
       langButton.textContent = 'English';
@@ -235,63 +235,63 @@ class Cart {
 
 // Mobile Menu Functions
 function toggleMobileMenu() {
-    const menu = document.querySelector('.mobile-nav');
-    const toggle = document.querySelector('.mobile-menu-toggle');
-    
-    if (menu && toggle) {
-        const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-        const newState = !isExpanded;
-        
-        menu.setAttribute('aria-hidden', (!newState).toString());
-        toggle.setAttribute('aria-expanded', newState.toString());
-        toggle.classList.toggle('is-active');
-        
-        // Prevent body scroll when menu is open
-        document.body.style.overflow = newState ? 'hidden' : '';
-    }
+  const menu = document.querySelector('.mobile-nav');
+  const toggle = document.querySelector('.mobile-menu-toggle');
+
+  if (menu && toggle) {
+    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+    const newState = !isExpanded;
+
+    menu.setAttribute('aria-hidden', (!newState).toString());
+    toggle.setAttribute('aria-expanded', newState.toString());
+    toggle.classList.toggle('is-active');
+
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = newState ? 'hidden' : '';
+  }
 }
 
 function closeMobileMenuOnResize() {
-    const menu = document.querySelector('.mobile-nav');
-    const toggle = document.querySelector('.mobile-menu-toggle');
-    
-    if (window.innerWidth >= 768 && menu && toggle) {
-        menu.setAttribute('aria-hidden', 'true');
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.classList.remove('is-active');
-        document.body.style.overflow = '';
-    }
+  const menu = document.querySelector('.mobile-nav');
+  const toggle = document.querySelector('.mobile-menu-toggle');
+
+  if (window.innerWidth >= 768 && menu && toggle) {
+    menu.setAttribute('aria-hidden', 'true');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.classList.remove('is-active');
+    document.body.style.overflow = '';
+  }
 }
 
 // Authentication Functions
 function handleAuthState() {
-    const authData = localStorage.getItem('tranex_auth');
-    const loginBtn = document.querySelector('.login-btn');
-    const registerBtn = document.querySelector('.register-btn');
-    const userNameBtn = document.querySelector('.user-name-btn');
-    const signOutBtn = document.querySelector('.sign-out-btn');
-    
-    if (authData) {
-        const user = JSON.parse(authData);
-        if (loginBtn) loginBtn.style.display = 'none';
-        if (registerBtn) registerBtn.style.display = 'none';
-        if (userNameBtn) {
-            userNameBtn.style.display = 'block';
-            userNameBtn.textContent = user.name;
-        }
-        if (signOutBtn) signOutBtn.style.display = 'block';
-    } else {
-        if (loginBtn) loginBtn.style.display = 'block';
-        if (registerBtn) registerBtn.style.display = 'block';
-        if (userNameBtn) userNameBtn.style.display = 'none';
-        if (signOutBtn) signOutBtn.style.display = 'none';
+  const authData = localStorage.getItem('tranex_auth');
+  const loginBtn = document.querySelector('.login-btn');
+  const registerBtn = document.querySelector('.register-btn');
+  const userNameBtn = document.querySelector('.user-name-btn');
+  const signOutBtn = document.querySelector('.sign-out-btn');
+
+  if (authData) {
+    const user = JSON.parse(authData);
+    if (loginBtn) loginBtn.style.display = 'none';
+    if (registerBtn) registerBtn.style.display = 'none';
+    if (userNameBtn) {
+      userNameBtn.style.display = 'block';
+      userNameBtn.textContent = user.name;
     }
+    if (signOutBtn) signOutBtn.style.display = 'block';
+  } else {
+    if (loginBtn) loginBtn.style.display = 'block';
+    if (registerBtn) registerBtn.style.display = 'block';
+    if (userNameBtn) userNameBtn.style.display = 'none';
+    if (signOutBtn) signOutBtn.style.display = 'none';
+  }
 }
 
 function handleSignOut() {
-    localStorage.removeItem('tranex_auth');
-    handleAuthState();
-    window.location.href = '/';
+  localStorage.removeItem('tranex_auth');
+  handleAuthState();
+  window.location.href = '/';
 }
 
 // Initialize cart and auth state
@@ -299,47 +299,48 @@ const cart = new Cart();
 
 // Initialize event listeners
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize theme
-    initializeTheme();
-    
-    // Initialize language
-    updateLanguageSwitcher();
-    
-    // Initialize auth state
-    handleAuthState();
-    
-    // Mobile menu event listeners
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    if (mobileMenuToggle) {
-        mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+  // Initialize theme
+  initializeTheme();
+
+  // Initialize language
+  updateLanguageSwitcher();
+
+  // Initialize auth state
+  handleAuthState();
+
+  // Mobile menu event listeners
+  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+  if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+  }
+
+  // Close mobile menu on outside click
+  document.addEventListener('click', (e) => {
+    const menu = document.querySelector('.mobile-nav');
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    console.log(e.target, toggle);
+
+    if (menu && toggle && !menu.contains(e.target) && !toggle.contains(e.target)) {
+      menu.setAttribute('aria-hidden', 'true');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.classList.remove('is-active');
+      document.body.style.overflow = '';
     }
-    
-    // Close mobile menu on outside click
-    document.addEventListener('click', (e) => {
-        const menu = document.querySelector('.mobile-nav');
-        const toggle = document.querySelector('.mobile-menu-toggle');
-        
-        if (menu && toggle && !menu.contains(e.target) && !toggle.contains(e.target)) {
-            menu.setAttribute('aria-hidden', 'true');
-            toggle.setAttribute('aria-expanded', 'false');
-            toggle.classList.remove('is-active');
-            document.body.style.overflow = '';
-        }
-    });
-    
-    // Handle window resize
-    window.addEventListener('resize', closeMobileMenuOnResize);
+  });
+
+  // Handle window resize
+  window.addEventListener('resize', closeMobileMenuOnResize);
 });
 
 function toggleMobileMenu() {
   const toggle = document.querySelector('.mobile-menu-toggle');
   const menu = document.querySelector('.mobile-nav');
   const body = document.body;
-  
+
   if (!toggle || !menu) return;
-  
+
   const isOpen = menu.getAttribute('aria-hidden') === 'false';
-  
+
   if (isOpen) {
     menu.setAttribute('aria-hidden', 'true');
     toggle.setAttribute('aria-expanded', 'false');
@@ -402,7 +403,7 @@ function handleSignOut() {
 function closeMobileMenuOnResize() {
   const menu = document.querySelector('.mobile-nav');
   const toggle = document.querySelector('.mobile-menu-toggle');
-  
+
   if (window.innerWidth >= 768) {
     if (menu) menu.setAttribute('aria-hidden', 'true');
     if (toggle) {
@@ -446,7 +447,7 @@ function updateAuthButtons(isAuthenticated) {
 function handleSignOut() {
   localStorage.removeItem('tranex-auth-token');
   updateAuthButtons(false);
-  
+
   // Redirect to home page if on a protected route
   const protectedRoutes = ['/src/pages/cart.html', '/src/pages/profile.html'];
   if (protectedRoutes.some(route => window.location.pathname.includes(route))) {
@@ -460,7 +461,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mobileMenuToggle) {
     mobileMenuToggle.addEventListener('click', toggleMobileMenu);
   }
-  
+
   // Close mobile menu on resize
   window.addEventListener('resize', closeMobileMenuOnResize);
 
@@ -561,33 +562,33 @@ function filterProducts() {
   const categoryFilter = document.querySelector('#category-filter');
   const priceFilter = document.querySelector('#price-filter');
   const productGrid = document.querySelector('.products__grid');
-  
+
   if (!productGrid) return;
-  
+
   const searchTerm = searchInput?.value.toLowerCase() || '';
   const selectedCategory = categoryFilter?.value || 'all';
   const maxPrice = priceFilter?.value ? parseFloat(priceFilter.value) : Infinity;
   const currentLang = getCurrentLanguage();
-  
+
   const filteredProducts = products.filter(product => {
     const name = currentLang === 'ar' ? product.nameAr : product.name;
     const description = currentLang === 'ar' ? product.descriptionAr : product.description;
-    
-    const matchesSearch = name.toLowerCase().includes(searchTerm) || 
-                         description.toLowerCase().includes(searchTerm);
+
+    const matchesSearch = name.toLowerCase().includes(searchTerm) ||
+      description.toLowerCase().includes(searchTerm);
     const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
     const matchesPrice = product.price <= maxPrice;
-    
+
     return matchesSearch && matchesCategory && matchesPrice;
   });
-  
+
   renderProducts(filteredProducts, currentLang);
 }
 
 function renderProducts(productsToRender, lang = 'en') {
   const productGrid = document.querySelector('.products__grid');
   if (!productGrid) return;
-  
+
   if (productsToRender.length === 0) {
     productGrid.innerHTML = `
       <div class="no-products">
@@ -596,12 +597,12 @@ function renderProducts(productsToRender, lang = 'en') {
     `;
     return;
   }
-  
+
   productGrid.innerHTML = productsToRender.map(product => {
     const name = lang === 'ar' ? product.nameAr : product.name;
     const description = lang === 'ar' ? product.descriptionAr : product.description;
     const viewDetailsText = lang === 'ar' ? 'عرض التفاصيل' : 'View Details';
-    
+
     return `
       <article class="product-card">
         <div class="product-card__image">
@@ -625,19 +626,19 @@ function initializeStore() {
   const searchInput = document.querySelector('#search-input');
   const categoryFilter = document.querySelector('#category-filter');
   const priceFilter = document.querySelector('#price-filter');
-  
+
   if (searchInput) {
     searchInput.addEventListener('input', debounce(filterProducts, 300));
   }
-  
+
   if (categoryFilter) {
     categoryFilter.addEventListener('change', filterProducts);
   }
-  
+
   if (priceFilter) {
     priceFilter.addEventListener('change', filterProducts);
   }
-  
+
   // Initial render
   const currentLang = getCurrentLanguage();
   renderProducts(products, currentLang);
@@ -650,10 +651,10 @@ function initializeStore() {
 function validateForm(form) {
   const inputs = form.querySelectorAll('[required]');
   let isValid = true;
-  
+
   inputs.forEach(input => {
     const errorElement = input.parentNode.querySelector('.form-error');
-    
+
     if (!input.value.trim()) {
       showFieldError(input, 'This field is required');
       isValid = false;
@@ -667,20 +668,20 @@ function validateForm(form) {
       hideFieldError(input);
     }
   });
-  
+
   return isValid;
 }
 
 function showFieldError(input, message) {
   input.classList.add('error');
   let errorElement = input.parentNode.querySelector('.form-error');
-  
+
   if (!errorElement) {
     errorElement = document.createElement('div');
     errorElement.className = 'form-error';
     input.parentNode.appendChild(errorElement);
   }
-  
+
   errorElement.textContent = message;
 }
 
@@ -704,9 +705,9 @@ function isValidPhone(phone) {
 
 function handleFormSubmit(event) {
   event.preventDefault();
-  
+
   const form = event.target;
-  
+
   if (validateForm(form)) {
     // Show success message
     showAlert('success', 'Thank you! Your message has been sent successfully.');
@@ -736,7 +737,7 @@ function showAlert(type, message) {
       ${message}
     </div>
   `;
-  
+
   // Find a suitable container or create one
   let container = document.querySelector('.alerts-container');
   if (!container) {
@@ -751,9 +752,9 @@ function showAlert(type, message) {
     `;
     document.body.appendChild(container);
   }
-  
+
   container.innerHTML = alertHTML;
-  
+
   // Auto-remove after 5 seconds
   setTimeout(() => {
     container.innerHTML = '';
@@ -772,12 +773,12 @@ function addToCart(productId) {
   // Placeholder function for cart functionality
   const currentCount = parseInt(document.querySelector('.cart-badge').textContent) || 0;
   updateCartBadge(currentCount + 1);
-  
+
   const currentLang = getCurrentLanguage();
-  const message = currentLang === 'ar' ? 
-    'تم إضافة المنتج إلى السلة' : 
+  const message = currentLang === 'ar' ?
+    'تم إضافة المنتج إلى السلة' :
     'Product added to cart';
-  
+
   showAlert('success', message);
 }
 
@@ -804,35 +805,35 @@ function initializeAnimations() {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
   };
-  
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const element = entry.target;
         const animationType = element.dataset.animation || 'slideInUp';
-        
+
         // Add animation class
         element.classList.add(`animate--${animationType}`);
         element.classList.add('animate--visible');
-        
+
         // Remove observer after animation
         observer.unobserve(element);
       }
     });
   }, observerOptions);
-  
+
   // Observe elements that should animate in
   const animateElements = document.querySelectorAll(
     '.feature-card, .product-card, .testimonial-card, .about-preview__text, .about-preview__image, .hero__content, .hero__image'
   );
-  
+
   animateElements.forEach((el, index) => {
     // Set initial state
     el.classList.add('animate--initial');
-    
+
     // Add animation delay for staggered effect
     el.style.animationDelay = `${index * 0.1}s`;
-    
+
     // Set animation type
     if (el.classList.contains('hero__content')) {
       el.dataset.animation = 'slideInLeft';
@@ -841,17 +842,17 @@ function initializeAnimations() {
     } else {
       el.dataset.animation = 'slideInUp';
     }
-    
+
     observer.observe(el);
   });
-  
+
   // Initialize floating animations for tech elements
   initializeFloatingAnimations();
 }
 
 function initializeFloatingAnimations() {
   const techElements = document.querySelectorAll('.tech-item, .tech-circle, .equipment-item, .equipment-circle');
-  
+
   techElements.forEach((el, index) => {
     el.style.animationDelay = `${index * 0.2}s`;
   });
@@ -897,7 +898,7 @@ function addAnimationStyles() {
 
 function initializeLazyLoading() {
   const images = document.querySelectorAll('img[loading="lazy"]');
-  
+
   if ('IntersectionObserver' in window) {
     const imageObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
@@ -909,7 +910,7 @@ function initializeLazyLoading() {
         }
       });
     });
-    
+
     images.forEach(img => {
       img.classList.add('lazy');
       imageObserver.observe(img);
@@ -932,7 +933,7 @@ function initializeProductPage() {
   // Image gallery functionality
   const thumbnails = document.querySelectorAll('.product-gallery__thumbnail');
   const mainImage = document.querySelector('.product-gallery__main img');
-  
+
   thumbnails.forEach(thumb => {
     thumb.addEventListener('click', (e) => {
       e.preventDefault();
@@ -940,13 +941,13 @@ function initializeProductPage() {
         mainImage.src = thumb.href;
         mainImage.alt = thumb.querySelector('img').alt;
       }
-      
+
       // Update active thumbnail
       thumbnails.forEach(t => t.classList.remove('active'));
       thumb.classList.add('active');
     });
   });
-  
+
   // Add to cart button
   const addToCartBtn = document.querySelector('.add-to-cart-btn');
   if (addToCartBtn) {
@@ -961,34 +962,34 @@ function initializeProductPage() {
 // Main Initialization
 // ==========================================================================
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   // Add animation styles
   addAnimationStyles();
-  
+
   // Initialize core functionality
   initializeTheme();
   initializeLanguage();
   initializeAnimations();
   initializeLazyLoading();
-  
+
   // Page-specific initialization
   const pathname = window.location.pathname;
-  
+
   if (pathname.includes('store.html')) {
     initializeStore();
   }
-  
+
   if (pathname.includes('contact.html')) {
     initializeContactPage();
   }
-  
+
   if (pathname.includes('product-')) {
     initializeProductPage();
   }
-  
+
   // Set up global event listeners
   window.addEventListener('resize', debounce(closeMobileMenuOnResize, 250));
-  
+
   // Handle system theme changes
   window.matchMedia('(prefers-color-scheme: dark)')
     .addEventListener('change', (e) => {
@@ -998,10 +999,10 @@ document.addEventListener('DOMContentLoaded', function() {
         updateThemeIcon(newTheme);
       }
     });
-  
+
   // Handle navigation active states
   updateActiveNavigation();
-  
+
   // Add smooth scroll behavior
   addSmoothScrollBehavior();
 });
@@ -1033,14 +1034,14 @@ function addSmoothScrollBehavior() {
 function updateActiveNavigation() {
   const currentPath = window.location.pathname;
   const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
-  
+
   navLinks.forEach(link => {
     link.classList.remove('active');
     const href = link.getAttribute('href');
-    
-    if (href === currentPath || 
-        (currentPath === '/' && href === '/') ||
-        (currentPath.includes('ar') && href.includes('ar'))) {
+
+    if (href === currentPath ||
+      (currentPath === '/' && href === '/') ||
+      (currentPath.includes('ar') && href.includes('ar'))) {
       link.classList.add('active');
     }
   });
