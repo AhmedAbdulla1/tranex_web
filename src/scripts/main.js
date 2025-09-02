@@ -311,6 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function toggleMobileMenu() {
+  console.log('Toggle Mobile Menu')
   const toggle = document.querySelector('.mobile-menu-toggle');
   const menu = document.querySelector('.mobile-nav');
   const body = document.body;
@@ -422,10 +423,6 @@ function handleSignOut() {
 
 // Initialize mobile menu and auth state
 document.addEventListener('DOMContentLoaded', () => {
-  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-  if (mobileMenuToggle) {
-    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
-  }
 
   // Close mobile menu on resize
   window.addEventListener('resize', closeMobileMenuOnResize);
