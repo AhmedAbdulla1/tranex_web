@@ -543,6 +543,14 @@
 				}
 			});
 
+			function initializeTheme() {
+				const themeToggle = document.querySelector(".theme-toggle");
+				if (themeToggle) {
+					themeToggle.addEventListener("click", toggleMobileMenu);
+				}
+				// Other mobile menu initialization code...
+			}
+
 			function initializeMobileMenu() {
 				const mobileMenuToggle = document.querySelector(
 					".mobile-menu-toggle"

@@ -247,6 +247,14 @@
 				}
 			});
 
+			function initializeTheme() {
+				const themeToggle = document.querySelector(".theme-toggle");
+				if (themeToggle) {
+					themeToggle.addEventListener("click", toggleMobileMenu);
+				}
+				// Other mobile menu initialization code...
+			}
+
 			// ✨ ADD THIS FUNCTION
 			function initializeMobileMenu() {
 				const mobileMenuToggle = document.querySelector(
