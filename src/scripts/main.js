@@ -181,7 +181,7 @@ function updateLanguageSwitcher() {
 
 // ثبت الليسنر مرة واحدة بس عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('theme toggle issue v1.0')
+  console.log('theme toggle issue v2.0')
   const langButton = document.querySelector('.lang-btn');
   if (langButton) {
     langButton.addEventListener('click', () => {
@@ -1015,4 +1015,10 @@ window.toggleTheme = toggleTheme;
 window.switchLanguage = switchLanguage;
 window.toggleMobileMenu = toggleMobileMenu;
 window.addToCart = addToCart;
-window.smoothScrollToSection = smoothScrollToSection;
+window.smoothScrollToSection = smoothScrollToSection; window.handleSignOut = handleSignOut;
+
+// Theme toggle event listener
+const themeToggleBtn = document.querySelector('.theme-toggle');
+if (themeToggleBtn) {
+  themeToggleBtn.addEventListener('click', toggleTheme);
+}
