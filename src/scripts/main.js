@@ -172,18 +172,23 @@ function updateLanguageSwitcher() {
     if (currentLang === 'ar') {
       langButton.textContent = 'English';
       langButton.setAttribute('aria-label', 'Switch to English');
-      langButton.onclick = () => switchLanguage('en');
-      document.documentElement.setAttribute('dir', 'rtl');
-      document.documentElement.setAttribute('lang', 'ar');
     } else {
       langButton.textContent = 'العربية';
       langButton.setAttribute('aria-label', 'Switch to Arabic');
-      langButton.onclick = () => switchLanguage('ar');
-      document.documentElement.setAttribute('dir', 'ltr');
-      document.documentElement.setAttribute('lang', 'en');
     }
   }
 }
+
+// ثبت الليسنر مرة واحدة بس عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+  const langButton = document.querySelector('.lang-btn');
+  if (langButton) {
+    langButton.addEventListener('click', () => {
+      const newLang = getCurrentLanguage() === 'ar' ? 'en' : 'ar';
+      switchLanguage(newLang);
+    });
+  }
+});
 
 // ==========================================================================
 // Mobile Menu Management
@@ -233,35 +238,6 @@ class Cart {
   }
 }
 
-// Mobile Menu Functions
-function toggleMobileMenu() {
-  const menu = document.querySelector('.mobile-nav');
-  const toggle = document.querySelector('.mobile-menu-toggle');
-
-  if (menu && toggle) {
-    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-    const newState = !isExpanded;
-
-    menu.setAttribute('aria-hidden', (!newState).toString());
-    toggle.setAttribute('aria-expanded', newState.toString());
-    toggle.classList.toggle('is-active');
-
-    // Prevent body scroll when menu is open
-    document.body.style.overflow = newState ? 'hidden' : '';
-  }
-}
-
-function closeMobileMenuOnResize() {
-  const menu = document.querySelector('.mobile-nav');
-  const toggle = document.querySelector('.mobile-menu-toggle');
-
-  if (window.innerWidth >= 768 && menu && toggle) {
-    menu.setAttribute('aria-hidden', 'true');
-    toggle.setAttribute('aria-expanded', 'false');
-    toggle.classList.remove('is-active');
-    document.body.style.overflow = '';
-  }
-}
 
 // Authentication Functions
 function handleAuthState() {
@@ -365,6 +341,7 @@ function closeMobileMenuOnResize() {
     menu.setAttribute('aria-hidden', 'true');
     toggle.setAttribute('aria-expanded', 'false');
     toggle.classList.remove('is-active');
+    toggle.setAttribute('aria-label', 'Open mobile menu');
     body.style.overflow = '';
   }
 }
@@ -400,20 +377,6 @@ function handleSignOut() {
   window.location.href = '/index.html';
 }
 
-function closeMobileMenuOnResize() {
-  const menu = document.querySelector('.mobile-nav');
-  const toggle = document.querySelector('.mobile-menu-toggle');
-
-  if (window.innerWidth >= 768) {
-    if (menu) menu.setAttribute('aria-hidden', 'true');
-    if (toggle) {
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-label', 'Open mobile menu');
-      toggle.classList.remove('is-active');
-      document.body.style.overflow = '';
-    }
-  }
-}
 
 // ==========================================================================
 // Authentication Management
