@@ -1,68 +1,110 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Success - TRANEX</title>
-    <link rel="stylesheet" href="/src/styles/main.css">
-    
-    <!-- Component Loader -->
-    <script type="module" src="../utils/component-loader.js"></script>
-</head>
-<body>
-    <!-- Header Component Container -->
-    <div id="header-container"></div>
-    
-    <!-- Main Content -->
-    <main class="main-content">
-        <section class="order-success-section">
-            <div class="container">
-                <div class="success-content">
-                    <div class="success-icon">
-                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M22 4L12 14.01l-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <h1 class="success-title" data-en="Order Placed Successfully!" data-ar="تم تقديم الطلب بنجاح!">Order Placed Successfully!</h1>
-                    <p class="success-message" data-en="Thank you for your purchase. Your order has been received and is being processed." data-ar="شكراً لك على الشراء. تم استلام طلبك وجاري معالجته.">Thank you for your purchase. Your order has been received and is being processed.</p>
-                    <div class="success-actions">
-                        <a href="/" class="btn btn--primary" data-en="Continue Shopping" data-ar="مواصلة التسوق">Continue Shopping</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <!-- Footer Component Container -->
-    <div id="footer-container"></div>
-    
-    <!-- Main Script -->
-    <script type="module">
-        import componentLoader from '../utils/component-loader.js';
-        
-        // Initialize components when DOM is loaded
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                // Get current language
-                const currentLang = document.documentElement.getAttribute('lang') || 'en';
-                
-                // Load components
-                await componentLoader.initializeComponents({
-                    '/src/components/header.html': '#header-container',
-                    '/src/components/footer.html': '#footer-container'
-                }, { language: currentLang });
-                
-                // Initialize theme
-                initializeTheme();
-                
-                console.log('Components loaded successfully');
-            } catch (error) {
-                console.error('Error loading components:', error);
-            }
-        });
-    </script>
-    
-    <script src="../scripts/main.js"></script>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Order Success - TRANEX</title>
+		<base href="https://ahmedabdulla1.github.io/tranex_web/" />
+		<link rel="stylesheet" href="/src/styles/main.css" />
+
+		<!-- Component Loader -->
+		<script type="module" src="../utils/component-loader.js"></script>
+	</head>
+	<body>
+		<!-- Header Component Container -->
+		<div id="header-container"></div>
+
+		<!-- Main Content -->
+		<main class="main-content">
+			<section class="order-success-section">
+				<div class="container">
+					<div class="success-content">
+						<div class="success-icon">
+							<svg
+								width="80"
+								height="80"
+								viewBox="0 0 24 24"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<path
+									d="M22 11.08V12a10 10 0 1 1-5.93-9.14"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+								<path
+									d="M22 4L12 14.01l-3-3"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								/>
+							</svg>
+						</div>
+						<h1
+							class="success-title"
+							data-en="Order Placed Successfully!"
+							data-ar="تم تقديم الطلب بنجاح!"
+						>
+							Order Placed Successfully!
+						</h1>
+						<p
+							class="success-message"
+							data-en="Thank you for your purchase. Your order has been received and is being processed."
+							data-ar="شكراً لك على الشراء. تم استلام طلبك وجاري معالجته."
+						>
+							Thank you for your purchase. Your order has been
+							received and is being processed.
+						</p>
+						<div class="success-actions">
+							<a
+								href="/"
+								class="btn btn--primary"
+								data-en="Continue Shopping"
+								data-ar="مواصلة التسوق"
+								>Continue Shopping</a
+							>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- Footer Component Container -->
+		<div id="footer-container"></div>
+
+		<!-- Main Script -->
+		<script type="module">
+			import componentLoader from "../utils/component-loader.js";
+
+			// Initialize components when DOM is loaded
+			document.addEventListener("DOMContentLoaded", async () => {
+				try {
+					// Get current language
+					const currentLang =
+						document.documentElement.getAttribute("lang") || "en";
+
+					// Load components
+					await componentLoader.initializeComponents(
+						{
+							"/src/components/header.html": "#header-container",
+							"/src/components/footer.html": "#footer-container",
+						},
+						{ language: currentLang }
+					);
+
+					// Initialize theme
+					initializeTheme();
+
+					console.log("Components loaded successfully");
+				} catch (error) {
+					console.error("Error loading components:", error);
+				}
+			});
+		</script>
+
+		<script src="../scripts/main.js"></script>
+	</body>
 </html>
