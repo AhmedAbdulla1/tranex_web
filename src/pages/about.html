@@ -222,7 +222,7 @@
 
 		<!-- Main Script -->
 		<script type="module">
-			import componentLoader from "../utils/component-loader.js";
+			import componentLoader from "./src/utils/component-loader.js";
 
 			// Initialize components when DOM is loaded
 			document.addEventListener("DOMContentLoaded", async () => {
@@ -234,8 +234,8 @@
 					// Load components
 					await componentLoader.initializeComponents(
 						{
-							"../components/header.html": "#header-container",
-							"../components/footer.html": "#footer-container",
+							"./src/components/header.html": "#header-container",
+							"./src/components/footer.html": "#footer-container",
 						},
 						{ language: currentLang }
 					);
