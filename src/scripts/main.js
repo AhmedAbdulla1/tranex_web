@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function toggleMobileMenu() {
-  console.log('Toggle Mobile Menu')
+  console.log('Toggle Mobile Menu V2.0')
   const toggle = document.querySelector('.mobile-menu-toggle');
   const menu = document.querySelector('.mobile-nav');
   const body = document.body;

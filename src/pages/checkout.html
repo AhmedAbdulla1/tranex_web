@@ -128,49 +128,39 @@
     
     <!-- Main Script -->
     <script type="module">
-			import componentLoader from "./src/utils/component-loader.js";
+    import componentLoader from "./src/utils/component-loader.js";
 
-			// Initialize components when DOM is loaded
-			document.addEventListener("DOMContentLoaded", async () => {
-				try {
-					// Get current language
-					const currentLang =
-						document.documentElement.getAttribute("lang") || "en";
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const currentLang = document.documentElement.getAttribute("lang") || "en";
 
-					// Load components
-					await componentLoader.initializeComponents(
-						{
-							"./src/components/header.html": "#header-container",
-							"./src/components/footer.html": "#footer-container",
-						},
-						{ language: currentLang }
-					);
+            // Wait for components to load first
+            await componentLoader.initializeComponents({
+                "./src/components/header.html": "#header-container",
+                "./src/components/footer.html": "#footer-container",
+            }, { language: currentLang });
 
-					// Initialize theme
-					initializeTheme();
+            // Now initialize functionality AFTER components are loaded
+            initializeTheme();
+            initializeMobileMenu(); // ✨ ADD THIS LINE
 
-					// Set up event listeners for theme and language toggles
-					const themeToggle = document.querySelector(".theme-toggle");
-					if (themeToggle) {
-						themeToggle.addEventListener("click", toggleTheme);
-					}
+            // Note: The theme/lang toggles will be handled by main.js,
+            // but the mobile menu needs this special handling because of the dynamic load.
 
-					const langToggle = document.querySelector(".lang-btn");
-					if (langToggle) {
-						langToggle.addEventListener("click", () => {
-							const currentLang =
-								document.documentElement.getAttribute("lang") ||
-								"en";
-							switchLanguage(currentLang === "en" ? "ar" : "en");
-						});
-					}
+            console.log("Components loaded successfully");
+        } catch (error) {
+            console.error("Error loading components:", error);
+        }
+    });
 
-					console.log("Components loaded successfully");
-				} catch (error) {
-					console.error("Error loading components:", error);
-				}
-			});
-		</script>
+    // ✨ ADD THIS FUNCTION
+    function initializeMobileMenu() {
+        const mobileMenuToggle = document.querySelector(".mobile-menu-toggle");
+        if (mobileMenuToggle) {
+            mobileMenuToggle.addEventListener("click", toggleMobileMenu);
+        }
+    }
+</script>
     
     <script src="src/scripts/main.js"></script>
     <script src="src/scripts/auth.js"></script>
