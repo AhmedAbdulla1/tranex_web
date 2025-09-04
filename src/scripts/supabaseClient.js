@@ -4,8 +4,8 @@ import { createClient } from "@supabase/supabase-js";
 class SupabaseService {
   constructor() {
     // Initialize Supabase client once
-    this.supabaseUrl = "https://YOUR_PROJECT_ID.supabase.co";
-    this.supabaseAnonKey = "YOUR_PUBLIC_ANON_KEY";
+    this.supabaseUrl = "https://cwkiimxabpcxxwwvkzdh.supabase.co";
+    this.supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN3a2lpbXhhYnBjeHh3d3ZremRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU4Mzg5NjUsImV4cCI6MjA3MTQxNDk2NX0.gIp5PPVNDOVOOK_zn5XIo8NRocpf-VrEVH7-NOX4hQs";
     this.client = createClient(this.supabaseUrl, this.supabaseAnonKey);
   }
 
