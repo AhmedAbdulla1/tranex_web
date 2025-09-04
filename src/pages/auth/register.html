@@ -154,6 +154,7 @@
 					></div>
 
 					<form id="register-form" class="space-y-[var(--space-4)]">
+						<!-- Name fields -->
 						<div
 							class="grid grid-cols-1 md:grid-cols-2 gap-[var(--space-4)]"
 						>
@@ -170,6 +171,9 @@
 									required
 									class="mt-[var(--space-1)] w-full px-[var(--space-3)] py-[var(--space-3)] bg-[var(--bg)] text-[var(--text)] border border-[var(--border)] [border-radius:var(--radius-md)] outline-none focus:ring-2 focus:ring-[var(--focus)] focus:border-[var(--focus)] placeholder:text-[var(--muted)]"
 								/>
+								<p
+									class="validation-message text-xs text-red-500 mt-1"
+								></p>
 							</div>
 							<div>
 								<label
@@ -184,9 +188,13 @@
 									required
 									class="mt-[var(--space-1)] w-full px-[var(--space-3)] py-[var(--space-3)] bg-[var(--bg)] text-[var(--text)] border border-[var(--border)] [border-radius:var(--radius-md)] outline-none focus:ring-2 focus:ring-[var(--focus)] focus:border-[var(--focus)] placeholder:text-[var(--muted)]"
 								/>
+								<p
+									class="validation-message text-xs text-red-500 mt-1"
+								></p>
 							</div>
 						</div>
 
+						<!-- Email -->
 						<div>
 							<label for="email" class="block text-sm font-medium"
 								>Email</label
@@ -198,41 +206,75 @@
 								required
 								class="mt-[var(--space-1)] w-full px-[var(--space-3)] py-[var(--space-3)] bg-[var(--bg)] text-[var(--text)] border border-[var(--border)] [border-radius:var(--radius-md)] outline-none focus:ring-2 focus:ring-[var(--focus)] focus:border-[var(--focus)] placeholder:text-[var(--muted)]"
 							/>
+							<p
+								class="validation-message text-xs text-red-500 mt-1"
+							></p>
 						</div>
 
+						<!-- Password with toggle -->
 						<div>
 							<label
 								for="password"
 								class="block text-sm font-medium"
 								>Password</label
 							>
-							<input
-								type="password"
-								id="password"
-								name="password"
-								required
-								class="mt-[var(--space-1)] w-full px-[var(--space-3)] py-[var(--space-3)] bg-[var(--bg)] text-[var(--text)] border border-[var(--border)] [border-radius:var(--radius-md)] outline-none focus:ring-2 focus:ring-[var(--focus)] focus:border-[var(--focus)] placeholder:text-[var(--muted)]"
-							/>
-							<small class="text-xs text-[var(--muted)]">
-								Password must be at least 8 characters
-							</small>
+							<div class="relative">
+								<input
+									type="password"
+									id="password"
+									name="password"
+									required
+									class="mt-[var(--space-1)] w-full pr-10 px-[var(--space-3)] py-[var(--space-3)] bg-[var(--bg)] text-[var(--text)] border border-[var(--border)] [border-radius:var(--radius-md)] outline-none focus:ring-2 focus:ring-[var(--focus)] focus:border-[var(--focus)] placeholder:text-[var(--muted)]"
+								/>
+								<!-- Toggle button -->
+								<button
+									type="button"
+									class="toggle-password absolute inset-y-0 right-3 flex items-center text-[var(--muted)] hover:text-[var(--text)]"
+									aria-label="Show password"
+									data-target="password"
+								>
+									👁
+								</button>
+							</div>
+							<small class="text-xs text-[var(--muted)]"
+								>Password must be at least 8 characters</small
+							>
+							<p
+								class="validation-message text-xs text-red-500 mt-1"
+							></p>
 						</div>
 
+						<!-- Confirm Password with toggle -->
 						<div>
 							<label
-								for="confirm-password"
+								for="confirmPassword"
 								class="block text-sm font-medium"
 								>Confirm Password</label
 							>
-							<input
-								type="password"
-								id="confirm-password"
-								name="confirmPassword"
-								required
-								class="mt-[var(--space-1)] w-full px-[var(--space-3)] py-[var(--space-3)] bg-[var(--bg)] text-[var(--text)] border border-[var(--border)] [border-radius:var(--radius-md)] outline-none focus:ring-2 focus:ring-[var(--focus)] focus:border-[var(--focus)] placeholder:text-[var(--muted)]"
-							/>
+							<div class="relative">
+								<input
+									type="password"
+									id="confirmPassword"
+									name="confirmPassword"
+									required
+									class="mt-[var(--space-1)] w-full pr-10 px-[var(--space-3)] py-[var(--space-3)] bg-[var(--bg)] text-[var(--text)] border border-[var(--border)] [border-radius:var(--radius-md)] outline-none focus:ring-2 focus:ring-[var(--focus)] focus:border-[var(--focus)] placeholder:text-[var(--muted)]"
+								/>
+								<!-- Toggle button -->
+								<button
+									type="button"
+									class="toggle-password absolute inset-y-0 right-3 flex items-center text-[var(--muted)] hover:text-[var(--text)]"
+									aria-label="Show password"
+									data-target="confirmPassword"
+								>
+									👁
+								</button>
+							</div>
+							<p
+								class="validation-message text-xs text-red-500 mt-1"
+							></p>
 						</div>
 
+						<!-- Terms checkbox -->
 						<div class="flex items-start text-sm">
 							<input
 								type="checkbox"
@@ -246,17 +288,20 @@
 								<a
 									href="src/pages/terms.html"
 									class="text-[var(--primary)] hover:underline"
-									>Terms of Service</a
 								>
+									Terms of Service
+								</a>
 								and
 								<a
 									href="src/pages/privacy.html"
 									class="text-[var(--primary)] hover:underline"
-									>Privacy Policy</a
 								>
+									Privacy Policy
+								</a>
 							</label>
 						</div>
 
+						<!-- Submit Button -->
 						<button
 							type="submit"
 							class="w-full py-[var(--space-3)] bg-[var(--primary)] text-[var(--primary-contrast)] [border-radius:var(--radius-md)] transition hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-[var(--focus)]"
@@ -265,6 +310,7 @@
 						</button>
 					</form>
 
+					<!-- Divider -->
 					<div class="my-[var(--space-6)] flex items-center">
 						<div
 							class="flex-grow border-t border-[var(--border)]"
@@ -278,6 +324,7 @@
 						></div>
 					</div>
 
+					<!-- Google Signup Button -->
 					<button
 						class="w-full flex items-center justify-center gap-[var(--space-3)] py-[var(--space-3)] border border-[var(--border)] bg-[var(--bg)] text-[var(--text)] [border-radius:var(--radius-md)] transition hover:bg-[var(--hover)] focus:outline-none focus:ring-2 focus:ring-[var(--focus)]"
 					>
@@ -289,13 +336,15 @@
 						<span>Sign up with Google</span>
 					</button>
 
+					<!-- Link to login -->
 					<p class="mt-[var(--space-6)] text-sm text-center">
 						Already have an account?
 						<a
 							href="src/pages/auth/login.html"
 							class="hover:underline text-[var(--primary)]"
-							>Sign in</a
 						>
+							Sign in
+						</a>
 					</p>
 				</div>
 

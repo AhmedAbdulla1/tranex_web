@@ -3,81 +3,6 @@
  * Handles user authentication flows and UI interactions with real-time validation
  */
 
-// Validation patterns
-const PATTERNS = {
-    email: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
-    password: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$/,
-    username: /^[a-zA-Z0-9_]{3,20}$/
-};
-
-// Validation messages
-const MESSAGES = {
-    en: {
-        email: {
-            invalid: 'Please enter a valid email address',
-            required: 'Email is required'
-        },
-        password: {
-            invalid: 'Password must be at least 8 characters and contain letters and numbers',
-            required: 'Password is required'
-        },
-        username: {
-            invalid: 'Username must be 3-20 characters and can contain letters, numbers and underscore',
-            required: 'Username is required'
-        },
-        confirmPassword: {
-            mismatch: 'Passwords do not match',
-            required: 'Please confirm your password'
-        }
-    },
-    ar: {
-        email: {
-            invalid: 'يرجى إدخال عنوان بريد إلكتروني صالح',
-            required: 'البريد الإلكتروني مطلوب'
-        },
-        password: {
-            invalid: 'يجب أن تتكون كلمة المرور من 8 أحرف على الأقل وتحتوي على أحرف وأرقام',
-            required: 'كلمة المرور مطلوبة'
-        },
-        username: {
-            invalid: 'يجب أن يتكون اسم المستخدم من 3-20 حرفًا ويمكن أن يحتوي على أحرف وأرقام وشرطة سفلية',
-            required: 'اسم المستخدم مطلوب'
-        },
-        confirmPassword: {
-            mismatch: 'كلمات المرور غير متطابقة',
-            required: 'يرجى تأكيد كلمة المرور'
-        }
-    }
-};
-
-
-// Initialize forms when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    const lang = document.documentElement.lang || 'en';
-
-    // Initialize login form
-    const loginForm = document.getElementById('login-form');
-    if (loginForm) {
-        new FormValidator(loginForm, lang);
-    }
-
-    // Initialize register form
-    const registerForm = document.getElementById('register-form');
-    if (registerForm) {
-        new FormValidator(registerForm, lang);
-    }
-
-    // Add sign out functionality
-    const signOutBtn = document.querySelector('.sign-out-btn');
-    if (signOutBtn) {
-        signOutBtn.addEventListener('click', () => {
-            localStorage.removeItem('auth_token');
-            window.location.href = '/';
-        });
-    }
-});
-
-
 class FormValidator {
     constructor() {
         this.patterns = {
@@ -125,14 +50,25 @@ class FormValidator {
             }
         };
 
+        this.excludedPages = ['login.html', 'register.html', 'reset-password.html'];
+        this.currentPage = window.location.pathname.split("/").pop();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectParam = urlParams.get('redirect');
+
+        this.redirectPage = redirectParam || (this.excludedPages.includes(this.redirectPage)
+            ? 'index.html'
+            : document.referrer || 'index.html');
+
         this.initializeForms();
         this.initializePasswordToggles();
         this.initializeTabSwitching();
     }
 
     initializeForms() {
-        const loginForm = document.getElementById('loginForm');
-        const registerForm = document.getElementById('registerForm');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+        console.log('Initializing forms:', loginForm, registerForm);
 
         if (loginForm) {
             this.setupFormValidation(loginForm);
@@ -148,13 +84,15 @@ class FormValidator {
     setupFormValidation(form) {
         const inputs = form.querySelectorAll('input');
         inputs.forEach(input => {
+            console.log('Validating input:', input.name);
+            input.classList.remove('invalid')
             input.addEventListener('input', () => this.validateInput(input));
             input.addEventListener('blur', () => this.validateInput(input));
         });
     }
 
     validateInput(input) {
-        const lang = document.documentElement.getAttribute('lang') || 'en';
+        const lang = document.documentElement.getAttribute('lang') || document.documentElement.lang || 'en';
         const field = input.name;
         const value = input.value.trim();
         const messages = this.messages[lang];
@@ -181,7 +119,7 @@ class FormValidator {
 
         // Confirm password validation
         if (field === 'confirmPassword') {
-            const password = document.getElementById('registerPassword').value;
+            const password = input.form.querySelector('input[name="password"]').value;
             if (value !== password) {
                 input.classList.add('invalid');
                 messageElement.textContent = messages.confirmPassword.match;
@@ -201,7 +139,7 @@ class FormValidator {
                 isValid = false;
             }
         });
-
+        console.log('Form validation result:', isValid)
         return isValid;
     }
 
@@ -264,7 +202,7 @@ class FormValidator {
 
             // Redirect back to the previous page or home
             const redirect = new URLSearchParams(window.location.search).get('redirect');
-            window.location.href = redirect || '/';
+            window.location.href = redirect || this.redirectPage;
         } catch (error) {
             console.error('Login failed:', error);
         }
@@ -292,20 +230,28 @@ class FormValidator {
             }
 
             // Redirect to home page
-            window.location.href = '/';
+            window.location.href = this.redirectPage;
         } catch (error) {
             console.error('Registration failed:', error);
         }
     }
 }
 
-// Initialize form validation when the DOM is loaded
+// Initialize forms when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new FormValidator();
-});
+    if (!window.formValidatorInstance) {
+        window.formValidatorInstance = new FormValidator();
+    }
 
+    // Add sign out functionality
+    const signOutBtn = document.querySelector('.sign-out-btn');
+    if (signOutBtn) {
+        signOutBtn.addEventListener('click', () => {
+            localStorage.removeItem('tranex-auth-token');
+            localStorage.removeItem('tranex-user-email');
+            localStorage.removeItem('tranex-username');
+            window.location.href = 'index.html';
+        });
+    }
 
-// Export the Cart class
-document.addEventListener('DOMContentLoaded', () => {
-    new FormValidator();
 });

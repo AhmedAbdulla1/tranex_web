@@ -123,16 +123,12 @@
 		<div id="header-container"></div>
 
 		<!-- Main Content -->
-		<main
-			class="flex items-center justify-center min-h-screen bg-[var(--surface)]"
-		>
+		<main class="flex items-center justify-center min-h-screen bg-[var(--surface)]">
 			<section
 				class="w-full max-w-[90vw] md:max-w-5xl grid grid-cols-1 md:grid-cols-2 overflow-hidden border border-[var(--border)] [border-radius:var(--radius-xl)] bg-[var(--bg)] text-[var(--text)] [box-shadow:var(--shadow-lg)]"
 			>
 				<!-- Left: Form -->
-				<div
-					class="flex flex-col justify-center p-[var(--space-7)] md:p-[var(--space-8)] "
-				>
+				<div class="flex flex-col justify-center p-[var(--space-7)] md:p-[var(--space-8)]">
 					<h1
 						class="text-3xl font-semibold mb-[var(--space-2)]"
 						data-en="Login"
@@ -149,16 +145,13 @@
 						Welcome back! Please enter your details
 					</p>
 
-					<div
-						id="auth-message"
-						class="mb-[var(--space-4)] text-sm"
-					></div>
+					<!-- Global error / success messages -->
+					<div id="auth-message" class="mb-[var(--space-4)] text-sm"></div>
 
 					<form id="login-form" class="space-y-[var(--space-4)]">
+						<!-- Email Field -->
 						<div>
-							<label for="email" class="block text-sm font-medium"
-								>Email</label
-							>
+							<label for="email" class="block text-sm font-medium">Email</label>
 							<input
 								type="email"
 								id="email"
@@ -166,27 +159,36 @@
 								required
 								class="mt-[var(--space-1)] w-full px-[var(--space-3)] py-[var(--space-3)] bg-[var(--bg)] text-[var(--text)] border border-[var(--border)] [border-radius:var(--radius-md)] outline-none focus:ring-2 focus:ring-[var(--focus)] focus:border-[var(--focus)] placeholder:text-[var(--muted)]"
 							/>
+							<div class="validation-message text-xs text-red-500 mt-1"></div>
 						</div>
 
-						<div>
-							<label
-								for="password"
-								class="block text-sm font-medium"
-								>Password</label
-							>
-							<input
-								type="password"
-								id="password"
-								name="password"
-								required
-								class="mt-[var(--space-1)] w-full px-[var(--space-3)] py-[var(--space-3)] bg-[var(--bg)] text-[var(--text)] border border-[var(--border)] [border-radius:var(--radius-md)] outline-none focus:ring-2 focus:ring-[var(--focus)] focus:border-[var(--focus)] placeholder:text-[var(--muted)]"
-							/>
+						<!-- Password Field with Toggle -->
+						<div class="relative">
+							<label for="password" class="block text-sm font-medium">Password</label>
+							<div class="relative">
+								<input
+									type="password"
+									id="password"
+									name="password"
+									required
+									class="mt-[var(--space-1)] w-full px-[var(--space-3)] py-[var(--space-3)] pr-10 bg-[var(--bg)] text-[var(--text)] border border-[var(--border)] [border-radius:var(--radius-md)] outline-none focus:ring-2 focus:ring-[var(--focus)] focus:border-[var(--focus)] placeholder:text-[var(--muted)]"
+								/>
+								<!-- Toggle Password Button -->
+								<button
+									type="button"
+									class="toggle-password absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted)] hover:text-[var(--text)]"
+									data-target="password"
+									aria-label="Toggle Password"
+								>
+									👁️
+								</button>
+							</div>
+							<div class="validation-message text-xs text-red-500 mt-1"></div>
 						</div>
 
+						<!-- Remember Me + Forgot Password -->
 						<div class="flex items-center justify-between text-sm">
-							<label
-								class="flex items-center gap-[var(--space-2)]"
-							>
+							<label class="flex items-center gap-[var(--space-2)]">
 								<input
 									type="checkbox"
 									id="remember"
@@ -203,6 +205,7 @@
 							</a>
 						</div>
 
+						<!-- Submit Button -->
 						<button
 							type="submit"
 							class="w-full py-[var(--space-3)] bg-[var(--primary)] text-[var(--primary-contrast)] [border-radius:var(--radius-md)] transition hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-[var(--focus)]"
@@ -211,19 +214,14 @@
 						</button>
 					</form>
 
+					<!-- Divider -->
 					<div class="my-[var(--space-6)] flex items-center">
-						<div
-							class="flex-grow border-t border-[var(--border)]"
-						></div>
-						<span
-							class="px-[var(--space-4)] text-sm text-[var(--muted)]"
-							>OR</span
-						>
-						<div
-							class="flex-grow border-t border-[var(--border)]"
-						></div>
+						<div class="flex-grow border-t border-[var(--border)]"></div>
+						<span class="px-[var(--space-4)] text-sm text-[var(--muted)]">OR</span>
+						<div class="flex-grow border-t border-[var(--border)]"></div>
 					</div>
 
+					<!-- Google Login -->
 					<button
 						class="w-full flex items-center justify-center gap-[var(--space-3)] py-[var(--space-3)] border border-[var(--border)] bg-[var(--bg)] text-[var(--text)] [border-radius:var(--radius-md)] transition hover:bg-[var(--hover)] focus:outline-none focus:ring-2 focus:ring-[var(--focus)]"
 					>
@@ -235,13 +233,15 @@
 						<span>Sign in with Google</span>
 					</button>
 
+					<!-- Sign Up Link -->
 					<p class="mt-[var(--space-6)] text-sm text-center">
 						Don't have an account?
 						<a
 							href="src/pages/auth/register.html"
 							class="hover:underline text-[var(--primary)]"
-							>Sign up</a
 						>
+							Sign up
+						</a>
 					</p>
 				</div>
 
@@ -254,7 +254,9 @@
 					/>
 				</div>
 			</section>
+
 		</main>
+
 
 		<!-- Footer Component Container -->
 		<div id="footer-container"></div>
