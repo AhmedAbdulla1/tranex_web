@@ -1,0 +1,100 @@
+// src/js/SupabaseService.js
+import { createClient } from "@supabase/supabase-js";
+
+class SupabaseService {
+  constructor() {
+    // Initialize Supabase client once
+    this.supabaseUrl = "https://YOUR_PROJECT_ID.supabase.co";
+    this.supabaseAnonKey = "YOUR_PUBLIC_ANON_KEY";
+    this.client = createClient(this.supabaseUrl, this.supabaseAnonKey);
+  }
+
+  /**
+   * 1. LOGIN
+   * @param {string} email
+   * @param {string} password
+   */
+  async login(email, password) {
+    const { data, error } = await this.client.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      console.error("Login failed:", error.message);
+      return { success: false, error: error.message };
+    }
+
+    console.log("Login successful:", data.user);
+    return { success: true, user: data.user, session: data.session };
+  }
+
+  /**
+   * 2. REGISTER
+   * @param {string} email
+   * @param {string} password
+   * @param {string} username
+   */
+  async register(email, password, username) {
+    const { data, error } = await this.client.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          username: username, // Save extra data in user_metadata
+        },
+      },
+    });
+
+    if (error) {
+      console.error("Registration failed:", error.message);
+      return { success: false, error: error.message };
+    }
+
+    console.log("Registration successful:", data.user);
+    return { success: true, user: data.user };
+  }
+
+  /**
+   * 3. RESET PASSWORD
+   * Sends password reset email
+   * @param {string} email
+   */
+  async resetPassword(email) {
+    const { data, error } = await this.client.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/src/pages/auth/update-password.html`,
+    });
+
+    if (error) {
+      console.error("Password reset failed:", error.message);
+      return { success: false, error: error.message };
+    }
+
+    console.log("Password reset email sent:", data);
+    return { success: true, data };
+  }
+
+  /**
+   * 4. FETCH PRODUCT
+   * Fetch product details by ID
+   * @param {number} productId
+   */
+  async fetchProduct(productId) {
+    const { data, error } = await this.client
+      .from("products")
+      .select("id, name, description, price, image_url")
+      .eq("id", productId)
+      .single(); // Return only one product
+
+    if (error) {
+      console.error("Error fetching product:", error.message);
+      return { success: false, error: error.message };
+    }
+
+    console.log("Product fetched:", data);
+    return { success: true, product: data };
+  }
+}
+
+// Export a **single shared instance** of the service
+export const supabaseService = new SupabaseService();
