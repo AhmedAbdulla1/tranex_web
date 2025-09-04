@@ -4,14 +4,14 @@ A modern, responsive website for TRANEX Sports, specializing in elite sports per
 
 ## 🏃‍♂️ Features
 
-- **Responsive Design**: Mobile-first approach with modern UI/UX
-- **Product Catalog**: Detailed product pages with image galleries
-- **Shopping Cart**: Full cart functionality with local storage
-- **User Authentication**: Supabase-powered user management
-- **Multi-language Support**: English and Arabic with RTL support
-- **Theme Switching**: Light/dark mode toggle
-- **Performance Analytics**: Real-time tracking and data visualization
-- **SEO Optimized**: Meta tags, OpenGraph, and structured data
+-   **Responsive Design**: Mobile-first approach with modern UI/UX
+-   **Product Catalog**: Detailed product pages with image galleries
+-   **Shopping Cart**: Full cart functionality with local storage
+-   **User Authentication**: Supabase-powered user management
+-   **Multi-language Support**: English and Arabic with RTL support
+-   **Theme Switching**: Light/dark mode toggle
+-   **Performance Analytics**: Real-time tracking and data visualization
+-   **SEO Optimized**: Meta tags, OpenGraph, and structured data
 
 ## 🏗️ Project Structure
 
@@ -40,34 +40,36 @@ tranex_website/
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
-- Modern web browser
-- Supabase account (for backend functionality)
+-   Node.js (v14 or higher)
+-   Modern web browser
+-   Supabase account (for backend functionality)
 
 ### Local Development
 
 1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd tranex_website
-   ```
+
+    ```bash
+    git clone <repository-url>
+    cd tranex_website
+    ```
 
 2. **Start local server**
-   ```bash
-   # Using Python (recommended)
-   python -m http.server 8000
-   
-   # Using Node.js
-   npx serve .
-   
-   # Using PHP
-   php -S localhost:8000
-   ```
+
+    ```bash
+    # Using Python (recommended)
+    python -m http.server 8000
+
+    # Using Node.js
+    npx serve .
+
+    # Using PHP
+    php -S localhost:8000
+    ```
 
 3. **Open in browser**
-   ```
-   http://localhost:8000
-   ```
+    ```
+    http://localhost:8000
+    ```
 
 ## 🔧 Supabase Setup
 
@@ -84,8 +86,8 @@ tranex_website/
 3. Update `config/supabase.js`:
 
 ```javascript
-const SUPABASE_URL = 'YOUR_PROJECT_URL';
-const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY';
+const SUPABASE_URL = "YOUR_PROJECT_URL";
+const SUPABASE_ANON_KEY = "YOUR_ANON_KEY";
 ```
 
 ### 3. Set Up Database
@@ -103,43 +105,49 @@ const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY';
 ## 📱 Pages Overview
 
 ### Homepage (`index.html`)
-- Hero section with sports equipment showcase
-- Features highlighting TRANEX Sports benefits
-- Equipment showcase grid
-- About preview section
-- Call-to-action for consultation
+
+-   Hero section with sports equipment showcase
+-   Features highlighting TRANEX Sports benefits
+-   Equipment showcase grid
+-   About preview section
+-   Call-to-action for consultation
 
 ### Product Details (`product-details.html`)
-- Image gallery with thumbnails
-- Product information and pricing
-- Configuration options (resistance, color)
-- Detailed specifications
-- Customer reviews
-- Related products
+
+-   Image gallery with thumbnails
+-   Product information and pricing
+-   Configuration options (resistance, color)
+-   Detailed specifications
+-   Customer reviews
+-   Related products
 
 ### Store (`store.html`)
-- Product catalog with filtering
-- Category-based organization
-- Search functionality
-- Shopping cart integration
+
+-   Product catalog with filtering
+-   Category-based organization
+-   Search functionality
+-   Shopping cart integration
 
 ### About (`about.html`)
-- Company story and mission
-- Team information
-- Values and principles
-- Company achievements
+
+-   Company story and mission
+-   Team information
+-   Values and principles
+-   Company achievements
 
 ### Contact (`contact.html`)
-- Contact form with validation
-- Company information
-- Location details
-- FAQ section
+
+-   Contact form with validation
+-   Company information
+-   Location details
+-   FAQ section
 
 ### Services (`services.html`)
-- Service offerings overview
-- Process explanation
-- Technology solutions
-- Consultation booking
+
+-   Service offerings overview
+-   Process explanation
+-   Technology solutions
+-   Consultation booking
 
 ## 🎨 Customization
 
@@ -149,13 +157,13 @@ The website uses CSS custom properties for easy theming:
 
 ```css
 :root {
-  --primary: #3b82f6;      /* Primary brand color */
-  --accent: #8b5cf6;       /* Accent color */
-  --text: #1f2937;         /* Main text color */
-  --muted: #6b7280;        /* Muted text color */
-  --bg: #ffffff;           /* Background color */
-  --surface: #f9fafb;      /* Surface color */
-  --border: #e5e7eb;       /* Border color */
+	--primary: #3b82f6; /* Primary brand color */
+	--accent: #8b5cf6; /* Accent color */
+	--text: #1f2937; /* Main text color */
+	--muted: #6b7280; /* Muted text color */
+	--bg: #ffffff; /* Background color */
+	--surface: #f9fafb; /* Surface color */
+	--border: #e5e7eb; /* Border color */
 }
 ```
 
@@ -170,58 +178,60 @@ The website uses CSS custom properties for easy theming:
 
 The website supports English and Arabic:
 
-- Use `data-en` and `data-ar` attributes for translatable content
-- JavaScript automatically switches between languages
-- RTL support for Arabic text
+-   Use `data-en` and `data-ar` attributes for translatable content
+-   JavaScript automatically switches between languages
+-   RTL support for Arabic text
 
 ## 🔒 Security Features
 
-- **Row Level Security (RLS)**: Database-level access control
-- **Input Validation**: Client and server-side validation
-- **XSS Protection**: Sanitized user inputs
-- **CSRF Protection**: Secure form submissions
-- **Authentication**: Supabase Auth integration
+-   **Row Level Security (RLS)**: Database-level access control
+-   **Input Validation**: Client and server-side validation
+-   **XSS Protection**: Sanitized user inputs
+-   **CSRF Protection**: Secure form submissions
+-   **Authentication**: Supabase Auth integration
 
 ## 📊 Performance Features
 
-- **Lazy Loading**: Images load as needed
-- **Optimized Assets**: Compressed images and minified CSS/JS
-- **Caching**: Local storage for cart and preferences
-- **Responsive Images**: Different sizes for different devices
-- **Code Splitting**: Modular JavaScript architecture
+-   **Lazy Loading**: Images load as needed
+-   **Optimized Assets**: Compressed images and minified CSS/JS
+-   **Caching**: Local storage for cart and preferences
+-   **Responsive Images**: Different sizes for different devices
+-   **Code Splitting**: Modular JavaScript architecture
 
 ## 🧪 Testing
 
 ### Browser Compatibility
 
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
+-   Chrome 90+
+-   Firefox 88+
+-   Safari 14+
+-   Edge 90+
 
 ### Device Testing
 
-- Desktop (1920x1080, 1366x768)
-- Tablet (768x1024, 1024x768)
-- Mobile (375x667, 414x896)
+-   Desktop (1920x1080, 1366x768)
+-   Tablet (768x1024, 1024x768)
+-   Mobile (375x667, 414x896)
 
 ## 🚀 Deployment
 
 ### Static Hosting
 
 1. **Netlify**:
-   - Connect your Git repository
-   - Build command: `none` (static site)
-   - Publish directory: `.`
+
+    - Connect your Git repository
+    - Build command: `none` (static site)
+    - Publish directory: `.`
 
 2. **Vercel**:
-   - Import your Git repository
-   - Framework preset: `Other`
-   - Build command: `none`
+
+    - Import your Git repository
+    - Framework preset: `Other`
+    - Build command: `none`
 
 3. **GitHub Pages**:
-   - Enable GitHub Pages in repository settings
-   - Source: `main` branch
+    - Enable GitHub Pages in repository settings
+    - Source: `main` branch
 
 ### Environment Variables
 
@@ -234,10 +244,10 @@ SUPABASE_ANON_KEY=your_supabase_anon_key
 
 ## 📈 Analytics and Monitoring
 
-- **Google Analytics**: Track user behavior
-- **Supabase Analytics**: Monitor database performance
-- **Error Tracking**: Console error logging
-- **Performance Monitoring**: Core Web Vitals tracking
+-   **Google Analytics**: Track user behavior
+-   **Supabase Analytics**: Monitor database performance
+-   **Error Tracking**: Console error logging
+-   **Performance Monitoring**: Core Web Vitals tracking
 
 ## 🤝 Contributing
 
@@ -255,25 +265,25 @@ This project is proprietary to TRANEX Sports. All rights reserved.
 
 For technical support or questions:
 
-- **Email**: tech@tranex.com
-- **Documentation**: [docs.tranex.com](https://docs.tranex.com)
-- **Issues**: Create an issue in this repository
+-   **Email**: tech@tranex.com
+-   **Documentation**: [docs.tranex.com](https://docs.tranex.com)
+-   **Issues**: Create an issue in this repository
 
 ## 🔄 Updates and Maintenance
 
 ### Regular Tasks
 
-- **Weekly**: Check for broken links and images
-- **Monthly**: Update product information and pricing
-- **Quarterly**: Review and update content
-- **Annually**: Major design and feature updates
+-   **Weekly**: Check for broken links and images
+-   **Monthly**: Update product information and pricing
+-   **Quarterly**: Review and update content
+-   **Annually**: Major design and feature updates
 
 ### Monitoring
 
-- **Uptime**: 99.9% target
-- **Performance**: Core Web Vitals > 90
-- **Security**: Regular dependency updates
-- **Backup**: Daily database backups
+-   **Uptime**: 99.9% target
+-   **Performance**: Core Web Vitals > 90
+-   **Security**: Regular dependency updates
+-   **Backup**: Daily database backups
 
 ---
 
