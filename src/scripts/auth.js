@@ -1,3 +1,5 @@
+import { supabaseService } from "./SupabaseService.js";
+
 /**
  * Authentication functionality for TRANEX website
  * Handles user authentication flows and UI interactions with real-time validation
@@ -190,21 +192,49 @@ class FormValidator {
         const password = formData.get('password');
 
         try {
-            // Here you would typically make an API call to your authentication endpoint
-            // For demo purposes, we'll use localStorage
-            localStorage.setItem('tranex-auth-token', 'demo-token');
-            localStorage.setItem('tranex-user-email', email);
+            const { data, error } = await supabaseService.client.auth.signInWithPassword({
+                email,
+                password
+            });
 
-            // Update auth state in the header
+            if (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Login Failed',
+                    text: error.message,
+                    confirmButtonColor: '#0066cc'
+                });
+                return;
+            }
+
+            // Save session info
+            localStorage.setItem('tranex-auth-token', data.session.access_token);
+            localStorage.setItem('tranex-user-email', data.user.email);
+
             if (typeof checkAuthState === 'function') {
                 checkAuthState();
             }
 
-            // Redirect back to the previous page or home
-            const redirect = new URLSearchParams(window.location.search).get('redirect');
-            window.location.href = redirect || this.redirectPage;
+            Swal.fire({
+                icon: 'success',
+                title: 'Welcome Back!',
+                text: 'Login successful!',
+                confirmButtonColor: '#0066cc'
+            });
+
+            // Redirect after short delay
+            setTimeout(() => {
+                const redirect = new URLSearchParams(window.location.search).get('redirect');
+                window.location.href = redirect || this.redirectPage;
+            }, 1500);
         } catch (error) {
             console.error('Login failed:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Login Failed',
+                text: 'An unexpected error occurred.',
+                confirmButtonColor: '#0066cc'
+            });
         }
     }
 
@@ -218,21 +248,50 @@ class FormValidator {
         const username = formData.get('username');
 
         try {
-            // Here you would typically make an API call to your registration endpoint
-            // For demo purposes, we'll use localStorage
-            localStorage.setItem('tranex-auth-token', 'demo-token');
+            const { data, error } = await supabaseService.client.auth.signUp({
+                email,
+                password,
+                options: {
+                    data: { username }
+                }
+            });
+
+            if (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Registration Failed',
+                    text: error.message,
+                    confirmButtonColor: '#0066cc'
+                });
+                return;
+            }
+
             localStorage.setItem('tranex-user-email', email);
             localStorage.setItem('tranex-username', username);
 
-            // Update auth state in the header
             if (typeof checkAuthState === 'function') {
                 checkAuthState();
             }
 
+            Swal.fire({
+                icon: 'success',
+                title: 'Registration Successful',
+                text: 'Please check your email to confirm your account.',
+                confirmButtonColor: '#0066cc'
+            });
+
             // Redirect to home page
-            window.location.href = this.redirectPage;
+            setTimeout(() => {
+                window.location.href = this.redirectPage;
+            }, 2000);
         } catch (error) {
             console.error('Registration failed:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Registration Failed',
+                text: 'An unexpected error occurred.',
+                confirmButtonColor: '#0066cc'
+            });
         }
     }
 }
@@ -253,5 +312,4 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'index.html';
         });
     }
-
 });

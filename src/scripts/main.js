@@ -6,6 +6,8 @@
 // ==========================================================================
 // Theme Management
 // ==========================================================================
+import { supabaseService } from "./SupabaseService.js";
+
 
 function initializeTheme() {
   const savedTheme = localStorage.getItem('tranex-theme');
