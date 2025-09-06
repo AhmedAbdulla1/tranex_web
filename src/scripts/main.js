@@ -242,32 +242,6 @@ class Cart {
   }
 }
 
-
-// Authentication Functions
-function handleAuthState() {
-  const authData = localStorage.getItem('tranex_auth');
-  const loginBtn = document.querySelector('.login-btn');
-  const registerBtn = document.querySelector('.register-btn');
-  const userNameBtn = document.querySelector('.user-name-btn');
-  const signOutBtn = document.querySelector('.sign-out-btn');
-
-  if (authData) {
-    const user = JSON.parse(authData);
-    if (loginBtn) loginBtn.style.display = 'none';
-    if (registerBtn) registerBtn.style.display = 'none';
-    if (userNameBtn) {
-      userNameBtn.style.display = 'block';
-      userNameBtn.textContent = user.name;
-    }
-    if (signOutBtn) signOutBtn.style.display = 'block';
-  } else {
-    if (loginBtn) loginBtn.style.display = 'block';
-    if (registerBtn) registerBtn.style.display = 'block';
-    if (userNameBtn) userNameBtn.style.display = 'none';
-    if (signOutBtn) signOutBtn.style.display = 'none';
-  }
-}
-
 function handleSignOut() {
   localStorage.removeItem('tranex_auth');
   handleAuthState();
