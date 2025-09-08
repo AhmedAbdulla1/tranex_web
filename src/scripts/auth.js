@@ -206,8 +206,9 @@ class FormValidator {
 
             // Save session info
             console.log(success, error, user, session)
-            // localStorage.setItem('tranex-auth-token', data.session.access_token);
-            // localStorage.setItem('tranex-user-email', data.user.email);
+            localStorage.setItem('tranex-username', user.user_metadata.full_name);
+            localStorage.setItem('tranex-user-email', user.email);
+            localStorage.setItem('tranex-auth-token', session.access_token);
 
             if (typeof checkAuthState === 'function') {
                 checkAuthState();
@@ -221,10 +222,10 @@ class FormValidator {
             });
 
             // Redirect after short delay
-            // setTimeout(() => {
-            //     const redirect = new URLSearchParams(window.location.search).get('redirect');
-            //     window.location.href = redirect || this.redirectPage;
-            // }, 2500);
+            setTimeout(() => {
+                const redirect = new URLSearchParams(window.location.search).get('redirect');
+                window.location.href = redirect || this.redirectPage;
+            }, 2500);
         } catch (error) {
             console.error('Login failed:', error);
             Swal.fire({
