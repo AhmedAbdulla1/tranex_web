@@ -31,15 +31,15 @@ class SupabaseService {
    * 2. REGISTER
    * @param {string} email
    * @param {string} password
-   * @param {string} username
+   * @param {string} full_name
    */
-  async register(email, password, username) {
+  async register(email, password, full_name) {
     const { data, error } = await this.client.auth.signUp({
       email,
       password,
       options: {
         data: {
-          username: username, // Save extra data in user_metadata
+          full_name: full_name, // Save extra data in user_metadata
         },
       },
     });
