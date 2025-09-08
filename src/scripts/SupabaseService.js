@@ -1,6 +1,4 @@
-// src/js/SupabaseService.js
-import { createClient } from "@supabase/supabase-js";
-
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 class SupabaseService {
   constructor() {
     // Initialize Supabase client once
