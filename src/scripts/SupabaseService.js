@@ -73,7 +73,21 @@ class SupabaseService {
   }
 
   /**
-   * 4. FETCH PRODUCT
+ * 4. SIGN OUT
+ * Logs the user out
+ */
+  async signOut() {
+    const { error } = await this.client.auth.signOut();
+    if (error) {
+      console.error("Sign out failed:", error.message);
+      return { success: false, error: error.message };
+    }
+    console.log("Sign out successful");
+    return { success: true };
+  }
+
+  /**
+   * 5. FETCH PRODUCT
    * Fetch product details by ID
    * @param {number} productId
    */

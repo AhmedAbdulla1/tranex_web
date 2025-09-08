@@ -336,10 +336,19 @@ function updateAuthButtons(isAuthenticated) {
   });
 }
 
-function handleSignOut() {
+// In src/scripts/main.js
+
+async function handleSignOut() { // Make this function async
+  await supabaseService.signOut(); // Call the service
+
+  // Clear all local storage items
   localStorage.removeItem('tranex-username');
   localStorage.removeItem('tranex-user-email');
   localStorage.removeItem('tranex-auth-token');
+
+  // Also clear the session storage flag
+  sessionStorage.removeItem('signOutOnClose');
+
   checkAuthState(); // Re-run auth check to update UI
 
   // Redirect to home page
@@ -800,6 +809,13 @@ function updateActiveNavigation() {
 
 function initializeApp() {
   console.log('App Initialized V3.4');
+
+  window.addEventListener('beforeunload', () => {
+    if (sessionStorage.getItem('signOutOnClose') === 'true') {
+      // This calls the correct, centralized signOut function
+      supabaseService.signOut();
+    }
+  });
 
   // Add animation styles
   addAnimationStyles();

@@ -190,6 +190,7 @@ class FormValidator {
         const formData = new FormData(e.target);
         const email = formData.get('email');
         const password = formData.get('password');
+        const rememberMe = formData.get('remember') === 'on';
 
         try {
             const { success, error, user, session } = await supabaseService.login(email, password);
@@ -202,6 +203,13 @@ class FormValidator {
                     confirmButtonColor: '#0066cc'
                 });
                 return;
+            }
+            if (!rememberMe) {
+                // If "Remember me" is NOT checked, set a flag to sign out on browser close.
+                sessionStorage.setItem('signOutOnClose', 'true');
+            } else {
+                // If it IS checked, ensure the flag is removed.
+                sessionStorage.removeItem('signOutOnClose');
             }
 
             // Save session info
@@ -295,14 +303,4 @@ document.addEventListener('DOMContentLoaded', () => {
         window.formValidatorInstance = new FormValidator();
     }
 
-    // Add sign out functionality
-    const signOutBtn = document.querySelector('.sign-out-btn');
-    if (signOutBtn) {
-        signOutBtn.addEventListener('click', () => {
-            localStorage.removeItem('tranex-auth-token');
-            localStorage.removeItem('tranex-user-email');
-            localStorage.removeItem('tranex-username');
-            window.location.href = 'index.html';
-        });
-    }
 });
