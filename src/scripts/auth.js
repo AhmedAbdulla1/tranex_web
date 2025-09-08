@@ -250,6 +250,7 @@ class FormValidator {
         const email = formData.get('email');
         const password = formData.get('password');
         const username = formData.get('username');
+        console.log('Registering user:', { email, password, username })
 
         try {
             const { data, error } = await supabaseService.client.auth.signUp({
