@@ -281,20 +281,23 @@ function closeMobileMenuOnResize() {
   }
 }
 
+// TODO
 function handleAuthState() {
-  const userData = JSON.parse(localStorage.getItem('user_data'));
-  const isAuthenticated = !!userData;
+  const userToken = JSON.parse(localStorage.getItem('tranex-auth-token'));
+  const userName = JSON.parse(localStorage.getItem('tranex-username'));
+  console.log(userName);
+  const isAuthenticated = !!userToken;
 
   const loginBtn = document.querySelector('.login-btn');
   const registerBtn = document.querySelector('.register-btn');
   const userNameBtn = document.querySelector('.user-name-btn');
   const signOutBtn = document.querySelector('.signout-btn');
 
-  if (isAuthenticated && userData.name) {
+  if (isAuthenticated && userName) {
     if (loginBtn) loginBtn.classList.add('hidden');
     if (registerBtn) registerBtn.classList.add('hidden');
     if (userNameBtn) {
-      userNameBtn.textContent = userData.name;
+      userNameBtn.textContent = userName;
       userNameBtn.classList.remove('hidden');
     }
     if (signOutBtn) signOutBtn.classList.remove('hidden');
