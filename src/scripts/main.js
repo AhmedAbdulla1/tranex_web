@@ -19,7 +19,7 @@ function initializeTheme() {
 }
 
 function toggleTheme() {
-  console.log('Toggle Theme V2.0');
+  console.log('Toggle Theme V3.0');
   const currentTheme = document.documentElement.getAttribute('data-theme');
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
@@ -243,7 +243,7 @@ class Cart {
 const cart = new Cart();
 
 function toggleMobileMenu() {
-  console.log('Toggle Mobile Menu V2.0')
+  console.log('Toggle Mobile Menu V3.0')
   const toggle = document.querySelector('.mobile-menu-toggle');
   const menu = document.querySelector('.mobile-nav');
   const body = document.body;
