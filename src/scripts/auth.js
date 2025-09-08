@@ -56,9 +56,8 @@ class FormValidator {
         this.currentPage = window.location.pathname.split("/").pop();
 
         const urlParams = new URLSearchParams(window.location.search);
-        const redirectParam = urlParams.get('redirect');
 
-        this.redirectPage = redirectParam || (this.excludedPages.includes(this.redirectPage)
+        this.redirectPage = (this.excludedPages.includes(this.currentPage)
             ? 'index.html'
             : document.referrer || 'index.html');
 
@@ -70,7 +69,6 @@ class FormValidator {
     initializeForms() {
         const loginForm = document.getElementById('login-form');
         const registerForm = document.getElementById('register-form');
-        console.log('Initializing forms:', loginForm, registerForm);
 
         if (loginForm) {
             this.setupFormValidation(loginForm);
@@ -86,7 +84,6 @@ class FormValidator {
     setupFormValidation(form) {
         const inputs = form.querySelectorAll('input');
         inputs.forEach(input => {
-            console.log('Validating input:', input.name);
             input.classList.remove('invalid')
             input.addEventListener('input', () => this.validateInput(input));
             input.addEventListener('blur', () => this.validateInput(input));
@@ -196,10 +193,7 @@ class FormValidator {
         const password = formData.get('password');
 
         try {
-            const { data, error } = await supabaseService.client.auth.signInWithPassword({
-                email,
-                password
-            });
+            const { data, error } = await supabaseService.login(email, password);
 
             if (error) {
                 Swal.fire({
@@ -281,7 +275,7 @@ class FormValidator {
 
             // Redirect to home page
             setTimeout(() => {
-                // window.location.href = this.redirectPage;
+                window.location.href = this.redirectPage;
             }, 2000);
         } catch (error) {
             console.error('Registration failed:', error);
