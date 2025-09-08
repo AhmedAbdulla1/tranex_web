@@ -192,7 +192,7 @@ class FormValidator {
         const password = formData.get('password');
 
         try {
-            const { data, error } = await supabaseService.login(email, password);
+            const { success, error, user, session } = await supabaseService.login(email, password);
 
             if (error) {
                 Swal.fire({
@@ -205,9 +205,9 @@ class FormValidator {
             }
 
             // Save session info
-            console.log(data)
-            localStorage.setItem('tranex-auth-token', data.session.access_token);
-            localStorage.setItem('tranex-user-email', data.user.email);
+            console.log(success, error, user, session)
+            // localStorage.setItem('tranex-auth-token', data.session.access_token);
+            // localStorage.setItem('tranex-user-email', data.user.email);
 
             if (typeof checkAuthState === 'function') {
                 checkAuthState();
