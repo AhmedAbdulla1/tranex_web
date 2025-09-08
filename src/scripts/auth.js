@@ -103,7 +103,11 @@ class FormValidator {
         input.classList.remove('invalid');
         const messageElement = input.parentElement.querySelector('.validation-message') ||
             input.parentElement.parentElement.querySelector('.validation-message');
-        messageElement.textContent = '';
+
+        // Add this safety check
+        if (messageElement) {
+            messageElement.textContent = '';
+        }
 
         // Required field validation
         if (!value && input.hasAttribute('required')) {
