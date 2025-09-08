@@ -102,8 +102,13 @@
 /* Auth Buttons Styles */
 .auth-actions {
 	display: flex;
+	gap: 0.5rem;
 	align-items: center;
 	margin-right: var(--space-4);
+}
+
+.user-name-btn {
+	display: none;
 }
 
 [dir="rtl"] .auth-actions {
