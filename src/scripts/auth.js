@@ -205,6 +205,7 @@ class FormValidator {
             }
 
             // Save session info
+            console.log(data)
             localStorage.setItem('tranex-auth-token', data.session.access_token);
             localStorage.setItem('tranex-user-email', data.user.email);
 
