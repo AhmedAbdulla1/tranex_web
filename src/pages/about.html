@@ -224,56 +224,33 @@
 
 		<!-- Main Script -->
 		<script type="module">
-			import componentLoader from "./src/utils/component-loader.js";
+    import componentLoader from "./src/utils/component-loader.js";
+    // Import the new initializeApp function from main.js
+    import { initializeApp } from "./src/scripts/main.js";
 
-			document.addEventListener("DOMContentLoaded", async () => {
-				try {
-					const currentLang =
-						document.documentElement.getAttribute("lang") || "en";
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            const currentLang = document.documentElement.getAttribute("lang") || "en";
 
-					// Wait for components to load first
-					await componentLoader.initializeComponents(
-						{
-							"./src/components/header.html": "#header-container",
-							"./src/components/footer.html": "#footer-container",
-						},
-						{ language: currentLang }
-					);
+            // Wait for components to load first
+            await componentLoader.initializeComponents(
+                {
+                    "./src/components/header.html": "#header-container",
+                    "./src/components/footer.html": "#footer-container",
+                },
+                { language: currentLang }
+            );
 
-					// Now initialize functionality AFTER components are loaded
-					initializeTheme();
-					initializeMobileMenu();
-					//initializeAuthState();
-					// Note: The theme/lang toggles will be handled by main.js,
-					// but the mobile menu needs this special handling because of the dynamic load.
+            // Now that header and footer are loaded, run the main initialization logic
+            initializeApp();
 
-					console.log("Components loaded successfully");
-				} catch (error) {
-					console.error("Error loading components:", error);
-				}
-			});
+            console.log("Components and functionality loaded successfully");
 
-			function initializeTheme() {
-				const themeToggle = document.querySelector(".theme-toggle");
-				if (themeToggle) {
-					themeToggle.addEventListener("click", toggleTheme);
-				}
-				// Other mobile menu initialization code...
-			}
-
-			// ✨ ADD THIS FUNCTION
-			function initializeMobileMenu() {
-				const mobileMenuToggle = document.querySelector(
-					".mobile-menu-toggle"
-				);
-				if (mobileMenuToggle) {
-					mobileMenuToggle.addEventListener(
-						"click",
-						toggleMobileMenu
-					);
-				}
-			}
-		</script>
+        } catch (error) {
+            console.error("Error during initialization:", error);
+        }
+    });
+</script>
 
 		<script type="module" src="src/scripts/main.js"></script>
 	</body>

@@ -182,17 +182,14 @@ function updateLanguageSwitcher() {
   }
 }
 
-// ثبت الليسنر مرة واحدة بس عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('theme toggle issue v2.0')
-  const langButton = document.querySelector('.lang-btn');
-  if (langButton) {
-    langButton.addEventListener('click', () => {
-      const newLang = getCurrentLanguage() === 'ar' ? 'en' : 'ar';
-      switchLanguage(newLang);
-    });
-  }
-});
+function initializeLanguage() {
+  const savedLang = localStorage.getItem('tranex-language') || 'en';
+  document.documentElement.setAttribute('lang', savedLang);
+  document.documentElement.setAttribute('dir', savedLang === 'ar' ? 'rtl' : 'ltr');
+  updateLanguageSwitcher();
+  updatePageContent(savedLang);
+}
+
 
 // ==========================================================================
 // Mobile Menu Management
@@ -242,51 +239,8 @@ class Cart {
   }
 }
 
-function handleSignOut() {
-  localStorage.removeItem('tranex_auth');
-  handleAuthState();
-  window.location.href = '/';
-}
-
 // Initialize cart and auth state
 const cart = new Cart();
-
-// Initialize event listeners
-document.addEventListener('DOMContentLoaded', () => {
-  // Initialize theme
-  initializeTheme();
-
-  // Initialize language
-  updateLanguageSwitcher();
-
-  // Initialize auth state
-  handleAuthState();
-
-  // Mobile menu event listeners
-  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-  if (mobileMenuToggle) {
-    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
-  }
-
-  // Close mobile menu on outside click
-  document.addEventListener('click', (e) => {
-    const menu = document.querySelector('.mobile-nav');
-    const toggle = document.querySelector('.mobile-menu-toggle');
-
-    if (e.target.closest('.mobile-nav') || e.target.closest('.mobile-menu-toggle')) return;
-
-
-    if (menu && toggle) {
-      menu.setAttribute('aria-hidden', 'true');
-      toggle.setAttribute('aria-expanded', 'false');
-      toggle.classList.remove('is-active');
-      document.body.style.overflow = '';
-    }
-  });
-
-  // Handle window resize
-  window.addEventListener('resize', closeMobileMenuOnResize);
-});
 
 function toggleMobileMenu() {
   console.log('Toggle Mobile Menu V2.0')
@@ -352,13 +306,6 @@ function handleAuthState() {
   }
 }
 
-function handleSignOut() {
-  localStorage.removeItem('user_data');
-  handleAuthState();
-  window.location.href = '/index.html';
-}
-
-
 // ==========================================================================
 // Authentication Management
 // ==========================================================================
@@ -366,6 +313,7 @@ function handleSignOut() {
 function checkAuthState() {
   const isAuthenticated = localStorage.getItem('tranex-auth-token');
   updateAuthButtons(!!isAuthenticated);
+  handleAuthState(); // Also run the other auth handler
 }
 
 function updateAuthButtons(isAuthenticated) {
@@ -389,25 +337,13 @@ function updateAuthButtons(isAuthenticated) {
 }
 
 function handleSignOut() {
+  localStorage.removeItem('user_data');
   localStorage.removeItem('tranex-auth-token');
-  updateAuthButtons(false);
+  checkAuthState(); // Re-run auth check to update UI
 
-  // Redirect to home page if on a protected route
-  const protectedRoutes = ['/src/pages/cart.html', '/src/pages/profile.html'];
-  if (protectedRoutes.some(route => window.location.pathname.includes(route))) {
-    window.location.href = '/';
-  }
+  // Redirect to home page
+  window.location.href = '/index.html';
 }
-
-// Initialize mobile menu and auth state
-document.addEventListener('DOMContentLoaded', () => {
-
-  // Close mobile menu on resize
-  window.addEventListener('resize', closeMobileMenuOnResize);
-
-  // Initialize auth state
-  checkAuthState();
-});
 
 // ==========================================================================
 // Store Functionality
@@ -570,11 +506,9 @@ function initializeStore() {
   if (searchInput) {
     searchInput.addEventListener('input', debounce(filterProducts, 300));
   }
-
   if (categoryFilter) {
     categoryFilter.addEventListener('change', filterProducts);
   }
-
   if (priceFilter) {
     priceFilter.addEventListener('change', filterProducts);
   }
@@ -615,13 +549,11 @@ function validateForm(form) {
 function showFieldError(input, message) {
   input.classList.add('error');
   let errorElement = input.parentNode.querySelector('.form-error');
-
   if (!errorElement) {
     errorElement = document.createElement('div');
     errorElement.className = 'form-error';
     input.parentNode.appendChild(errorElement);
   }
-
   errorElement.textContent = message;
 }
 
@@ -645,11 +577,8 @@ function isValidPhone(phone) {
 
 function handleFormSubmit(event) {
   event.preventDefault();
-
   const form = event.target;
-
   if (validateForm(form)) {
-    // Show success message
     showAlert('success', 'Thank you! Your message has been sent successfully.');
     form.reset();
   }
@@ -677,8 +606,6 @@ function showAlert(type, message) {
       ${message}
     </div>
   `;
-
-  // Find a suitable container or create one
   let container = document.querySelector('.alerts-container');
   if (!container) {
     container = document.createElement('div');
@@ -692,10 +619,7 @@ function showAlert(type, message) {
     `;
     document.body.appendChild(container);
   }
-
   container.innerHTML = alertHTML;
-
-  // Auto-remove after 5 seconds
   setTimeout(() => {
     container.innerHTML = '';
   }, 5000);
@@ -710,15 +634,10 @@ function updateCartBadge(count = 0) {
 }
 
 function addToCart(productId) {
-  // Placeholder function for cart functionality
   const currentCount = parseInt(document.querySelector('.cart-badge').textContent) || 0;
   updateCartBadge(currentCount + 1);
-
   const currentLang = getCurrentLanguage();
-  const message = currentLang === 'ar' ?
-    'تم إضافة المنتج إلى السلة' :
-    'Product added to cart';
-
+  const message = currentLang === 'ar' ? 'تم إضافة المنتج إلى السلة' : 'Product added to cart';
   showAlert('success', message);
 }
 
@@ -729,11 +648,20 @@ function addToCart(productId) {
 function smoothScrollToSection(targetId) {
   const target = document.getElementById(targetId);
   if (target) {
-    target.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+}
+
+function addSmoothScrollBehavior() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
 }
 
 // ==========================================================================
@@ -741,40 +669,25 @@ function smoothScrollToSection(targetId) {
 // ==========================================================================
 
 function initializeAnimations() {
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-
+  const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const element = entry.target;
         const animationType = element.dataset.animation || 'slideInUp';
-
-        // Add animation class
-        element.classList.add(`animate--${animationType}`);
-        element.classList.add('animate--visible');
-
-        // Remove observer after animation
+        element.classList.add(`animate--${animationType}`, 'animate--visible');
         observer.unobserve(element);
       }
     });
   }, observerOptions);
 
-  // Observe elements that should animate in
   const animateElements = document.querySelectorAll(
     '.feature-card, .product-card, .testimonial-card, .about-preview__text, .about-preview__image, .hero__content, .hero__image'
   );
 
   animateElements.forEach((el, index) => {
-    // Set initial state
     el.classList.add('animate--initial');
-
-    // Add animation delay for staggered effect
     el.style.animationDelay = `${index * 0.1}s`;
-
-    // Set animation type
     if (el.classList.contains('hero__content')) {
       el.dataset.animation = 'slideInLeft';
     } else if (el.classList.contains('hero__image')) {
@@ -782,52 +695,28 @@ function initializeAnimations() {
     } else {
       el.dataset.animation = 'slideInUp';
     }
-
     observer.observe(el);
   });
 
-  // Initialize floating animations for tech elements
   initializeFloatingAnimations();
 }
 
 function initializeFloatingAnimations() {
   const techElements = document.querySelectorAll('.tech-item, .tech-circle, .equipment-item, .equipment-circle');
-
   techElements.forEach((el, index) => {
     el.style.animationDelay = `${index * 0.2}s`;
   });
 }
 
-// Add CSS classes for animations
 function addAnimationStyles() {
   const style = document.createElement('style');
   style.textContent = `
-    .animate--initial {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .animate--visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .animate--slideInLeft {
-      transform: translateX(-30px);
-    }
-    
-    .animate--slideInRight {
-      transform: translateX(30px);
-    }
-    
-    .animate--slideInUp {
-      transform: translateY(30px);
-    }
-    
-    .animate--fadeIn {
-      opacity: 0;
-    }
+    .animate--initial { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+    .animate--visible { opacity: 1; transform: translateY(0); }
+    .animate--slideInLeft { transform: translateX(-30px); }
+    .animate--slideInRight { transform: translateX(30px); }
+    .animate--slideInUp { transform: translateY(30px); }
+    .animate--fadeIn { opacity: 0; }
   `;
   document.head.appendChild(style);
 }
@@ -838,7 +727,6 @@ function addAnimationStyles() {
 
 function initializeLazyLoading() {
   const images = document.querySelectorAll('img[loading="lazy"]');
-
   if ('IntersectionObserver' in window) {
     const imageObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
@@ -850,7 +738,6 @@ function initializeLazyLoading() {
         }
       });
     });
-
     images.forEach(img => {
       img.classList.add('lazy');
       imageObserver.observe(img);
@@ -870,7 +757,6 @@ function initializeContactPage() {
 }
 
 function initializeProductPage() {
-  // Image gallery functionality
   const thumbnails = document.querySelectorAll('.product-gallery__thumbnail');
   const mainImage = document.querySelector('.product-gallery__main img');
 
@@ -881,14 +767,11 @@ function initializeProductPage() {
         mainImage.src = thumb.href;
         mainImage.alt = thumb.querySelector('img').alt;
       }
-
-      // Update active thumbnail
       thumbnails.forEach(t => t.classList.remove('active'));
       thumb.classList.add('active');
     });
   });
 
-  // Add to cart button
   const addToCartBtn = document.querySelector('.add-to-cart-btn');
   if (addToCartBtn) {
     addToCartBtn.addEventListener('click', () => {
@@ -898,11 +781,25 @@ function initializeProductPage() {
   }
 }
 
+function updateActiveNavigation() {
+  const currentPath = window.location.pathname;
+  const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    const href = link.getAttribute('href');
+    if (href === currentPath || (currentPath === '/' && href === '/') || (currentPath.includes('ar') && href.includes('ar'))) {
+      link.classList.add('active');
+    }
+  });
+}
+
 // ==========================================================================
-// Main Initialization
+// Main Initialization - The Single Entry Point
 // ==========================================================================
 
-document.addEventListener('DOMContentLoaded', function () {
+function initializeApp() {
+  console.log('App Initialized V3.0');
+
   // Add animation styles
   addAnimationStyles();
 
@@ -911,91 +808,74 @@ document.addEventListener('DOMContentLoaded', function () {
   initializeLanguage();
   initializeAnimations();
   initializeLazyLoading();
+  checkAuthState();
 
   // Page-specific initialization
   const pathname = window.location.pathname;
-
   if (pathname.includes('store.html')) {
     initializeStore();
   }
-
   if (pathname.includes('contact.html')) {
     initializeContactPage();
   }
-
   if (pathname.includes('product-')) {
     initializeProductPage();
   }
 
-  // Set up global event listeners
+  // Set up global event listeners now that the DOM is ready
+  const themeToggleBtn = document.querySelector('.theme-toggle');
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', toggleTheme);
+  }
+
+  const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+  if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+  }
+
+  const langButton = document.querySelector('.lang-btn');
+  if (langButton) {
+    langButton.addEventListener('click', () => {
+      const newLang = getCurrentLanguage() === 'ar' ? 'en' : 'ar';
+      switchLanguage(newLang);
+    });
+  }
+
+  // Close mobile menu on outside click
+  document.addEventListener('click', (e) => {
+    const menu = document.querySelector('.mobile-nav');
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    if (menu.getAttribute('aria-hidden') === 'true') return;
+    if (!e.target.closest('.mobile-nav') && !e.target.closest('.mobile-menu-toggle')) {
+      toggleMobileMenu();
+    }
+  });
+
   window.addEventListener('resize', debounce(closeMobileMenuOnResize, 250));
 
   // Handle system theme changes
-  window.matchMedia('(prefers-color-scheme: dark)')
-    .addEventListener('change', (e) => {
-      if (!localStorage.getItem('tranex-theme')) {
-        const newTheme = e.matches ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        updateThemeIcon(newTheme);
-      }
-    });
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('tranex-theme')) {
+      const newTheme = e.matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      updateThemeIcon(newTheme);
+    }
+  });
 
   // Handle navigation active states
   updateActiveNavigation();
 
   // Add smooth scroll behavior
   addSmoothScrollBehavior();
-});
-
-function initializeLanguage() {
-  const savedLang = localStorage.getItem('tranex-language') || 'en';
-  document.documentElement.setAttribute('lang', savedLang);
-  document.documentElement.setAttribute('dir', savedLang === 'ar' ? 'rtl' : 'ltr');
-  updateLanguageSwitcher();
-  updatePageContent(savedLang);
 }
 
-function addSmoothScrollBehavior() {
-  // Smooth scroll for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    });
-  });
-}
-
-function updateActiveNavigation() {
-  const currentPath = window.location.pathname;
-  const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
-
-  navLinks.forEach(link => {
-    link.classList.remove('active');
-    const href = link.getAttribute('href');
-
-    if (href === currentPath ||
-      (currentPath === '/' && href === '/') ||
-      (currentPath.includes('ar') && href.includes('ar'))) {
-      link.classList.add('active');
-    }
-  });
-}
-
-// Expose functions globally for onclick handlers
+// Expose functions globally for potential use in HTML (onclick), though event listeners are preferred
 window.toggleTheme = toggleTheme;
 window.switchLanguage = switchLanguage;
 window.toggleMobileMenu = toggleMobileMenu;
 window.addToCart = addToCart;
-window.smoothScrollToSection = smoothScrollToSection; window.handleSignOut = handleSignOut;
+window.smoothScrollToSection = smoothScrollToSection;
+window.handleSignOut = handleSignOut;
 
-// Theme toggle event listener
-const themeToggleBtn = document.querySelector('.theme-toggle');
-if (themeToggleBtn) {
-  themeToggleBtn.addEventListener('click', toggleTheme);
-}
+// Export the main initialization function
+export { initializeApp };

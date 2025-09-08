@@ -220,6 +220,8 @@
 		<!-- Main Script -->
 		<script type="module">
 			import componentLoader from "./src/utils/component-loader.js";
+			// Import the new initializeApp function from main.js
+			import { initializeApp } from "./src/scripts/main.js";
 
 			document.addEventListener("DOMContentLoaded", async () => {
 				try {
@@ -235,40 +237,16 @@
 						{ language: currentLang }
 					);
 
-					// Now initialize functionality AFTER components are loaded
-					initializeTheme();
-					initializeMobileMenu();
-					//initializeAuthState();
+					// Now that header and footer are loaded, run the main initialization logic
+					initializeApp();
 
-					// Note: The theme/lang toggles will be handled by main.js,
-					// but the mobile menu needs this special handling because of the dynamic load.
-
-					console.log("Components loaded successfully");
+					console.log(
+						"Components and functionality loaded successfully"
+					);
 				} catch (error) {
-					console.error("Error loading components:", error);
+					console.error("Error during initialization:", error);
 				}
 			});
-
-			function initializeTheme() {
-				const themeToggle = document.querySelector(".theme-toggle");
-				if (themeToggle) {
-					themeToggle.addEventListener("click", toggleTheme);
-				}
-				// Other mobile menu initialization code...
-			}
-
-			// ✨ ADD THIS FUNCTION
-			function initializeMobileMenu() {
-				const mobileMenuToggle = document.querySelector(
-					".mobile-menu-toggle"
-				);
-				if (mobileMenuToggle) {
-					mobileMenuToggle.addEventListener(
-						"click",
-						toggleMobileMenu
-					);
-				}
-			}
 		</script>
 
 		<script type="module" src="src/scripts/main.js"></script>
