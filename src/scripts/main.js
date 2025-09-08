@@ -6,7 +6,7 @@
 // ==========================================================================
 // Theme Management
 // ==========================================================================
-// import { supabaseService } from "./SupabaseService.js";
+import { supabaseService } from "./SupabaseService.js";
 
 
 function initializeTheme() {
@@ -19,7 +19,7 @@ function initializeTheme() {
 }
 
 function toggleTheme() {
-  console.log('Toggle Theme V3.2');
+  console.log('Toggle Theme V3.3');
   const currentTheme = document.documentElement.getAttribute('data-theme');
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
@@ -243,7 +243,7 @@ class Cart {
 const cart = new Cart();
 
 function toggleMobileMenu() {
-  console.log('Toggle Mobile Menu V3.2')
+  console.log('Toggle Mobile Menu V3.3')
   const toggle = document.querySelector('.mobile-menu-toggle');
   const menu = document.querySelector('.mobile-nav');
   const body = document.body;
@@ -798,7 +798,7 @@ function updateActiveNavigation() {
 // ==========================================================================
 
 function initializeApp() {
-  console.log('App Initialized V3.2');
+  console.log('App Initialized V3.3');
 
   // Add animation styles
   addAnimationStyles();
@@ -844,6 +844,7 @@ function initializeApp() {
   // Close mobile menu on outside click
   document.addEventListener('click', (e) => {
     const menu = document.querySelector('.mobile-nav');
+    if (!menu) return;
     const toggle = document.querySelector('.mobile-menu-toggle');
     if (menu.getAttribute('aria-hidden') === 'true') return;
     if (!e.target.closest('.mobile-nav') && !e.target.closest('.mobile-menu-toggle')) {
