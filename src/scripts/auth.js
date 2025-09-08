@@ -221,10 +221,10 @@ class FormValidator {
             });
 
             // Redirect after short delay
-            setTimeout(() => {
-                const redirect = new URLSearchParams(window.location.search).get('redirect');
-                window.location.href = redirect || this.redirectPage;
-            }, 1500);
+            // setTimeout(() => {
+            //     const redirect = new URLSearchParams(window.location.search).get('redirect');
+            //     window.location.href = redirect || this.redirectPage;
+            // }, 2500);
         } catch (error) {
             console.error('Login failed:', error);
             Swal.fire({
