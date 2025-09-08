@@ -287,7 +287,7 @@ class FormValidator {
 
             // Redirect to home page
             setTimeout(() => {
-                window.location.href = this.redirectPage;
+                // window.location.href = this.redirectPage;
             }, 2000);
         } catch (error) {
             console.error('Registration failed:', error);
