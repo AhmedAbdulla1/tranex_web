@@ -19,7 +19,6 @@ function initializeTheme() {
 }
 
 function toggleTheme() {
-  console.log('Toggle Theme V3.4');
   const currentTheme = document.documentElement.getAttribute('data-theme');
   const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
@@ -243,7 +242,6 @@ class Cart {
 const cart = new Cart();
 
 function toggleMobileMenu() {
-  console.log('Toggle Mobile Menu V3.4')
   const toggle = document.querySelector('.mobile-menu-toggle');
   const menu = document.querySelector('.mobile-nav');
   const body = document.body;
@@ -285,7 +283,6 @@ function closeMobileMenuOnResize() {
 function handleAuthState() {
   const userToken = localStorage.getItem('tranex-auth-token');
   const userName = localStorage.getItem('tranex-username');
-  console.log(userName);
   const isAuthenticated = !!userToken;
 
   const loginBtn = document.querySelector('.login-btn');

@@ -142,7 +142,6 @@ class FormValidator {
                 isValid = false;
             }
         });
-        console.log('Form validation result:', isValid)
         return isValid;
     }
 
@@ -244,7 +243,6 @@ class FormValidator {
         const email = formData.get('email');
         const password = formData.get('password');
         const full_name = formData.get('username');
-        console.log('Registering user:', { email, password, full_name })
 
         try {
             const { data, error } = await supabaseService.register(email, password, full_name);
