@@ -337,7 +337,8 @@ function updateAuthButtons(isAuthenticated) {
 }
 
 function handleSignOut() {
-  localStorage.removeItem('user_data');
+  localStorage.removeItem('tranex-username');
+  localStorage.removeItem('tranex-user-email');
   localStorage.removeItem('tranex-auth-token');
   checkAuthState(); // Re-run auth check to update UI
 
