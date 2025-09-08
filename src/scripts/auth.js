@@ -260,7 +260,7 @@ class FormValidator {
             }
 
             localStorage.setItem('tranex-user-email', email);
-            localStorage.setItem('tranex-username', username);
+            localStorage.setItem('tranex-username', full_name);
 
             if (typeof checkAuthState === 'function') {
                 checkAuthState();
