@@ -284,7 +284,7 @@ function closeMobileMenuOnResize() {
 // TODO
 function handleAuthState() {
   const userToken = localStorage.getItem('tranex-auth-token');
-  const userName = JSON.parse(localStorage.getItem('tranex-username'));
+  const userName = localStorage.getItem('tranex-username');
   console.log(userName);
   const isAuthenticated = !!userToken;
 
