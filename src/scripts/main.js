@@ -6,7 +6,7 @@
 // ==========================================================================
 // Theme Management
 // ==========================================================================
-import { supabaseService } from "./SupabaseService.js";
+// import { supabaseService } from "./SupabaseService.js";
 
 
 function initializeTheme() {
