@@ -503,10 +503,13 @@ async function initializeHomepageProducts() {
   }
 
   // --- Make the "Add to Cart" buttons functional ---
+  // We add one click listener to the entire grid.
   grid.addEventListener('click', (event) => {
-    // Check if an "add-to-cart-btn" was clicked
-    if (event.target.matches('.add-to-cart-btn')) {
-      const productId = event.target.dataset.productId;
+    // We check if the clicked element is an "add-to-cart-btn".
+    const addToCartBtn = event.target.closest('.add-to-cart-btn');
+
+    if (addToCartBtn) {
+      const productId = addToCartBtn.dataset.productId;
 
       // Find the full product object from our fetched list
       const productToAdd = products.find(p => p.id === productId);
