@@ -101,9 +101,11 @@ class SupabaseService {
       if (options.category) query = query.eq('category', options.category);
       if (options.sortBy) {
         query = query.order(options.sortBy, { ascending: options.sortDirection === 'asc' });
-      } else {
-        query = query.order('created_at', { ascending: false });
       }
+      // TODO
+      // else {
+      //   query = query.order('created_at', { ascending: false });
+      // }
       if (options.limit) query = query.limit(options.limit);
       if (options.offset) query = query.offset(options.offset);
 
