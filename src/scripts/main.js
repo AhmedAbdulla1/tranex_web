@@ -8,7 +8,7 @@
 // ==========================================================================
 import { supabaseService } from "./SupabaseService.js";
 import { cartService } from "./CartService.js";
-import { productLoader } from "./ProductLoader.js";
+import { productLoader } from "./product-loader.js";
 
 
 function initializeTheme() {
