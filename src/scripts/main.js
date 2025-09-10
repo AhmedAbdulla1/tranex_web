@@ -509,6 +509,7 @@ async function initializeHomepageProducts() {
     const addToCartBtn = event.target.closest('.add-to-cart-btn');
 
     if (addToCartBtn) {
+      console.log('Add to cart button clicked!')
       const productId = addToCartBtn.dataset.productId;
 
       // Find the full product object from our fetched list
@@ -881,7 +882,7 @@ function initializeHeroSlider() {
 // ==========================================================================
 
 function initializeApp() {
-  console.log('App Initialized V4.3');
+  console.log('App Initialized V4.31');
 
   // Add animation styles
   addAnimationStyles();
