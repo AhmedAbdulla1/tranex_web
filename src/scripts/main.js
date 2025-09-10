@@ -317,154 +317,6 @@ async function handleSignOut() { // Make this function async
 // ==========================================================================
 // Store Functionality
 // ==========================================================================
-// TODO
-// Sample product data
-// const products = [
-//   {
-//     id: 'flywheel-pro',
-//     name: 'Flywheel Pro 2.0',
-//     nameAr: 'فلاي ويل برو 2.0',
-//     price: 899,
-//     category: 'flywheel',
-//     description: 'Professional-grade flywheel with CNC aluminum construction and BLE sensor port.',
-//     descriptionAr: 'فلاي ويل احترافي مع هيكل من الألمنيوم المصنع بتقنية CNC ومنفذ مستشعر BLE.',
-//     image: '/assets/products/flywheel-pro-1.jpg',
-//     specs: {
-//       inertia: '0.01–0.3 kg·m²',
-//       material: 'CNC aluminum',
-//       features: 'Quick-swap discs, BLE sensor port'
-//     },
-//     specsAr: {
-//       inertia: '0.01–0.3 كجم·م²',
-//       material: 'ألمنيوم CNC',
-//       features: 'أقراص سريعة التبديل، منفذ مستشعر BLE'
-//     }
-//   },
-//   {
-//     id: 'flywheel-lite',
-//     name: 'Flywheel Lite',
-//     nameAr: 'فلاي ويل لايت',
-//     price: 549,
-//     category: 'flywheel',
-//     description: 'Compact flywheel perfect for home and clinical use.',
-//     descriptionAr: 'فلاي ويل مضغوط مثالي للاستخدام المنزلي والسريري.',
-//     image: '/assets/products/flywheel-lite-1.jpg',
-//     specs: {
-//       design: 'Compact',
-//       strap: 'Adjustable',
-//       use: 'Home/clinic use'
-//     },
-//     specsAr: {
-//       design: 'مضغوط',
-//       strap: 'قابل للتعديل',
-//       use: 'للاستخدام المنزلي/السريري'
-//     }
-//   },
-//   {
-//     id: 'smart-sensor',
-//     name: 'Smart Sensor Module',
-//     nameAr: 'وحدة المستشعر الذكي',
-//     price: 129,
-//     category: 'sensors',
-//     description: 'Advanced sensor for RPM, direction, and force measurement.',
-//     descriptionAr: 'مستشعر متقدم لقياس RPM والاتجاه والقوة.',
-//     image: '/assets/products/smart-sensor-1.jpg',
-//     specs: {
-//       measurements: 'RPM + direction + force proxy',
-//       connectivity: 'BLE',
-//       charging: 'USB-C'
-//     },
-//     specsAr: {
-//       measurements: 'RPM + الاتجاه + وكيل القوة',
-//       connectivity: 'BLE',
-//       charging: 'USB-C'
-//     }
-//   },
-//   {
-//     id: 'mounting-kit',
-//     name: 'Mounting Accessory Kit',
-//     nameAr: 'طقم إكسسوارات التثبيت',
-//     price: 79,
-//     category: 'accessories',
-//     description: 'Universal mounting solution with anti-slip pads.',
-//     descriptionAr: 'حل تثبيت شامل مع وسائد مانعة للانزلاق.',
-//     image: '/assets/products/mounting-kit-1.jpg',
-//     specs: {
-//       mounts: 'Universal mounts',
-//       pads: 'Anti-slip pads',
-//       compatibility: 'All FlyPro devices'
-//     },
-//     specsAr: {
-//       mounts: 'حوامل شاملة',
-//       pads: 'وسائد مانعة للانزلاق',
-//       compatibility: 'جميع أجهزة FlyPro'
-//     }
-//   }
-// ];
-
-// function filterProducts() {
-//   const searchInput = document.querySelector('#search-input');
-//   const categoryFilter = document.querySelector('#category-filter');
-//   const priceFilter = document.querySelector('#price-filter');
-//   const productGrid = document.querySelector('.products__grid');
-
-//   if (!productGrid) return;
-
-//   const searchTerm = searchInput?.value.toLowerCase() || '';
-//   const selectedCategory = categoryFilter?.value || 'all';
-//   const maxPrice = priceFilter?.value ? parseFloat(priceFilter.value) : Infinity;
-//   const currentLang = getCurrentLanguage();
-
-//   const filteredProducts = products.filter(product => {
-//     const name = currentLang === 'ar' ? product.nameAr : product.name;
-//     const description = currentLang === 'ar' ? product.descriptionAr : product.description;
-
-//     const matchesSearch = name.toLowerCase().includes(searchTerm) ||
-//       description.toLowerCase().includes(searchTerm);
-//     const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
-//     const matchesPrice = product.price <= maxPrice;
-
-//     return matchesSearch && matchesCategory && matchesPrice;
-//   });
-
-//   renderProducts(filteredProducts, currentLang);
-// }
-
-// function renderProducts(productsToRender, lang = 'en') {
-//   const productGrid = document.querySelector('.products__grid');
-//   if (!productGrid) return;
-
-//   if (productsToRender.length === 0) {
-//     productGrid.innerHTML = `
-//       <div class="no-products">
-//         <p>${lang === 'ar' ? 'لم يتم العثور على منتجات' : 'No products found'}</p>
-//       </div>
-//     `;
-//     return;
-//   }
-
-//   productGrid.innerHTML = productsToRender.map(product => {
-//     const name = lang === 'ar' ? product.nameAr : product.name;
-//     const description = lang === 'ar' ? product.descriptionAr : product.description;
-//     const viewDetailsText = lang === 'ar' ? 'عرض التفاصيل' : 'View Details';
-
-//     return `
-//       <article class="product-card">
-//         <div class="product-card__image">
-//           <img src="${product.image}" alt="${name}" loading="lazy">
-//         </div>
-//         <div class="product-card__content">
-//           <h3 class="product-card__title">${name}</h3>
-//           <p class="product-card__description">${description}</p>
-//           <div class="product-card__price">${product.price}</div>
-//           <a href="/${lang === 'ar' ? 'ar/' : ''}product-${product.id}.html" class="btn btn--primary btn--sm">
-//             ${viewDetailsText}
-//           </a>
-//         </div>
-//       </article>
-//     `;
-//   }).join('');
-// }
 
 function initializeStore() {
   // Set up event listeners for store filters
@@ -549,7 +401,7 @@ function createProductCardHTML(product) {
         <h3 class="truncate text-lg font-semibold text-gray-900 dark:text-white">${product.name}</h3>
         <p class="mb-4 mt-2 text-xl font-bold text-blue-600 dark:text-blue-400">${formattedPrice}</p>
         
-        <button class="mt-auto w-full rounded-md bg-blue-600 px-4 py-2 font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:bg-blue-500 dark:hover:bg-blue-600" data-product-id="${product.id}">
+        <button class="add-to-cart-btn mt-auto w-full rounded-md bg-blue-600 px-4 py-2 font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:bg-blue-500 dark:hover:bg-blue-600" data-product-id="${product.id}">
           Add to Cart
         </button>
       </div>
@@ -882,7 +734,7 @@ function initializeHeroSlider() {
 // ==========================================================================
 
 function initializeApp() {
-  console.log('App Initialized V4.31');
+  console.log('App Initialized V4.32');
 
   // Add animation styles
   addAnimationStyles();
