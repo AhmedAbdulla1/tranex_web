@@ -206,17 +206,14 @@ class FormValidator {
             }
             if (!rememberMe) {
                 // If "Remember me" is NOT checked, set a flag to sign out on browser close.
-                sessionStorage.setItem('signOutOnClose', 'true');
+                sessionStorage.setItem('tranex-username', user.user_metadata.full_name);
+                sessionStorage.setItem('tranex-user-email', user.email);
+                sessionStorage.setItem('tranex-auth-token', session.access_token);
             } else {
-                // If it IS checked, ensure the flag is removed.
-                sessionStorage.removeItem('signOutOnClose');
+                localStorage.setItem('tranex-username', user.user_metadata.full_name);
+                localStorage.setItem('tranex-user-email', user.email);
+                localStorage.setItem('tranex-auth-token', session.access_token);
             }
-
-            // Save session info
-            console.log(success, error, user, session)
-            localStorage.setItem('tranex-username', user.user_metadata.full_name);
-            localStorage.setItem('tranex-user-email', user.email);
-            localStorage.setItem('tranex-auth-token', session.access_token);
 
             if (typeof checkAuthState === 'function') {
                 checkAuthState();

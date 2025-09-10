@@ -281,8 +281,8 @@ function closeMobileMenuOnResize() {
 
 // TODO
 function handleAuthState() {
-  const userToken = localStorage.getItem('tranex-auth-token');
-  const userName = localStorage.getItem('tranex-username');
+  const userToken = localStorage.getItem('tranex-auth-token') || sessionStorage.getItem('tranex-auth-token');
+  const userName = localStorage.getItem('tranex-username') || sessionStorage.getItem('tranex-username');
   const isAuthenticated = !!userToken;
 
   const loginBtn = document.querySelector('.login-btn');
@@ -311,7 +311,7 @@ function handleAuthState() {
 // ==========================================================================
 
 function checkAuthState() {
-  const isAuthenticated = localStorage.getItem('tranex-auth-token');
+  const isAuthenticated = localStorage.getItem('tranex-auth-token') || sessionStorage.getItem('tranex-auth-token');
   updateAuthButtons(!!isAuthenticated);
   handleAuthState(); // Also run the other auth handler
 }
@@ -346,8 +346,10 @@ async function handleSignOut() { // Make this function async
   localStorage.removeItem('tranex-user-email');
   localStorage.removeItem('tranex-auth-token');
 
-  // Also clear the session storage flag
-  sessionStorage.removeItem('signOutOnClose');
+  // Clear all session storage items
+  sessionStorage.removeItem('tranex-username');
+  sessionStorage.removeItem('tranex-user-email');
+  sessionStorage.removeItem('tranex-auth-token');
 
   checkAuthState(); // Re-run auth check to update UI
 
@@ -809,13 +811,6 @@ function updateActiveNavigation() {
 
 function initializeApp() {
   console.log('App Initialized V3.4');
-
-  window.addEventListener('beforeunload', () => {
-    if (sessionStorage.getItem('signOutOnClose') === 'true') {
-      // This calls the correct, centralized signOut function
-      supabaseService.signOut();
-    }
-  });
 
   // Add animation styles
   addAnimationStyles();
