@@ -520,7 +520,7 @@ async function initializeHomepageProducts() {
 }
 
 /**
- * Creates the HTML string for a single product card.
+ * Creates the HTML string for a single product card using Tailwind CSS.
  * @param {object} product - The product data object.
  * @returns {string} - The HTML string for the product card.
  */
@@ -531,20 +531,25 @@ function createProductCardHTML(product) {
     currency: 'USD'
   }).format(product.price);
 
+  // The 'group' class on the main container enables hover effects on child elements.
   return `
-    <article class="product-card">
-      <a href="/src/pages/product-details.html?id=${product.id}" class="product-link">
-        <div class="product-card__image">
-          <img src="${imageUrl}" alt="${product.name}" loading="lazy">
-        </div>
-        <div class="product-card__content">
-          <h3 class="product-card__title">${product.name}</h3>
-          <p class="product-card__price">${formattedPrice}</p>
+    <article class="group flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-md transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800">
+      
+      <a href="/src/pages/product-details.html?id=${product.id}" class="block">
+        <div class="aspect-square overflow-hidden">
+          <img src="${imageUrl}" alt="${product.name}" loading="lazy" class="h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
         </div>
       </a>
-      <button class="btn btn--primary btn--sm add-to-cart-btn" data-product-id="${product.id}">
-        Add to Cart
-      </button>
+      
+      <div class="flex flex-grow flex-col p-4">
+        <h3 class="truncate text-lg font-semibold text-gray-900 dark:text-white">${product.name}</h3>
+        <p class="mb-4 mt-2 text-xl font-bold text-blue-600 dark:text-blue-400">${formattedPrice}</p>
+        
+        <button class="mt-auto w-full rounded-md bg-blue-600 px-4 py-2 font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:bg-blue-500 dark:hover:bg-blue-600" data-product-id="${product.id}">
+          Add to Cart
+        </button>
+      </div>
+      
     </article>
   `;
 }
