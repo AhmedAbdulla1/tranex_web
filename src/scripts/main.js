@@ -557,11 +557,6 @@ function createProductCardHTML(product) {
   `;
 }
 
-// Then call it from initializeApp in main.js
-if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
-  initializeHomepageProducts();
-}
-
 // ==========================================================================
 // Form Validation
 // ==========================================================================
@@ -848,6 +843,39 @@ function updateActiveNavigation() {
   });
 }
 
+function initializeHeroSlider() {
+  // Check if we are on a page with a slider
+  const sliderContainer = document.querySelector('.hero-slider');
+  if (!sliderContainer) return;
+
+  let slideIndex = 0;
+  const slides = document.querySelectorAll(".slide");
+  const dots = document.querySelectorAll(".dot");
+
+  function showSlide(n) {
+    slides.forEach((slide) => slide.classList.remove("active"));
+    dots.forEach((dot) => dot.classList.remove("active"));
+
+    if (n >= slides.length) slideIndex = 0;
+    if (n < 0) slideIndex = slides.length - 1;
+
+    slides[slideIndex].classList.add("active");
+    dots[slideIndex].classList.add("active");
+  }
+
+  // Attach event listeners
+  document.querySelector('.prev-btn')?.addEventListener('click', () => showSlide(slideIndex += -1));
+  document.querySelector('.next-btn')?.addEventListener('click', () => showSlide(slideIndex += 1));
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => showSlide(slideIndex = i));
+  });
+
+  // Auto-play slider
+  setInterval(() => {
+    showSlide(slideIndex += 1);
+  }, 5000);
+}
+
 // ==========================================================================
 // Main Initialization - The Single Entry Point
 // ==========================================================================
@@ -864,6 +892,12 @@ function initializeApp() {
   initializeAnimations();
   initializeLazyLoading();
   checkAuthState();
+
+  // Then call it from initializeApp in main.js
+  if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+    initializeHomepageProducts();
+    initializeHeroSlider();
+  }
 
   // set cart count
   const cartCountElement = document.getElementById('cart-count');
