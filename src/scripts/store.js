@@ -4,6 +4,7 @@
  */
 
 import productLoader from './product-loader.js';
+import { cartService } from "./CartService.js";
 
 // DOM Elements
 let productGrid;
@@ -29,27 +30,27 @@ async function initializeStore() {
   sortFilter = document.getElementById('sort-filter');
   searchInput = document.getElementById('product-search');
   loadMoreBtn = document.getElementById('load-more');
-  
+
   // Set up event listeners
   if (categoryFilter) {
     categoryFilter.addEventListener('change', handleCategoryChange);
   }
-  
+
   if (sortFilter) {
     sortFilter.addEventListener('change', handleSortChange);
   }
-  
+
   if (searchInput) {
     searchInput.addEventListener('input', debounce(handleSearch, 300));
   }
-  
+
   if (loadMoreBtn) {
     loadMoreBtn.addEventListener('click', loadMoreProducts);
   }
-  
+
   // Load categories
   await loadCategories();
-  
+
   // Load initial products
   await loadProducts();
 }
@@ -59,22 +60,22 @@ async function initializeStore() {
  */
 async function loadCategories() {
   if (!categoryFilter) return;
-  
+
   try {
     // Check if Supabase is configured
-    const isSupabaseConfigured = window.supabase && 
+    const isSupabaseConfigured = window.supabase &&
       typeof window.supabase.from === 'function';
-    
+
     // Get categories (real or mock)
-    const categories = isSupabaseConfigured ? 
-      await productLoader.loadCategories() : 
+    const categories = isSupabaseConfigured ?
+      await productLoader.loadCategories() :
       productLoader.getMockCategories();
-    
+
     // Clear existing options except "All"
     while (categoryFilter.options.length > 1) {
       categoryFilter.remove(1);
     }
-    
+
     // Add category options
     categories.forEach(category => {
       const option = document.createElement('option');
@@ -92,51 +93,51 @@ async function loadCategories() {
  */
 async function loadProducts(append = false) {
   if (!productGrid) return;
-  
+
   // Show loading state
   toggleLoading(true);
   console.log('load products');
   try {
     // Check if Supabase is configured
-    const isSupabaseConfigured = window.supabase && 
+    const isSupabaseConfigured = window.supabase &&
       typeof window.supabase.from === 'function';
-    
+
     // Get products (real or mock)
     let products;
-    
+
     if (isSupabaseConfigured) {
       // Get from Supabase
-       console.log('supabase configured');
+      console.log('supabase configured');
       const options = {
         limit: productsPerPage,
         offset: append ? (currentPage - 1) * productsPerPage : 0,
         category: currentCategory,
         sortBy: getSortField(currentSort),
         sortDirection: getSortDirection(currentSort)
-      }; 
+      };
       products = await productLoader.loadProducts(options);
     } else {
       // Get mock products
       products = productLoader.getMockProducts(12);
-      
+
       // Apply filtering
       if (currentCategory) {
         const categoryName = getCategoryNameFromSlug(currentCategory);
         products = products.filter(p => p.category === categoryName);
       }
-      
+
       // Apply sorting
       products = sortProducts(products, currentSort);
-      
+
       // Apply pagination
       const startIndex = append ? (currentPage - 1) * productsPerPage : 0;
       const endIndex = startIndex + productsPerPage;
       products = products.slice(startIndex, endIndex);
     }
-    
+
     // Render products
     renderProducts(products, append);
-    
+
     // Update load more button
     updateLoadMoreButton(products.length);
   } catch (error) {
@@ -154,12 +155,12 @@ async function loadProducts(append = false) {
  */
 function renderProducts(products, append = false) {
   if (!productGrid) return;
-  
+
   // Clear grid if not appending
   if (!append) {
     productGrid.innerHTML = '';
   }
-  
+
   // If no products, show message
   if (products.length === 0 && !append) {
     const noProducts = document.createElement('div');
@@ -168,7 +169,7 @@ function renderProducts(products, append = false) {
     productGrid.appendChild(noProducts);
     return;
   }
-  
+
   // Create product cards
   products.forEach(product => {
     const productCard = createProductCard(product);
@@ -184,7 +185,7 @@ function renderProducts(products, append = false) {
 function createProductCard(product) {
   const card = document.createElement('div');
   card.className = 'product-card';
-  
+
   // Calculate discount percentage if there's an original price
   let discountBadge = '';
   if (product.original_price && product.original_price > product.price) {
@@ -195,18 +196,18 @@ function createProductCard(product) {
       </div>
     `;
   }
-  
+
   // Get main image or placeholder
-  const imageUrl = product.images && product.images.main ? 
-    product.images.main : 
+  const imageUrl = product.images && product.images.main ?
+    product.images.main :
     '/src/assets/images/product-placeholder.jpg';
-  
+
   // Format price
   const formattedPrice = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD'
   }).format(product.price);
-  
+
   // Format original price if exists
   let originalPriceHtml = '';
   if (product.original_price && product.original_price > product.price) {
@@ -214,10 +215,10 @@ function createProductCard(product) {
       style: 'currency',
       currency: 'USD'
     }).format(product.original_price);
-    
+
     originalPriceHtml = `<span class="product-original-price">${formattedOriginalPrice}</span>`;
   }
-  
+
   // Build card HTML
   card.innerHTML = `
     <a href="/src/pages/product-details.html?id=${product.id}" class="product-link">
@@ -238,69 +239,22 @@ function createProductCard(product) {
       Add to Cart
     </button>
   `;
-  
+
   // Add event listener to Add to Cart button
   const addToCartBtn = card.querySelector('.add-to-cart-btn');
   if (addToCartBtn) {
     addToCartBtn.addEventListener('click', (e) => {
       e.preventDefault();
-      addToCart(product.id);
+
+      // THIS IS THE NEW, SIMPLIFIED LOGIC
+      cartService.addItem(product);
+      showNotification('Product added to cart!', 'success');
     });
   }
-  
+
   return card;
 }
 
-/**
- * Add a product to the cart
- * @param {string} productId - Product ID to add
- */
-async function addToCart(productId) {
-  try {
-    const product = await getProductById(productId);
-    if (!product) {
-      throw new Error('Product not found');
-    }
-    
-    const productData = {
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      quantity: 1,
-      image: product.image
-    };
-    
-    // Add to local storage cart
-    let cart = JSON.parse(localStorage.getItem('tranex-cart') || '[]');
-    
-    // Check if product already exists
-    const existingProductIndex = cart.findIndex(item => item.id === productId);
-    
-    if (existingProductIndex !== -1) {
-      // Update quantity if product exists
-      cart[existingProductIndex].quantity += 1;
-    } else {
-      // Add new product
-      cart.push(productData);
-    }
-    
-    localStorage.setItem('tranex-cart', JSON.stringify(cart));
-    
-    // Update cart count
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    const cartCountElement = document.getElementById('cart-count');
-    if (cartCountElement) {
-      cartCountElement.textContent = totalItems;
-    }
-    
-    // Show success message
-    showNotification('Product added to cart!', 'success');
-    
-  } catch (error) {
-    console.error('Error adding to cart:', error);
-    showNotification('Failed to add product to cart. Please try again.', 'error');
-  }
-}
 
 /**
  * Handle category filter change
@@ -343,7 +297,7 @@ function loadMoreProducts() {
  */
 function updateLoadMoreButton(productsLoaded) {
   if (!loadMoreBtn) return;
-  
+
   // Hide button if fewer products were loaded than requested
   if (productsLoaded < productsPerPage) {
     loadMoreBtn.style.display = 'none';
@@ -361,7 +315,7 @@ function toggleLoading(isLoading) {
   if (loadingElement) {
     loadingElement.style.display = isLoading ? 'flex' : 'none';
   }
-  
+
   if (loadMoreBtn) {
     loadMoreBtn.disabled = isLoading;
   }
@@ -384,14 +338,14 @@ function showNotification(message, type = 'info') {
   const notification = document.createElement('div');
   notification.className = `notification notification-${type}`;
   notification.textContent = message;
-  
+
   document.body.appendChild(notification);
-  
+
   // Animate in
   setTimeout(() => {
     notification.classList.add('show');
   }, 10);
-  
+
   // Remove after delay
   setTimeout(() => {
     notification.classList.remove('show');
@@ -445,7 +399,7 @@ function getSortDirection(sortOption) {
  */
 function sortProducts(products, sortOption) {
   const sortedProducts = [...products];
-  
+
   switch (sortOption) {
     case 'price-low':
       return sortedProducts.sort((a, b) => a.price - b.price);
@@ -473,7 +427,7 @@ function getCategoryNameFromSlug(slug) {
     'performance-analytics': 'Performance Analytics',
     'accessories': 'Accessories'
   };
-  
+
   return categoryMap[slug] || '';
 }
 
@@ -485,7 +439,7 @@ function getCategoryNameFromSlug(slug) {
  */
 function debounce(func, wait) {
   let timeout;
-  return function(...args) {
+  return function (...args) {
     clearTimeout(timeout);
     timeout = setTimeout(() => func.apply(this, args), wait);
   };

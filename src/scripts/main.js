@@ -7,6 +7,7 @@
 // Theme Management
 // ==========================================================================
 import { supabaseService } from "./SupabaseService.js";
+import { cartService } from "./CartService.js";
 
 
 function initializeTheme() {
@@ -195,51 +196,6 @@ function initializeLanguage() {
 // ==========================================================================
 
 // Cart class for managing cart state
-class Cart {
-  constructor() {
-    this.items = JSON.parse(localStorage.getItem('cart_items') || '[]');
-    this.updateBadge();
-  }
-
-  addItem(item) {
-    this.items.push(item);
-    this.saveCart();
-    this.updateBadge();
-  }
-
-  removeItem(itemId) {
-    this.items = this.items.filter(item => item.id !== itemId);
-    this.saveCart();
-    this.updateBadge();
-  }
-
-  updateQuantity(itemId, quantity) {
-    const item = this.items.find(item => item.id === itemId);
-    if (item) {
-      item.quantity = quantity;
-      this.saveCart();
-      this.updateBadge();
-    }
-  }
-
-  saveCart() {
-    localStorage.setItem('cart_items', JSON.stringify(this.items));
-  }
-
-  updateBadge() {
-    const badge = document.querySelector('.cart-badge');
-    if (badge) {
-      badge.textContent = this.items.length;
-    }
-  }
-
-  getTotal() {
-    return this.items.reduce((total, item) => total + (item.price * item.quantity), 0);
-  }
-}
-
-// Initialize cart and auth state
-const cart = new Cart();
 
 function toggleMobileMenu() {
   const toggle = document.querySelector('.mobile-menu-toggle');
@@ -360,154 +316,154 @@ async function handleSignOut() { // Make this function async
 // ==========================================================================
 // Store Functionality
 // ==========================================================================
-
+// TODO
 // Sample product data
-const products = [
-  {
-    id: 'flywheel-pro',
-    name: 'Flywheel Pro 2.0',
-    nameAr: 'فلاي ويل برو 2.0',
-    price: 899,
-    category: 'flywheel',
-    description: 'Professional-grade flywheel with CNC aluminum construction and BLE sensor port.',
-    descriptionAr: 'فلاي ويل احترافي مع هيكل من الألمنيوم المصنع بتقنية CNC ومنفذ مستشعر BLE.',
-    image: '/assets/products/flywheel-pro-1.jpg',
-    specs: {
-      inertia: '0.01–0.3 kg·m²',
-      material: 'CNC aluminum',
-      features: 'Quick-swap discs, BLE sensor port'
-    },
-    specsAr: {
-      inertia: '0.01–0.3 كجم·م²',
-      material: 'ألمنيوم CNC',
-      features: 'أقراص سريعة التبديل، منفذ مستشعر BLE'
-    }
-  },
-  {
-    id: 'flywheel-lite',
-    name: 'Flywheel Lite',
-    nameAr: 'فلاي ويل لايت',
-    price: 549,
-    category: 'flywheel',
-    description: 'Compact flywheel perfect for home and clinical use.',
-    descriptionAr: 'فلاي ويل مضغوط مثالي للاستخدام المنزلي والسريري.',
-    image: '/assets/products/flywheel-lite-1.jpg',
-    specs: {
-      design: 'Compact',
-      strap: 'Adjustable',
-      use: 'Home/clinic use'
-    },
-    specsAr: {
-      design: 'مضغوط',
-      strap: 'قابل للتعديل',
-      use: 'للاستخدام المنزلي/السريري'
-    }
-  },
-  {
-    id: 'smart-sensor',
-    name: 'Smart Sensor Module',
-    nameAr: 'وحدة المستشعر الذكي',
-    price: 129,
-    category: 'sensors',
-    description: 'Advanced sensor for RPM, direction, and force measurement.',
-    descriptionAr: 'مستشعر متقدم لقياس RPM والاتجاه والقوة.',
-    image: '/assets/products/smart-sensor-1.jpg',
-    specs: {
-      measurements: 'RPM + direction + force proxy',
-      connectivity: 'BLE',
-      charging: 'USB-C'
-    },
-    specsAr: {
-      measurements: 'RPM + الاتجاه + وكيل القوة',
-      connectivity: 'BLE',
-      charging: 'USB-C'
-    }
-  },
-  {
-    id: 'mounting-kit',
-    name: 'Mounting Accessory Kit',
-    nameAr: 'طقم إكسسوارات التثبيت',
-    price: 79,
-    category: 'accessories',
-    description: 'Universal mounting solution with anti-slip pads.',
-    descriptionAr: 'حل تثبيت شامل مع وسائد مانعة للانزلاق.',
-    image: '/assets/products/mounting-kit-1.jpg',
-    specs: {
-      mounts: 'Universal mounts',
-      pads: 'Anti-slip pads',
-      compatibility: 'All FlyPro devices'
-    },
-    specsAr: {
-      mounts: 'حوامل شاملة',
-      pads: 'وسائد مانعة للانزلاق',
-      compatibility: 'جميع أجهزة FlyPro'
-    }
-  }
-];
+// const products = [
+//   {
+//     id: 'flywheel-pro',
+//     name: 'Flywheel Pro 2.0',
+//     nameAr: 'فلاي ويل برو 2.0',
+//     price: 899,
+//     category: 'flywheel',
+//     description: 'Professional-grade flywheel with CNC aluminum construction and BLE sensor port.',
+//     descriptionAr: 'فلاي ويل احترافي مع هيكل من الألمنيوم المصنع بتقنية CNC ومنفذ مستشعر BLE.',
+//     image: '/assets/products/flywheel-pro-1.jpg',
+//     specs: {
+//       inertia: '0.01–0.3 kg·m²',
+//       material: 'CNC aluminum',
+//       features: 'Quick-swap discs, BLE sensor port'
+//     },
+//     specsAr: {
+//       inertia: '0.01–0.3 كجم·م²',
+//       material: 'ألمنيوم CNC',
+//       features: 'أقراص سريعة التبديل، منفذ مستشعر BLE'
+//     }
+//   },
+//   {
+//     id: 'flywheel-lite',
+//     name: 'Flywheel Lite',
+//     nameAr: 'فلاي ويل لايت',
+//     price: 549,
+//     category: 'flywheel',
+//     description: 'Compact flywheel perfect for home and clinical use.',
+//     descriptionAr: 'فلاي ويل مضغوط مثالي للاستخدام المنزلي والسريري.',
+//     image: '/assets/products/flywheel-lite-1.jpg',
+//     specs: {
+//       design: 'Compact',
+//       strap: 'Adjustable',
+//       use: 'Home/clinic use'
+//     },
+//     specsAr: {
+//       design: 'مضغوط',
+//       strap: 'قابل للتعديل',
+//       use: 'للاستخدام المنزلي/السريري'
+//     }
+//   },
+//   {
+//     id: 'smart-sensor',
+//     name: 'Smart Sensor Module',
+//     nameAr: 'وحدة المستشعر الذكي',
+//     price: 129,
+//     category: 'sensors',
+//     description: 'Advanced sensor for RPM, direction, and force measurement.',
+//     descriptionAr: 'مستشعر متقدم لقياس RPM والاتجاه والقوة.',
+//     image: '/assets/products/smart-sensor-1.jpg',
+//     specs: {
+//       measurements: 'RPM + direction + force proxy',
+//       connectivity: 'BLE',
+//       charging: 'USB-C'
+//     },
+//     specsAr: {
+//       measurements: 'RPM + الاتجاه + وكيل القوة',
+//       connectivity: 'BLE',
+//       charging: 'USB-C'
+//     }
+//   },
+//   {
+//     id: 'mounting-kit',
+//     name: 'Mounting Accessory Kit',
+//     nameAr: 'طقم إكسسوارات التثبيت',
+//     price: 79,
+//     category: 'accessories',
+//     description: 'Universal mounting solution with anti-slip pads.',
+//     descriptionAr: 'حل تثبيت شامل مع وسائد مانعة للانزلاق.',
+//     image: '/assets/products/mounting-kit-1.jpg',
+//     specs: {
+//       mounts: 'Universal mounts',
+//       pads: 'Anti-slip pads',
+//       compatibility: 'All FlyPro devices'
+//     },
+//     specsAr: {
+//       mounts: 'حوامل شاملة',
+//       pads: 'وسائد مانعة للانزلاق',
+//       compatibility: 'جميع أجهزة FlyPro'
+//     }
+//   }
+// ];
 
-function filterProducts() {
-  const searchInput = document.querySelector('#search-input');
-  const categoryFilter = document.querySelector('#category-filter');
-  const priceFilter = document.querySelector('#price-filter');
-  const productGrid = document.querySelector('.products__grid');
+// function filterProducts() {
+//   const searchInput = document.querySelector('#search-input');
+//   const categoryFilter = document.querySelector('#category-filter');
+//   const priceFilter = document.querySelector('#price-filter');
+//   const productGrid = document.querySelector('.products__grid');
 
-  if (!productGrid) return;
+//   if (!productGrid) return;
 
-  const searchTerm = searchInput?.value.toLowerCase() || '';
-  const selectedCategory = categoryFilter?.value || 'all';
-  const maxPrice = priceFilter?.value ? parseFloat(priceFilter.value) : Infinity;
-  const currentLang = getCurrentLanguage();
+//   const searchTerm = searchInput?.value.toLowerCase() || '';
+//   const selectedCategory = categoryFilter?.value || 'all';
+//   const maxPrice = priceFilter?.value ? parseFloat(priceFilter.value) : Infinity;
+//   const currentLang = getCurrentLanguage();
 
-  const filteredProducts = products.filter(product => {
-    const name = currentLang === 'ar' ? product.nameAr : product.name;
-    const description = currentLang === 'ar' ? product.descriptionAr : product.description;
+//   const filteredProducts = products.filter(product => {
+//     const name = currentLang === 'ar' ? product.nameAr : product.name;
+//     const description = currentLang === 'ar' ? product.descriptionAr : product.description;
 
-    const matchesSearch = name.toLowerCase().includes(searchTerm) ||
-      description.toLowerCase().includes(searchTerm);
-    const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
-    const matchesPrice = product.price <= maxPrice;
+//     const matchesSearch = name.toLowerCase().includes(searchTerm) ||
+//       description.toLowerCase().includes(searchTerm);
+//     const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
+//     const matchesPrice = product.price <= maxPrice;
 
-    return matchesSearch && matchesCategory && matchesPrice;
-  });
+//     return matchesSearch && matchesCategory && matchesPrice;
+//   });
 
-  renderProducts(filteredProducts, currentLang);
-}
+//   renderProducts(filteredProducts, currentLang);
+// }
 
-function renderProducts(productsToRender, lang = 'en') {
-  const productGrid = document.querySelector('.products__grid');
-  if (!productGrid) return;
+// function renderProducts(productsToRender, lang = 'en') {
+//   const productGrid = document.querySelector('.products__grid');
+//   if (!productGrid) return;
 
-  if (productsToRender.length === 0) {
-    productGrid.innerHTML = `
-      <div class="no-products">
-        <p>${lang === 'ar' ? 'لم يتم العثور على منتجات' : 'No products found'}</p>
-      </div>
-    `;
-    return;
-  }
+//   if (productsToRender.length === 0) {
+//     productGrid.innerHTML = `
+//       <div class="no-products">
+//         <p>${lang === 'ar' ? 'لم يتم العثور على منتجات' : 'No products found'}</p>
+//       </div>
+//     `;
+//     return;
+//   }
 
-  productGrid.innerHTML = productsToRender.map(product => {
-    const name = lang === 'ar' ? product.nameAr : product.name;
-    const description = lang === 'ar' ? product.descriptionAr : product.description;
-    const viewDetailsText = lang === 'ar' ? 'عرض التفاصيل' : 'View Details';
+//   productGrid.innerHTML = productsToRender.map(product => {
+//     const name = lang === 'ar' ? product.nameAr : product.name;
+//     const description = lang === 'ar' ? product.descriptionAr : product.description;
+//     const viewDetailsText = lang === 'ar' ? 'عرض التفاصيل' : 'View Details';
 
-    return `
-      <article class="product-card">
-        <div class="product-card__image">
-          <img src="${product.image}" alt="${name}" loading="lazy">
-        </div>
-        <div class="product-card__content">
-          <h3 class="product-card__title">${name}</h3>
-          <p class="product-card__description">${description}</p>
-          <div class="product-card__price">${product.price}</div>
-          <a href="/${lang === 'ar' ? 'ar/' : ''}product-${product.id}.html" class="btn btn--primary btn--sm">
-            ${viewDetailsText}
-          </a>
-        </div>
-      </article>
-    `;
-  }).join('');
-}
+//     return `
+//       <article class="product-card">
+//         <div class="product-card__image">
+//           <img src="${product.image}" alt="${name}" loading="lazy">
+//         </div>
+//         <div class="product-card__content">
+//           <h3 class="product-card__title">${name}</h3>
+//           <p class="product-card__description">${description}</p>
+//           <div class="product-card__price">${product.price}</div>
+//           <a href="/${lang === 'ar' ? 'ar/' : ''}product-${product.id}.html" class="btn btn--primary btn--sm">
+//             ${viewDetailsText}
+//           </a>
+//         </div>
+//       </article>
+//     `;
+//   }).join('');
+// }
 
 function initializeStore() {
   // Set up event listeners for store filters
@@ -528,6 +484,25 @@ function initializeStore() {
   // Initial render
   const currentLang = getCurrentLanguage();
   renderProducts(products, currentLang);
+}
+
+async function initializeHomepageProducts() {
+  const grid = document.getElementById('featured-products-grid');
+  if (!grid) return; // Only run on the homepage
+
+  // Import productLoader at the top of main.js
+  const products = await productLoader.loadProducts({ limit: 4 }); // Or use getMockProducts
+
+  // You'll need a simplified render function, since you deleted the old one.
+  // You can copy a simplified version from store.js's createProductCard
+  // For now, let's just log them to show it works:
+  console.log("Featured products:", products);
+  // ... then, build the HTML for the product cards and inject into the grid.
+}
+
+// Then call it from initializeApp in main.js
+if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+  initializeHomepageProducts();
 }
 
 // ==========================================================================
@@ -636,22 +611,22 @@ function showAlert(type, message) {
     container.innerHTML = '';
   }, 5000);
 }
+// TODO
+// function updateCartBadge(count = 0) {
+//   const badge = document.querySelector('.cart-badge');
+//   if (badge) {
+//     badge.textContent = count;
+//     badge.style.display = count > 0 ? 'flex' : 'none';
+//   }
+// }
 
-function updateCartBadge(count = 0) {
-  const badge = document.querySelector('.cart-badge');
-  if (badge) {
-    badge.textContent = count;
-    badge.style.display = count > 0 ? 'flex' : 'none';
-  }
-}
-
-function addToCart(productId) {
-  const currentCount = parseInt(document.querySelector('.cart-badge').textContent) || 0;
-  updateCartBadge(currentCount + 1);
-  const currentLang = getCurrentLanguage();
-  const message = currentLang === 'ar' ? 'تم إضافة المنتج إلى السلة' : 'Product added to cart';
-  showAlert('success', message);
-}
+// function addToCart(productId) {
+//   const currentCount = parseInt(document.querySelector('.cart-badge').textContent) || 0;
+//   updateCartBadge(currentCount + 1);
+//   const currentLang = getCurrentLanguage();
+//   const message = currentLang === 'ar' ? 'تم إضافة المنتج إلى السلة' : 'Product added to cart';
+//   showAlert('success', message);
+// }
 
 // ==========================================================================
 // Smooth Scrolling
@@ -786,9 +761,20 @@ function initializeProductPage() {
 
   const addToCartBtn = document.querySelector('.add-to-cart-btn');
   if (addToCartBtn) {
-    addToCartBtn.addEventListener('click', () => {
-      const productId = addToCartBtn.dataset.productId;
-      addToCart(productId);
+    addToCartBtn.addEventListener('click', async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = urlParams.get('id');
+
+      // We need the full product details to add to cart
+      // This assumes productLoader is available or you can import it
+      const product = await productLoader.loadProductById(productId);
+
+      if (product) {
+        cartService.addItem(product);
+        showAlert('success', 'Product added to cart');
+      } else {
+        showAlert('error', 'Could not add product to cart');
+      }
     });
   }
 }
@@ -810,7 +796,7 @@ function updateActiveNavigation() {
 // ==========================================================================
 
 function initializeApp() {
-  console.log('App Initialized V3.4');
+  console.log('App Initialized V4.0');
 
   // Add animation styles
   addAnimationStyles();
@@ -821,6 +807,21 @@ function initializeApp() {
   initializeAnimations();
   initializeLazyLoading();
   checkAuthState();
+
+  // set cart count
+  const cartCountElement = document.getElementById('cart-count');
+  if (cartCountElement) {
+    // Subscribe to cart updates
+    cartService.subscribe(totalItems => {
+      cartCountElement.textContent = totalItems;
+      cartCountElement.style.display = totalItems > 0 ? 'flex' : 'none';
+    });
+    // Set initial value on page load
+    const initialCount = cartService.getTotalItemCount();
+    cartCountElement.textContent = initialCount;
+    cartCountElement.style.display = initialCount > 0 ? 'flex' : 'none';
+  }
+
 
   // Page-specific initialization
   const pathname = window.location.pathname;

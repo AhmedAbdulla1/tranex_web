@@ -1,19 +1,8 @@
 // ==========================================================================
 // Product Details Page JavaScript
 // ==========================================================================
-
-// Supabase configuration (replace with your actual credentials)
-const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
-
-// Initialize Supabase client
-let supabase;
-try {
-    supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-} catch (error) {
-    console.warn('Supabase not available, using mock data');
-}
-
+import { supabaseService } from "./SupabaseService.js";
+import { cartService } from "./CartService.js";
 // ==========================================================================
 // Product Gallery
 // ==========================================================================
@@ -21,15 +10,15 @@ try {
 function initializeProductGallery() {
     const thumbnails = document.querySelectorAll('.gallery-thumbnail');
     const mainImage = document.getElementById('main-image');
-    
+
     thumbnails.forEach(thumbnail => {
         thumbnail.addEventListener('click', () => {
             // Remove active class from all thumbnails
             thumbnails.forEach(t => t.classList.remove('active'));
-            
+
             // Add active class to clicked thumbnail
             thumbnail.classList.add('active');
-            
+
             // Update main image
             const imageSrc = thumbnail.dataset.image;
             mainImage.src = imageSrc;
@@ -49,12 +38,12 @@ function initializeProductOptions() {
         option.addEventListener('click', () => {
             colorOptions.forEach(o => o.classList.remove('active'));
             option.classList.add('active');
-            
+
             // Update product price if color affects price
             updateProductPrice();
         });
     });
-    
+
     // Resistance level selection
     const resistanceSelect = document.getElementById('resistance-level');
     if (resistanceSelect) {
@@ -67,28 +56,28 @@ function initializeProductOptions() {
 function updateProductPrice() {
     const resistanceLevel = document.getElementById('resistance-level')?.value;
     const selectedColor = document.querySelector('.color-option.active')?.dataset.color;
-    
+
     // Base price for Pro model
     let basePrice = 2499;
-    
+
     // Adjust price based on resistance level
     if (resistanceLevel === 'basic') {
         basePrice = 1999;
     } else if (resistanceLevel === 'elite') {
         basePrice = 2999;
     }
-    
+
     // Adjust price based on color (example pricing)
     if (selectedColor === 'blue') {
         basePrice += 100; // Premium color
     }
-    
+
     // Update displayed price
     const currentPriceElement = document.querySelector('.current-price');
     if (currentPriceElement) {
         currentPriceElement.textContent = `$${basePrice.toLocaleString()}`;
     }
-    
+
     // Update discount calculation
     const originalPriceElement = document.querySelector('.original-price');
     const discountBadge = document.querySelector('.discount-badge');
@@ -107,7 +96,7 @@ function initializeQuantityControls() {
     const quantityInput = document.getElementById('quantity');
     const increaseBtn = document.querySelector('.quantity-increase');
     const decreaseBtn = document.querySelector('.quantity-decrease');
-    
+
     if (quantityInput && increaseBtn && decreaseBtn) {
         increaseBtn.addEventListener('click', () => {
             const currentValue = parseInt(quantityInput.value);
@@ -115,14 +104,14 @@ function initializeQuantityControls() {
                 quantityInput.value = currentValue + 1;
             }
         });
-        
+
         decreaseBtn.addEventListener('click', () => {
             const currentValue = parseInt(quantityInput.value);
             if (currentValue > 1) {
                 quantityInput.value = currentValue - 1;
             }
         });
-        
+
         // Prevent manual input of invalid values
         quantityInput.addEventListener('change', () => {
             let value = parseInt(quantityInput.value);
@@ -133,82 +122,10 @@ function initializeQuantityControls() {
     }
 }
 
-// ==========================================================================
-// Add to Cart
-// ==========================================================================
-
-async function addToCart() {
-    const quantityInput = document.getElementById('quantity-input');
-    const quantity = quantityInput ? quantityInput.value : 1;
-    // const quantity = parseInt(document.getElementById('quantity').value);
-    const resistanceLevel = document.getElementById('resistance-level').value;
-    const selectedColor = document.querySelector('.color-option.active').dataset.color;
-    
-    const productData = {
-        id: 'FLW-PRO-001',
-        name: 'Flywheel Training System Pro',
-        price: 2499,
-        quantity: quantity,
-        options: {
-            resistance: resistanceLevel,
-            color: selectedColor
-        },
-        image: '/src/assets/images/flywheel-main.jpg'
-    };
-    
-    try {
-        if (supabase) {
-            // Add to Supabase cart table
-            const { data, error } = await supabase
-                .from('cart')
-                .insert([{
-                    user_id: getCurrentUserId(),
-                    product_data: productData,
-                    created_at: new Date().toISOString()
-                }]);
-            
-            if (error) throw error;
-        }
-        
-        // Add to local storage cart
-        addToLocalCart(productData);
-        
-        // Update cart count
-        updateCartCount();
-        
-        // Show success message
-        showNotification('Product added to cart successfully!', 'success');
-        
-    } catch (error) {
-        console.error('Error adding to cart:', error);
-        showNotification('Failed to add product to cart. Please try again.', 'error');
-    }
-}
-
-function addToLocalCart(productData) {
-    let cart = JSON.parse(localStorage.getItem('tranex-cart') || '[]');
-    
-    // Check if product already exists in cart
-    const existingProductIndex = cart.findIndex(item => 
-        item.id === productData.id && 
-        JSON.stringify(item.options) === JSON.stringify(productData.options)
-    );
-    
-    if (existingProductIndex !== -1) {
-        // Update quantity if product exists
-        cart[existingProductIndex].quantity += productData.quantity;
-    } else {
-        // Add new product
-        cart.push(productData);
-    }
-    
-    localStorage.setItem('tranex-cart', JSON.stringify(cart));
-}
-
 function updateCartCount() {
     const cart = JSON.parse(localStorage.getItem('tranex-cart') || '[]');
     const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    
+
     const cartCountElement = document.getElementById('cart-count');
     if (cartCountElement) {
         cartCountElement.textContent = totalItems;
@@ -228,22 +145,22 @@ function getCurrentUserId() {
 function initializeProductTabs() {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabPanels = document.querySelectorAll('.tab-panel');
-    
+
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
             const targetTab = button.dataset.tab;
-            
+
             // Remove active class from all buttons and panels
             tabButtons.forEach(btn => btn.classList.remove('active'));
             tabPanels.forEach(panel => panel.classList.remove('active'));
-            
+
             // Add active class to clicked button and corresponding panel
             button.classList.add('active');
             const targetPanel = document.getElementById(targetTab);
             if (targetPanel) {
                 targetPanel.classList.add('active');
             }
-            
+
             // Load content for specific tabs
             if (targetTab === 'reviews') {
                 loadProductReviews();
@@ -279,9 +196,9 @@ async function loadProductData() {
                 .select('*')
                 .eq('id', 'FLW-PRO-001')
                 .single();
-            
+
             if (error) throw error;
-            
+
             // Update product information
             updateProductInfo(data);
         } else {
@@ -319,7 +236,7 @@ function loadMockProductData() {
             warranty: '3 years comprehensive'
         }
     };
-    
+
     updateProductInfo(mockData);
 }
 
@@ -329,7 +246,7 @@ function updateProductInfo(data) {
     if (titleElement && data.name) {
         titleElement.textContent = data.name;
     }
-    
+
     // Update price
     if (data.price) {
         const currentPriceElement = document.querySelector('.current-price');
@@ -337,7 +254,7 @@ function updateProductInfo(data) {
             currentPriceElement.textContent = `$${data.price.toLocaleString()}`;
         }
     }
-    
+
     // Update rating
     if (data.rating) {
         const ratingElement = document.querySelector('.rating-text');
@@ -360,9 +277,9 @@ async function loadProductReviews() {
                 .select('*')
                 .eq('product_id', 'FLW-PRO-001')
                 .order('created_at', { ascending: false });
-            
+
             if (error) throw error;
-            
+
             displayReviews(data);
         } else {
             // Use mock reviews
@@ -398,19 +315,19 @@ function loadMockReviews() {
             created_at: '2024-01-05'
         }
     ];
-    
+
     displayReviews(mockReviews);
 }
 
 function displayReviews(reviews) {
     const reviewsContainer = document.getElementById('reviews-container');
     if (!reviewsContainer) return;
-    
+
     if (reviews.length === 0) {
         reviewsContainer.innerHTML = '<p>No reviews yet. Be the first to review this product!</p>';
         return;
     }
-    
+
     const reviewsHTML = reviews.map(review => `
         <div class="review-item">
             <div class="review-header">
@@ -423,14 +340,14 @@ function displayReviews(reviews) {
             <div class="review-comment">${review.comment}</div>
         </div>
     `).join('');
-    
+
     reviewsContainer.innerHTML = reviewsHTML;
 }
 
 function generateStars(rating) {
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 !== 0;
-    
+
     let starsHTML = '';
     for (let i = 0; i < 5; i++) {
         if (i < fullStars) {
@@ -441,7 +358,7 @@ function generateStars(rating) {
             starsHTML += '<span class="star">☆</span>';
         }
     }
-    
+
     return starsHTML;
 }
 
@@ -467,9 +384,9 @@ async function loadRelatedProducts() {
                 .select('*')
                 .neq('id', 'FLW-PRO-001')
                 .limit(4);
-            
+
             if (error) throw error;
-            
+
             displayRelatedProducts(data);
         } else {
             // Use mock related products
@@ -502,14 +419,14 @@ function loadMockRelatedProducts() {
             image: '/src/assets/images/analytics-dashboard.jpg'
         }
     ];
-    
+
     displayRelatedProducts(mockProducts);
 }
 
 function displayRelatedProducts(products) {
     const container = document.getElementById('related-products');
     if (!container) return;
-    
+
     const productsHTML = products.map(product => `
         <div class="product-card">
             <div class="product-card__image">
@@ -522,7 +439,7 @@ function displayRelatedProducts(products) {
             </div>
         </div>
     `).join('');
-    
+
     container.innerHTML = productsHTML;
 }
 
@@ -535,7 +452,7 @@ function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification notification--${type}`;
     notification.textContent = message;
-    
+
     // Add styles
     notification.style.cssText = `
         position: fixed;
@@ -550,7 +467,7 @@ function showNotification(message, type = 'info') {
         transition: transform 0.3s ease;
         max-width: 300px;
     `;
-    
+
     // Set background color based on type
     if (type === 'success') {
         notification.style.backgroundColor = '#10b981';
@@ -559,15 +476,15 @@ function showNotification(message, type = 'info') {
     } else {
         notification.style.backgroundColor = '#3b82f6';
     }
-    
+
     // Add to page
     document.body.appendChild(notification);
-    
+
     // Animate in
     setTimeout(() => {
         notification.style.transform = 'translateX(0)';
     }, 100);
-    
+
     // Remove after 3 seconds
     setTimeout(() => {
         notification.style.transform = 'translateX(100%)';
@@ -583,25 +500,25 @@ function showNotification(message, type = 'info') {
 // Initialize Page
 // ==========================================================================
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Initialize all components
     initializeProductGallery();
     initializeProductOptions();
     initializeProductTabs();
-    
+
     // Load product data
     loadProductData();
-    
+
     // Load related products
     loadRelatedProducts();
-    
+
     // Update cart count
     updateCartCount();
-    
+
     // Add event listeners for quantity controls
     const quantityInput = document.getElementById('quantity');
     if (quantityInput) {
-        quantityInput.addEventListener('change', function() {
+        quantityInput.addEventListener('change', function () {
             const value = parseInt(this.value);
             if (value < 1) this.value = 1;
             if (value > 10) this.value = 10;

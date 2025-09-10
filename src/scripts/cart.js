@@ -2,22 +2,23 @@
  * Cart functionality for TRANEX website
  * Handles cart display, updates, and checkout process
  */
+import { cartService } from './CartService.js';
 
 class CartPage {
     constructor() {
-        this.cart = window.cart; // Get cart instance from main.js
+        this.cart = cartService;
         this.initializeElements();
         this.bindEvents();
         this.renderCart();
     }
 
     initializeElements() {
-        this.cartItemsContainer = document.getElementById('cart-items');
+        this.cartItemsContainer = document.getElementById('cart-body');
         this.emptyCartMessage = document.getElementById('empty-cart');
         this.cartSubtotal = document.getElementById('cart-subtotal');
         this.shippingCost = document.getElementById('shipping-cost');
         this.cartTotal = document.getElementById('cart-total');
-        this.checkoutBtn = document.getElementById('checkout-btn');
+        this.checkoutBtn = document.querySelector('.checkout-button');
         this.checkoutModal = document.getElementById('checkout-modal');
         this.checkoutForm = document.getElementById('checkout-form');
         this.modalCloseBtn = document.querySelector('.modal-close');
@@ -47,19 +48,20 @@ class CartPage {
                 const change = button.dataset.change === 'increase' ? 1 : -1;
                 const quantityElement = button.parentElement.querySelector('.quantity');
                 const currentQuantity = parseInt(quantityElement.textContent);
-                const newQuantity = Math.max(1, currentQuantity + change);
+                const newQuantity = currentQuantity + change;
 
-                this.cart.updateQuantity(itemId, newQuantity);
+                this.cart.updateQuantity(itemId, newQuantity); // This now calls the service method
                 this.renderCart();
             } else if (button.classList.contains('remove-item')) {
-                this.cart.removeItem(itemId);
+                this.cart.removeItem(itemId); // This now calls the service method
                 this.renderCart();
             }
         });
     }
 
     renderCart() {
-        if (this.cart.items.length === 0) {
+        const cartItems = this.cart.getCartItems();
+        if (cartItems.length === 0) {
             this.cartItemsContainer.parentElement.style.display = 'none';
             this.emptyCartMessage.style.display = 'flex';
             return;
@@ -69,7 +71,7 @@ class CartPage {
         this.emptyCartMessage.style.display = 'none';
 
         // Render cart items
-        this.cartItemsContainer.innerHTML = this.cart.items.map(item => `
+        this.cartItemsContainer.innerHTML = cartItems.map(item => `
             <div class="cart-item" data-id="${item.id}">
                 <img src="${item.image}" alt="${item.name}" class="item-image">
                 <div class="item-details">
@@ -87,7 +89,7 @@ class CartPage {
         `).join('');
 
         // Update summary
-        const subtotal = this.cart.getTotal();
+        const subtotal = this.cart.getTotalPrice()
         const shipping = subtotal > 0 ? 10 : 0; // Example shipping cost
         const total = subtotal + shipping;
 
@@ -140,6 +142,7 @@ class CartPage {
 
             // Show success message
             alert('Order placed successfully! Thank you for shopping with us.');
+            this.cart.clearCart();
 
             // Redirect to home
             window.location.href = '/';
