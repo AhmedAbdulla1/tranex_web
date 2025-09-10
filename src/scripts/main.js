@@ -494,11 +494,59 @@ async function initializeHomepageProducts() {
   // Import productLoader at the top of main.js
   const products = await productLoader.loadProducts({ limit: 4 }); // Or use getMockProducts
 
-  // You'll need a simplified render function, since you deleted the old one.
-  // You can copy a simplified version from store.js's createProductCard
-  // For now, let's just log them to show it works:
-  console.log("Featured products:", products);
-  // ... then, build the HTML for the product cards and inject into the grid.
+  // Check if products were fetched and render them
+  if (products && products.length > 0) {
+    grid.innerHTML = products.map(createProductCardHTML).join('');
+  } else {
+    // Show a message if no products are found
+    grid.innerHTML = '<p>No featured products available at the moment.</p>';
+  }
+
+  // --- Make the "Add to Cart" buttons functional ---
+  grid.addEventListener('click', (event) => {
+    // Check if an "add-to-cart-btn" was clicked
+    if (event.target.matches('.add-to-cart-btn')) {
+      const productId = event.target.dataset.productId;
+
+      // Find the full product object from our fetched list
+      const productToAdd = products.find(p => p.id === productId);
+
+      if (productToAdd) {
+        cartService.addItem(productToAdd);
+        showAlert('success', 'Product added to cart!');
+      }
+    }
+  });
+}
+
+/**
+ * Creates the HTML string for a single product card.
+ * @param {object} product - The product data object.
+ * @returns {string} - The HTML string for the product card.
+ */
+function createProductCardHTML(product) {
+  const imageUrl = product.images?.main || 'src/assets/images/product-placeholder.jpg';
+  const formattedPrice = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD'
+  }).format(product.price);
+
+  return `
+    <article class="product-card">
+      <a href="/src/pages/product-details.html?id=${product.id}" class="product-link">
+        <div class="product-card__image">
+          <img src="${imageUrl}" alt="${product.name}" loading="lazy">
+        </div>
+        <div class="product-card__content">
+          <h3 class="product-card__title">${product.name}</h3>
+          <p class="product-card__price">${formattedPrice}</p>
+        </div>
+      </a>
+      <button class="btn btn--primary btn--sm add-to-cart-btn" data-product-id="${product.id}">
+        Add to Cart
+      </button>
+    </article>
+  `;
 }
 
 // Then call it from initializeApp in main.js
