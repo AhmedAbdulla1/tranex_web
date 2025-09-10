@@ -881,7 +881,7 @@ function initializeHeroSlider() {
 // ==========================================================================
 
 function initializeApp() {
-  console.log('App Initialized V4.1');
+  console.log('App Initialized V4.3');
 
   // Add animation styles
   addAnimationStyles();
