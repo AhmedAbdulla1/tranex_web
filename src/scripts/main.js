@@ -8,6 +8,7 @@
 // ==========================================================================
 import { supabaseService } from "./SupabaseService.js";
 import { cartService } from "./CartService.js";
+import { productLoader } from "./ProductLoader.js";
 
 
 function initializeTheme() {
@@ -796,7 +797,7 @@ function updateActiveNavigation() {
 // ==========================================================================
 
 function initializeApp() {
-  console.log('App Initialized V4.0');
+  console.log('App Initialized V4.1');
 
   // Add animation styles
   addAnimationStyles();
@@ -887,7 +888,7 @@ function initializeApp() {
 window.toggleTheme = toggleTheme;
 window.switchLanguage = switchLanguage;
 window.toggleMobileMenu = toggleMobileMenu;
-window.addToCart = addToCart;
+window.addToCart = cartService.addItem;
 window.smoothScrollToSection = smoothScrollToSection;
 window.handleSignOut = handleSignOut;
 
