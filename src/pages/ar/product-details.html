@@ -1,392 +1,640 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تفاصيل المنتج - TRANEX</title>
-    <meta name="description" content="استكشف المواصفات التفصيلية، الميزات، والمراجعات لمنتجات TRANEX.">
-    <link rel="canonical" href="https://tranex.com/ar/product-details.html">
-    
-    <!-- OpenGraph -->
-    <meta property="og:title" content="تفاصيل المنتج - TRANEX">
-    <meta property="og:description" content="استكشف المواصفات التفصيلية، الميزات، والمراجعات لمنتجات TRANEX.">
-    <meta property="og:image" content="https://tranex.com/assets/images/og-product.jpg">
-    <meta property="og:url" content="https://tranex.com/ar/product-details.html">
-    <meta property="og:type" content="website">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    
-    <link rel="stylesheet" href="../../styles/main.css">
-    <link rel="stylesheet" href="../../styles/product-details.css">
-    
-    <!-- Component Loader -->
-    <script type="module" src="../../utils/component-loader.js"></script>
-    
-    <!-- JSON-LD Schema -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "name": "TRANEX Pro Tablet",
-        "image": "https://tranex.com/assets/images/products/product1.jpg",
-        "description": "جهاز لوحي عالي الأداء بشاشة 12 بوصة وقوة معالجة متقدمة.",
-        "brand": {
-            "@type": "Brand",
-            "name": "TRANEX"
-        },
-        "offers": {
-            "@type": "Offer",
-            "url": "https://tranex.com/ar/product-details.html?id=1",
-            "priceCurrency": "USD",
-            "price": "899.99",
-            "availability": "https://schema.org/InStock"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.5",
-            "reviewCount": "89"
-        }
-    }
-    </script>
-</head>
-<body>
-    <!-- Header Component Container -->
-    <div data-component="header.html"></div>
-    
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <div class="product-details" id="product-details">
-                <!-- Product details will be loaded dynamically -->
-                <div class="loading-spinner">
-                    <div class="spinner"></div>
-                    <p data-en="Loading product details..." data-ar="جاري تحميل تفاصيل المنتج...">جاري تحميل تفاصيل المنتج...</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Related Products -->
-        <section class="related-products">
-            <div class="container">
-                <h2 class="section-title" data-en="Related Products" data-ar="منتجات ذات صلة">منتجات ذات صلة</h2>
-                <div class="related-products__grid">
-                    <!-- Related product 1 -->
-                    <div class="product-card">
-                        <div class="product-card__image">
-                            <img src="/assets/images/products/product2.jpg" alt="TRANEX Analytics Suite" loading="lazy">
-                        </div>
-                        <div class="product-card__content">
-                            <h3 class="product-card__title" data-en="TRANEX Analytics Suite" data-ar="حزمة TRANEX للتحليلات">حزمة TRANEX للتحليلات</h3>
-                            <div class="product-card__price">$499.99</div>
-                            <a href="/ar/product-details.html?id=2" class="btn btn--secondary" data-en="View Details" data-ar="عرض التفاصيل">عرض التفاصيل</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Related product 2 -->
-                    <div class="product-card">
-                        <div class="product-card__image">
-                            <img src="/assets/images/products/product3.jpg" alt="TRANEX Smart Keyboard" loading="lazy">
-                        </div>
-                        <div class="product-card__content">
-                            <h3 class="product-card__title" data-en="TRANEX Smart Keyboard" data-ar="لوحة مفاتيح TRANEX الذكية">لوحة مفاتيح TRANEX الذكية</h3>
-                            <div class="product-card__price">$129.99</div>
-                            <a href="/ar/product-details.html?id=3" class="btn btn--secondary" data-en="View Details" data-ar="عرض التفاصيل">عرض التفاصيل</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Related product 3 -->
-                    <div class="product-card">
-                        <div class="product-card__image">
-                            <img src="/assets/images/products/product4.jpg" alt="TRANEX Smart Hub" loading="lazy">
-                        </div>
-                        <div class="product-card__content">
-                            <h3 class="product-card__title" data-en="TRANEX Smart Hub" data-ar="مركز TRANEX الذكي">مركز TRANEX الذكي</h3>
-                            <div class="product-card__price"><span class="original-price">$349.99</span> $299.99</div>
-                            <a href="/ar/product-details.html?id=4" class="btn btn--secondary" data-en="View Details" data-ar="عرض التفاصيل">عرض التفاصيل</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Recently Viewed -->
-        <section class="recently-viewed">
-            <div class="container">
-                <h2 class="section-title" data-en="Recently Viewed" data-ar="شوهدت مؤخرًا">شوهدت مؤخرًا</h2>
-                <div class="recently-viewed__grid" id="recently-viewed">
-                    <!-- Recently viewed products will be loaded dynamically -->
-                    <p class="no-items" data-en="No recently viewed products" data-ar="لا توجد منتجات تمت مشاهدتها مؤخرًا">لا توجد منتجات تمت مشاهدتها مؤخرًا</p>
-                </div>
-            </div>
-        </section>
-    </main>
-    
-    <!-- Footer Component Container -->
-    <div data-component="footer.html"></div>
-    
-    <!-- Product Template -->
-    <template id="product-template">
-        <div class="product-details__grid">
-            <div class="product-gallery">
-                <div class="product-gallery__main">
-                    <img src="" alt="" class="product-image" id="main-product-image">
-                </div>
-                <div class="product-gallery__thumbnails">
-                    <!-- Thumbnails will be added dynamically -->
-                </div>
-            </div>
-            
-            <div class="product-info">
-                <h1 class="product-title"></h1>
-                
-                <div class="product-rating">
-                    <div class="stars">
-                        <span class="stars-filled"></span>
-                        <span class="stars-empty"></span>
-                    </div>
-                    <span class="rating-count"></span>
-                </div>
-                
-                <div class="product-price">
-                    <span class="current-price"></span>
-                    <span class="original-price"></span>
-                </div>
-                
-                <div class="product-availability">
-                    <span class="availability-status"></span>
-                </div>
-                
-                <div class="product-description"></div>
-                
-                <div class="product-options">
-                    <div class="option-group color-options">
-                        <h3 data-en="Color" data-ar="اللون">اللون</h3>
-                        <div class="option-buttons" id="color-options">
-                            <!-- Color options will be added dynamically -->
-                        </div>
-                    </div>
-                    
-                    <div class="option-group storage-options">
-                        <h3 data-en="Storage" data-ar="التخزين">التخزين</h3>
-                        <div class="option-buttons" id="storage-options">
-                            <!-- Storage options will be added dynamically -->
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="product-quantity">
-                    <h3 data-en="Quantity" data-ar="الكمية">الكمية</h3>
-                    <div class="quantity-selector">
-                        <button class="quantity-btn decrease" id="decrease-quantity">-</button>
-                        <input type="number" value="1" min="1" id="quantity-input">
-                        <button class="quantity-btn increase" id="increase-quantity">+</button>
-                    </div>
-                </div>
-                
-                <div class="product-actions">
-                    <button class="btn btn--primary add-to-cart" id="add-to-cart" data-en="Add to Cart" data-ar="أضف إلى السلة">أضف إلى السلة</button>
-                    <button class="btn btn--secondary wishlist" id="add-to-wishlist" data-en="Add to Wishlist" data-ar="أضف إلى قائمة الرغبات">أضف إلى قائمة الرغبات</button>
-                </div>
-                
-                <div class="product-meta">
-                    <div class="meta-item">
-                        <span class="meta-label" data-en="SKU:" data-ar="رمز المنتج:">رمز المنتج:</span>
-                        <span class="meta-value sku"></span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label" data-en="Category:" data-ar="الفئة:">الفئة:</span>
-                        <span class="meta-value category"></span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label" data-en="Tags:" data-ar="الوسوم:">الوسوم:</span>
-                        <span class="meta-value tags"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="product-tabs">
-            <div class="tabs-header">
-                <button class="tab-btn active" data-tab="description" data-en="Description" data-ar="الوصف">الوصف</button>
-                <button class="tab-btn" data-tab="specifications" data-en="Specifications" data-ar="المواصفات">المواصفات</button>
-                <button class="tab-btn" data-tab="reviews" data-en="Reviews" data-ar="المراجعات">المراجعات</button>
-            </div>
-            
-            <div class="tabs-content">
-                <div class="tab-panel active" id="description-panel">
-                    <!-- Description content will be added dynamically -->
-                </div>
-                
-                <div class="tab-panel" id="specifications-panel">
-                    <table class="specifications-table">
-                        <!-- Specifications will be added dynamically -->
-                    </table>
-                </div>
-                
-                <div class="tab-panel" id="reviews-panel">
-                    <div class="reviews-summary">
-                        <div class="average-rating">
-                            <div class="rating-number"></div>
-                            <div class="stars">
-                                <span class="stars-filled"></span>
-                                <span class="stars-empty"></span>
-                            </div>
-                            <div class="rating-count"></div>
-                        </div>
-                        
-                        <div class="rating-breakdown">
-                            <!-- Rating breakdown will be added dynamically -->
-                        </div>
-                    </div>
-                    
-                    <div class="reviews-list">
-                        <!-- Reviews will be added dynamically -->
-                    </div>
-                    
-                    <div class="review-form-container">
-                        <h3 data-en="Write a Review" data-ar="اكتب مراجعة">اكتب مراجعة</h3>
-                        <form class="review-form" id="review-form">
-                            <div class="form-group">
-                                <label for="review-name" data-en="Your Name" data-ar="اسمك">اسمك</label>
-                                <input type="text" id="review-name" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="review-email" data-en="Your Email" data-ar="بريدك الإلكتروني">بريدك الإلكتروني</label>
-                                <input type="email" id="review-email" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label data-en="Your Rating" data-ar="تقييمك">تقييمك</label>
-                                <div class="rating-selector" id="rating-selector">
-                                    <span class="star" data-rating="1">★</span>
-                                    <span class="star" data-rating="2">★</span>
-                                    <span class="star" data-rating="3">★</span>
-                                    <span class="star" data-rating="4">★</span>
-                                    <span class="star" data-rating="5">★</span>
-                                </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="review-title" data-en="Review Title" data-ar="عنوان المراجعة">عنوان المراجعة</label>
-                                <input type="text" id="review-title" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="review-content" data-en="Your Review" data-ar="مراجعتك">مراجعتك</label>
-                                <textarea id="review-content" rows="5" required></textarea>
-                            </div>
-                            
-                            <button type="submit" class="btn btn--primary" data-en="Submit Review" data-ar="إرسال المراجعة">إرسال المراجعة</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </template>
-    
-    <!-- Scripts -->
-    <script type="module">
-        import componentLoader from '../../utils/component-loader.js';
-        import { productLoader } from '../../scripts/product-loader.js';
-        
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                // Get current language
-                const currentLang = document.documentElement.getAttribute('lang') || 'ar';
-                
-                // Load components
-                await componentLoader.initializeComponents({
-                    '/src/components/header.html': '[data-component="header.html"]',
-                    '/src/components/footer.html': '[data-component="footer.html"]'
-                }, { language: currentLang });
-                
-                // Initialize theme
-                initializeTheme();
-            
-            // Get product ID from URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const productId = urlParams.get('id') || '1'; // Default to product 1 if no ID provided
-            
-            // Load product details
-            productLoader.loadProductDetails(productId, 'ar');
-            
-            // Tab functionality
-            document.querySelectorAll('.tab-btn').forEach(button => {
-                button.addEventListener('click', () => {
-                    // Remove active class from all buttons and panels
-                    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-                    document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
-                    
-                    // Add active class to clicked button and corresponding panel
-                    button.classList.add('active');
-                    const tabId = button.getAttribute('data-tab');
-                    document.getElementById(`${tabId}-panel`).classList.add('active');
-                });
-            });
-            
-            // Quantity selector functionality
-            const decreaseBtn = document.getElementById('decrease-quantity');
-            const increaseBtn = document.getElementById('increase-quantity');
-            const quantityInput = document.getElementById('quantity-input');
-            
-            if (decreaseBtn && increaseBtn && quantityInput) {
-                decreaseBtn.addEventListener('click', () => {
-                    const currentValue = parseInt(quantityInput.value);
-                    if (currentValue > 1) {
-                        quantityInput.value = currentValue - 1;
-                    }
-                });
-                
-                increaseBtn.addEventListener('click', () => {
-                    const currentValue = parseInt(quantityInput.value);
-                    quantityInput.value = currentValue + 1;
-                });
-            }
-            
-            // Review form submission
-            const reviewForm = document.getElementById('review-form');
-            if (reviewForm) {
-                reviewForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    alert('شكرًا لمراجعتك! سيتم نشرها بعد المراجعة.');
-                    reviewForm.reset();
-                });
-            }
-            
-            // Rating selector functionality
-            const ratingSelector = document.getElementById('rating-selector');
-            if (ratingSelector) {
-                const stars = ratingSelector.querySelectorAll('.star');
-                stars.forEach(star => {
-                    star.addEventListener('click', () => {
-                        const rating = star.getAttribute('data-rating');
-                        stars.forEach(s => {
-                            if (s.getAttribute('data-rating') <= rating) {
-                                s.classList.add('selected');
-                            } else {
-                                s.classList.remove('selected');
-                            }
-                        });
-                    });
-                });
-            }
-            
-            console.log('Components loaded successfully');
-        } catch (error) {
-            console.error('Error loading components:', error);
-        }
-    });
-    </script>
-    <script src="../../scripts/main.js"></script>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>تفاصيل المنتج - TRANEX</title>
+		<meta
+			name="description"
+			content="استكشف المواصفات التفصيلية، الميزات، والمراجعات لمنتجات TRANEX."
+		/>
+		<link
+			rel="canonical"
+			href="https://tranex.com/ar/product-details.html"
+		/>
+
+		<!-- OpenGraph -->
+		<meta property="og:title" content="تفاصيل المنتج - TRANEX" />
+		<meta
+			property="og:description"
+			content="استكشف المواصفات التفصيلية، الميزات، والمراجعات لمنتجات TRANEX."
+		/>
+		<meta
+			property="og:image"
+			content="https://tranex.com/assets/images/og-product.jpg"
+		/>
+		<meta
+			property="og:url"
+			content="https://tranex.com/ar/product-details.html"
+		/>
+		<meta property="og:type" content="website" />
+
+		<!-- Favicon -->
+		<link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico" />
+
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- Supabase -->
+		<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+		<link rel="stylesheet" href="../../styles/main.css" />
+		<link rel="stylesheet" href="../../styles/product-details.css" />
+
+		<!-- Component Loader -->
+		<script type="module" src="../../utils/component-loader.js"></script>
+
+		<!-- JSON-LD Schema -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Product",
+				"name": "TRANEX Pro Tablet",
+				"image": "https://tranex.com/assets/images/products/product1.jpg",
+				"description": "جهاز لوحي عالي الأداء بشاشة 12 بوصة وقوة معالجة متقدمة.",
+				"brand": {
+					"@type": "Brand",
+					"name": "TRANEX"
+				},
+				"offers": {
+					"@type": "Offer",
+					"url": "https://tranex.com/ar/product-details.html?id=1",
+					"priceCurrency": "USD",
+					"price": "899.99",
+					"availability": "https://schema.org/InStock"
+				},
+				"aggregateRating": {
+					"@type": "AggregateRating",
+					"ratingValue": "4.5",
+					"reviewCount": "89"
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<!-- Header Component Container -->
+		<div data-component="header.html"></div>
+
+		<!-- Main Content -->
+		<main class="main-content">
+			<div class="container">
+				<div class="product-details" id="product-details">
+					<!-- Product details will be loaded dynamically -->
+					<div class="loading-spinner">
+						<div class="spinner"></div>
+						<p
+							data-en="Loading product details..."
+							data-ar="جاري تحميل تفاصيل المنتج..."
+						>
+							جاري تحميل تفاصيل المنتج...
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Related Products -->
+			<section class="related-products">
+				<div class="container">
+					<h2
+						class="section-title"
+						data-en="Related Products"
+						data-ar="منتجات ذات صلة"
+					>
+						منتجات ذات صلة
+					</h2>
+					<div class="related-products__grid">
+						<!-- Related product 1 -->
+						<div class="product-card">
+							<div class="product-card__image">
+								<img
+									src="/assets/images/products/product2.jpg"
+									alt="TRANEX Analytics Suite"
+									loading="lazy"
+								/>
+							</div>
+							<div class="product-card__content">
+								<h3
+									class="product-card__title"
+									data-en="TRANEX Analytics Suite"
+									data-ar="حزمة TRANEX للتحليلات"
+								>
+									حزمة TRANEX للتحليلات
+								</h3>
+								<div class="product-card__price">$499.99</div>
+								<a
+									href="/ar/product-details.html?id=2"
+									class="btn btn--secondary"
+									data-en="View Details"
+									data-ar="عرض التفاصيل"
+									>عرض التفاصيل</a
+								>
+							</div>
+						</div>
+
+						<!-- Related product 2 -->
+						<div class="product-card">
+							<div class="product-card__image">
+								<img
+									src="/assets/images/products/product3.jpg"
+									alt="TRANEX Smart Keyboard"
+									loading="lazy"
+								/>
+							</div>
+							<div class="product-card__content">
+								<h3
+									class="product-card__title"
+									data-en="TRANEX Smart Keyboard"
+									data-ar="لوحة مفاتيح TRANEX الذكية"
+								>
+									لوحة مفاتيح TRANEX الذكية
+								</h3>
+								<div class="product-card__price">$129.99</div>
+								<a
+									href="/ar/product-details.html?id=3"
+									class="btn btn--secondary"
+									data-en="View Details"
+									data-ar="عرض التفاصيل"
+									>عرض التفاصيل</a
+								>
+							</div>
+						</div>
+
+						<!-- Related product 3 -->
+						<div class="product-card">
+							<div class="product-card__image">
+								<img
+									src="/assets/images/products/product4.jpg"
+									alt="TRANEX Smart Hub"
+									loading="lazy"
+								/>
+							</div>
+							<div class="product-card__content">
+								<h3
+									class="product-card__title"
+									data-en="TRANEX Smart Hub"
+									data-ar="مركز TRANEX الذكي"
+								>
+									مركز TRANEX الذكي
+								</h3>
+								<div class="product-card__price">
+									<span class="original-price">$349.99</span>
+									$299.99
+								</div>
+								<a
+									href="/ar/product-details.html?id=4"
+									class="btn btn--secondary"
+									data-en="View Details"
+									data-ar="عرض التفاصيل"
+									>عرض التفاصيل</a
+								>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Recently Viewed -->
+			<section class="recently-viewed">
+				<div class="container">
+					<h2
+						class="section-title"
+						data-en="Recently Viewed"
+						data-ar="شوهدت مؤخرًا"
+					>
+						شوهدت مؤخرًا
+					</h2>
+					<div class="recently-viewed__grid" id="recently-viewed">
+						<!-- Recently viewed products will be loaded dynamically -->
+						<p
+							class="no-items"
+							data-en="No recently viewed products"
+							data-ar="لا توجد منتجات تمت مشاهدتها مؤخرًا"
+						>
+							لا توجد منتجات تمت مشاهدتها مؤخرًا
+						</p>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- Footer Component Container -->
+		<div data-component="footer.html"></div>
+
+		<!-- Product Template -->
+		<template id="product-template">
+			<div class="product-details__grid">
+				<div class="product-gallery">
+					<div class="product-gallery__main">
+						<img
+							src=""
+							alt=""
+							class="product-image"
+							id="main-product-image"
+						/>
+					</div>
+					<div class="product-gallery__thumbnails">
+						<!-- Thumbnails will be added dynamically -->
+					</div>
+				</div>
+
+				<div class="product-info">
+					<h1 class="product-title"></h1>
+
+					<div class="product-rating">
+						<div class="stars">
+							<span class="stars-filled"></span>
+							<span class="stars-empty"></span>
+						</div>
+						<span class="rating-count"></span>
+					</div>
+
+					<div class="product-price">
+						<span class="current-price"></span>
+						<span class="original-price"></span>
+					</div>
+
+					<div class="product-availability">
+						<span class="availability-status"></span>
+					</div>
+
+					<div class="product-description"></div>
+
+					<div class="product-options">
+						<div class="option-group color-options">
+							<h3 data-en="Color" data-ar="اللون">اللون</h3>
+							<div class="option-buttons" id="color-options">
+								<!-- Color options will be added dynamically -->
+							</div>
+						</div>
+
+						<div class="option-group storage-options">
+							<h3 data-en="Storage" data-ar="التخزين">التخزين</h3>
+							<div class="option-buttons" id="storage-options">
+								<!-- Storage options will be added dynamically -->
+							</div>
+						</div>
+					</div>
+
+					<div class="product-quantity">
+						<h3 data-en="Quantity" data-ar="الكمية">الكمية</h3>
+						<div class="quantity-selector">
+							<button
+								class="quantity-btn decrease"
+								id="decrease-quantity"
+							>
+								-
+							</button>
+							<input
+								type="number"
+								value="1"
+								min="1"
+								id="quantity-input"
+							/>
+							<button
+								class="quantity-btn increase"
+								id="increase-quantity"
+							>
+								+
+							</button>
+						</div>
+					</div>
+
+					<div class="product-actions">
+						<button
+							class="btn btn--primary add-to-cart"
+							id="add-to-cart"
+							data-en="Add to Cart"
+							data-ar="أضف إلى السلة"
+						>
+							أضف إلى السلة
+						</button>
+						<button
+							class="btn btn--secondary wishlist"
+							id="add-to-wishlist"
+							data-en="Add to Wishlist"
+							data-ar="أضف إلى قائمة الرغبات"
+						>
+							أضف إلى قائمة الرغبات
+						</button>
+					</div>
+
+					<div class="product-meta">
+						<div class="meta-item">
+							<span
+								class="meta-label"
+								data-en="SKU:"
+								data-ar="رمز المنتج:"
+								>رمز المنتج:</span
+							>
+							<span class="meta-value sku"></span>
+						</div>
+						<div class="meta-item">
+							<span
+								class="meta-label"
+								data-en="Category:"
+								data-ar="الفئة:"
+								>الفئة:</span
+							>
+							<span class="meta-value category"></span>
+						</div>
+						<div class="meta-item">
+							<span
+								class="meta-label"
+								data-en="Tags:"
+								data-ar="الوسوم:"
+								>الوسوم:</span
+							>
+							<span class="meta-value tags"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="product-tabs">
+				<div class="tabs-header">
+					<button
+						class="tab-btn active"
+						data-tab="description"
+						data-en="Description"
+						data-ar="الوصف"
+					>
+						الوصف
+					</button>
+					<button
+						class="tab-btn"
+						data-tab="specifications"
+						data-en="Specifications"
+						data-ar="المواصفات"
+					>
+						المواصفات
+					</button>
+					<button
+						class="tab-btn"
+						data-tab="reviews"
+						data-en="Reviews"
+						data-ar="المراجعات"
+					>
+						المراجعات
+					</button>
+				</div>
+
+				<div class="tabs-content">
+					<div class="tab-panel active" id="description-panel">
+						<!-- Description content will be added dynamically -->
+					</div>
+
+					<div class="tab-panel" id="specifications-panel">
+						<table class="specifications-table">
+							<!-- Specifications will be added dynamically -->
+						</table>
+					</div>
+
+					<div class="tab-panel" id="reviews-panel">
+						<div class="reviews-summary">
+							<div class="average-rating">
+								<div class="rating-number"></div>
+								<div class="stars">
+									<span class="stars-filled"></span>
+									<span class="stars-empty"></span>
+								</div>
+								<div class="rating-count"></div>
+							</div>
+
+							<div class="rating-breakdown">
+								<!-- Rating breakdown will be added dynamically -->
+							</div>
+						</div>
+
+						<div class="reviews-list">
+							<!-- Reviews will be added dynamically -->
+						</div>
+
+						<div class="review-form-container">
+							<h3 data-en="Write a Review" data-ar="اكتب مراجعة">
+								اكتب مراجعة
+							</h3>
+							<form class="review-form" id="review-form">
+								<div class="form-group">
+									<label
+										for="review-name"
+										data-en="Your Name"
+										data-ar="اسمك"
+										>اسمك</label
+									>
+									<input
+										type="text"
+										id="review-name"
+										required
+									/>
+								</div>
+
+								<div class="form-group">
+									<label
+										for="review-email"
+										data-en="Your Email"
+										data-ar="بريدك الإلكتروني"
+										>بريدك الإلكتروني</label
+									>
+									<input
+										type="email"
+										id="review-email"
+										required
+									/>
+								</div>
+
+								<div class="form-group">
+									<label
+										data-en="Your Rating"
+										data-ar="تقييمك"
+										>تقييمك</label
+									>
+									<div
+										class="rating-selector"
+										id="rating-selector"
+									>
+										<span class="star" data-rating="1"
+											>★</span
+										>
+										<span class="star" data-rating="2"
+											>★</span
+										>
+										<span class="star" data-rating="3"
+											>★</span
+										>
+										<span class="star" data-rating="4"
+											>★</span
+										>
+										<span class="star" data-rating="5"
+											>★</span
+										>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label
+										for="review-title"
+										data-en="Review Title"
+										data-ar="عنوان المراجعة"
+										>عنوان المراجعة</label
+									>
+									<input
+										type="text"
+										id="review-title"
+										required
+									/>
+								</div>
+
+								<div class="form-group">
+									<label
+										for="review-content"
+										data-en="Your Review"
+										data-ar="مراجعتك"
+										>مراجعتك</label
+									>
+									<textarea
+										id="review-content"
+										rows="5"
+										required
+									></textarea>
+								</div>
+
+								<button
+									type="submit"
+									class="btn btn--primary"
+									data-en="Submit Review"
+									data-ar="إرسال المراجعة"
+								>
+									إرسال المراجعة
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</template>
+
+		<!-- Scripts -->
+		<script type="module">
+			import componentLoader from "../../utils/component-loader.js";
+			import productLoader from "../../scripts/product-loader.js";
+
+			document.addEventListener("DOMContentLoaded", async () => {
+				try {
+					// Get current language
+					const currentLang =
+						document.documentElement.getAttribute("lang") || "ar";
+
+					// Load components
+					await componentLoader.initializeComponents(
+						{
+							"/src/components/header.html":
+								'[data-component="header.html"]',
+							"/src/components/footer.html":
+								'[data-component="footer.html"]',
+						},
+						{ language: currentLang }
+					);
+
+					// Initialize theme
+					initializeTheme();
+
+					// Get product ID from URL
+					const urlParams = new URLSearchParams(
+						window.location.search
+					);
+					const productId = urlParams.get("id") || "1"; // Default to product 1 if no ID provided
+
+					// Load product details
+					productLoader.loadProductDetails(productId, "ar");
+
+					// Tab functionality
+					document.querySelectorAll(".tab-btn").forEach((button) => {
+						button.addEventListener("click", () => {
+							// Remove active class from all buttons and panels
+							document
+								.querySelectorAll(".tab-btn")
+								.forEach((btn) =>
+									btn.classList.remove("active")
+								);
+							document
+								.querySelectorAll(".tab-panel")
+								.forEach((panel) =>
+									panel.classList.remove("active")
+								);
+
+							// Add active class to clicked button and corresponding panel
+							button.classList.add("active");
+							const tabId = button.getAttribute("data-tab");
+							document
+								.getElementById(`${tabId}-panel`)
+								.classList.add("active");
+						});
+					});
+
+					// Quantity selector functionality
+					const decreaseBtn =
+						document.getElementById("decrease-quantity");
+					const increaseBtn =
+						document.getElementById("increase-quantity");
+					const quantityInput =
+						document.getElementById("quantity-input");
+
+					if (decreaseBtn && increaseBtn && quantityInput) {
+						decreaseBtn.addEventListener("click", () => {
+							const currentValue = parseInt(quantityInput.value);
+							if (currentValue > 1) {
+								quantityInput.value = currentValue - 1;
+							}
+						});
+
+						increaseBtn.addEventListener("click", () => {
+							const currentValue = parseInt(quantityInput.value);
+							quantityInput.value = currentValue + 1;
+						});
+					}
+
+					// Review form submission
+					const reviewForm = document.getElementById("review-form");
+					if (reviewForm) {
+						reviewForm.addEventListener("submit", (e) => {
+							e.preventDefault();
+							alert("شكرًا لمراجعتك! سيتم نشرها بعد المراجعة.");
+							reviewForm.reset();
+						});
+					}
+
+					// Rating selector functionality
+					const ratingSelector =
+						document.getElementById("rating-selector");
+					if (ratingSelector) {
+						const stars = ratingSelector.querySelectorAll(".star");
+						stars.forEach((star) => {
+							star.addEventListener("click", () => {
+								const rating = star.getAttribute("data-rating");
+								stars.forEach((s) => {
+									if (
+										s.getAttribute("data-rating") <= rating
+									) {
+										s.classList.add("selected");
+									} else {
+										s.classList.remove("selected");
+									}
+								});
+							});
+						});
+					}
+
+					console.log("Components loaded successfully");
+				} catch (error) {
+					console.error("Error loading components:", error);
+				}
+			});
+		</script>
+		<script src="../../scripts/main.js"></script>
+	</body>
 </html>
