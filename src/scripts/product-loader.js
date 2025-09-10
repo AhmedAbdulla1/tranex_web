@@ -2,14 +2,13 @@
  * Product Loader
  * Handles loading products from Supabase database
  */
-
+import { supabaseService } from './SupabaseService.js';
 class ProductLoader {
   /**
    * Initialize the product loader
    * @param {Object} supabaseClient - Initialized Supabase client
    */
   constructor(supabaseClient) {
-    this.supabase = supabaseClient;
     this.products = [];
     this.categories = [];
     this.isLoading = false;
@@ -24,50 +23,12 @@ class ProductLoader {
   async loadProducts(options = {}) {
     this.isLoading = true;
     this.error = null;
-    
+
     try {
-      // Build query
-      let query = this.supabase
-        .from('products')
-        .select('*')
-        .eq('is_active', true);
-      
-      // Apply filters
-      if (options.category) {
-        query = query.eq('category', options.category);
-      }
-      
-      if (options.subcategory) {
-        query = query.eq('subcategory', options.subcategory);
-      }
-      
-      // Apply sorting
-      if (options.sortBy) {
-        const direction = options.sortDirection === 'desc' ? 'desc' : 'asc';
-        query = query.order(options.sortBy, { ascending: direction === 'asc' });
-      } else {
-        // Default sort by created_at
-        query = query.order('created_at', { ascending: false });
-      }
-      
-      // Apply pagination
-      if (options.limit) {
-        query = query.limit(options.limit);
-      }
-      
-      if (options.offset) {
-        query = query.offset(options.offset);
-      }
-      
-      // Execute query
-      const { data, error } = await query;
-      
-      if (error) throw error;
-      console.log(data);
-      this.products = data || [];
-      return this.products;
+      // It now calls our centralized service method
+      const products = await supabaseService.fetchProducts(options);
+      return products || []; // Return empty array if service fails
     } catch (error) {
-      console.error('Error loading products:', error);
       this.error = error.message;
       return [];
     } finally {
@@ -83,19 +44,11 @@ class ProductLoader {
   async loadProductById(productId) {
     this.isLoading = true;
     this.error = null;
-    
+
     try {
-      const { data, error } = await this.supabase
-        .from('products')
-        .select('*')
-        .eq('id', productId)
-        .single();
-      
-      if (error) throw error;
-      
-      return data;
+      // It now calls our centralized service method
+      return await supabaseService.fetchProductById(productId);
     } catch (error) {
-      console.error(`Error loading product ${productId}:`, error);
       this.error = error.message;
       return null;
     } finally {
@@ -110,20 +63,12 @@ class ProductLoader {
   async loadCategories() {
     this.isLoading = true;
     this.error = null;
-    
+
     try {
-      const { data, error } = await this.supabase
-        .from('product_categories')
-        .select('*')
-        .eq('is_active', true)
-        .order('sort_order', { ascending: true });
-      
-      if (error) throw error;
-      
-      this.categories = data || [];
-      return this.categories;
+      // It now calls our centralized service method
+      const categories = await supabaseService.fetchCategories();
+      return categories || [];
     } catch (error) {
-      console.error('Error loading categories:', error);
       this.error = error.message;
       return [];
     } finally {
@@ -139,11 +84,11 @@ class ProductLoader {
   getMockProducts(count = 6) {
     const mockProducts = [];
     const categories = ['Flywheel Training', 'Fencing Equipment', 'Performance Analytics', 'Accessories'];
-    
+
     for (let i = 1; i <= count; i++) {
       const categoryIndex = i % categories.length;
       const price = 99.99 + (i * 50);
-      
+
       mockProducts.push({
         id: `product-${i}`,
         name: `TRANEX ${categories[categoryIndex]} Pro ${i}`,
@@ -179,7 +124,7 @@ class ProductLoader {
         created_at: new Date().toISOString()
       });
     }
-    
+
     return mockProducts;
   }
 
@@ -226,5 +171,5 @@ class ProductLoader {
 }
 
 // Create and export a singleton instance
-const productLoader = new ProductLoader(window.supabase);
+const productLoader = new ProductLoader();
 export default productLoader;

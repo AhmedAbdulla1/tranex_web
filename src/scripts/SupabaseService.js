@@ -87,24 +87,72 @@ class SupabaseService {
   }
 
   /**
-   * 5. FETCH PRODUCT
-   * Fetch product details by ID
-   * @param {number} productId
+   * Fetches a list of products with optional filtering and sorting.
+   * @param {object} options - Query options (limit, offset, category, etc.)
+   * @returns {Promise<Array|null>}
    */
-  async fetchProduct(productId) {
-    const { data, error } = await this.client
-      .from("products")
-      .select("id, name, description, price, image_url")
-      .eq("id", productId)
-      .single(); // Return only one product
+  async fetchProducts(options = {}) {
+    try {
+      let query = this.client
+        .from('products')
+        .select('*')
+        .eq('is_active', true);
 
-    if (error) {
-      console.error("Error fetching product:", error.message);
-      return { success: false, error: error.message };
+      if (options.category) query = query.eq('category', options.category);
+      if (options.sortBy) {
+        query = query.order(options.sortBy, { ascending: options.sortDirection === 'asc' });
+      } else {
+        query = query.order('created_at', { ascending: false });
+      }
+      if (options.limit) query = query.limit(options.limit);
+      if (options.offset) query = query.offset(options.offset);
+
+      const { data, error } = await query;
+      if (error) throw error;
+      return data;
+    } catch (error) {
+      console.error('SupabaseService Error (fetchProducts):', error.message);
+      return null;
     }
+  }
 
-    console.log("Product fetched:", data);
-    return { success: true, product: data };
+  /**
+   * Fetches a single product by its ID.
+   * @param {string} productId - The ID of the product.
+   * @returns {Promise<object|null>}
+   */
+  async fetchProductById(productId) {
+    try {
+      const { data, error } = await this.client
+        .from('products')
+        .select('*')
+        .eq('id', productId)
+        .single();
+      if (error) throw error;
+      return data;
+    } catch (error) {
+      console.error('SupabaseService Error (fetchProductById):', error.message);
+      return null;
+    }
+  }
+
+  /**
+   * Fetches all active product categories.
+   * @returns {Promise<Array|null>}
+   */
+  async fetchCategories() {
+    try {
+      const { data, error } = await this.client
+        .from('product_categories')
+        .select('*')
+        .eq('is_active', true)
+        .order('sort_order', { ascending: true });
+      if (error) throw error;
+      return data;
+    } catch (error) {
+      console.error('SupabaseService Error (fetchCategories):', error.message);
+      return null;
+    }
   }
 }
 
